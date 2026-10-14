@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c09c1b3b-d50b-4dab-be34-05c7b8afe57a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.XR_Lab_Proj/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.XR_Lab_Proj/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Elements/Diode/DiodComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Elements/Diode/DiodComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Elements/LED/LEDComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Elements/LED/LEDComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/FPSTester.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/FPSTester.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Visual/Sparks.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Visual/Sparks.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WiresAndConnectors/DiodComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WiresAndConnectors/DiodComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WiresAndConnectors/LampComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WiresAndConnectors/LampComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WiresAndConnectors/ResistorComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WiresAndConnectors/ResistorComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WiresAndConnectors/WiresAndConnectors_R.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WiresAndConnectors/WiresAndConnectors_R.prefab" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Elements/Resisor/Resistor.prefab" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/WiresAndConnectors/DiodComponent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/WiresAndConnectors/LampComponent.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="3.948238234290832E-11" />
+      <entry key="MS500" value="0.008314125187790618" />
+      <entry key="S2" value="0.42636580621288994" />
+      <entry key="S5" value="1.571951460372673" />
+      <entry key="S10" value="2.90737068168592" />
+      <entry key="S30" value="5.9543650433902435" />
+      <entry key="S60" value="8.235390582035587" />
+      <entry key="M2" value="10.332619977163334" />
+      <entry key="M5" value="12.257720375332408" />
+      <entry key="M10" value="13.072520399337403" />
+      <entry key="M15" value="13.36822876090232" />
+      <entry key="M30" value="13.677878507795576" />
+      <entry key="H1" value="13.890544389986436" />
+      <entry key="H2" value="14.380232918795183" />
+      <entry key="H4" value="15.317625994079567" />
+      <entry key="D1" value="17.333998707937543" />
+      <entry key="W1" value="17.897426414235753" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0000000000001281" />
+      <entry key="S5" value="1.000006974796572" />
+      <entry key="S10" value="1.002776067133212" />
+      <entry key="S30" value="1.2417367089817328" />
+      <entry key="S60" value="1.9263204450385656" />
+      <entry key="M2" value="2.8979023633208625" />
+      <entry key="M5" value="3.959038510072822" />
+      <entry key="M10" value="4.438589278709447" />
+      <entry key="M15" value="4.615964240443112" />
+      <entry key="M30" value="4.803484328964776" />
+      <entry key="H1" value="4.949572792003813" />
+      <entry key="H2" value="5.436958133729375" />
+      <entry key="H4" value="6.527433687853375" />
+      <entry key="D1" value="9.107275159418856" />
+      <entry key="W1" value="9.861492133031543" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.00552427172802915" />
+      <entry key="MS500" value="0.35511824165097877" />
+      <entry key="S2" value="1.0757619354736847" />
+      <entry key="S5" value="2.3103220479471727" />
+      <entry key="S10" value="3.710752573712235" />
+      <entry key="S30" value="7.064166917748735" />
+      <entry key="S60" value="10.056162005089808" />
+      <entry key="M2" value="13.154026422044533" />
+      <entry key="M5" value="16.176289915823364" />
+      <entry key="M10" value="17.48867706870393" />
+      <entry key="M15" value="17.968697864967428" />
+      <entry key="M30" value="18.47333031223028" />
+      <entry key="H1" value="18.835992979968633" />
+      <entry key="H2" value="19.81495940219501" />
+      <entry key="H4" value="21.84375797685017" />
+      <entry key="D1" value="26.440984538324557" />
+      <entry key="W1" value="27.758874209998254" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3FYmUvokV8CHjicJCC4jJ0o3LEM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "cidr.known.project.marker": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "mergetestbranch",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Standalone Player.Start Unity">
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.3.16f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\illios_jul\Documents\GitHub\XR_Lab_Proj -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\illios_jul\Documents\GitHub\XR_Lab_Proj" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.3.16f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\illios_jul\Documents\GitHub\XR_Lab_Proj -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\illios_jul\Documents\GitHub\XR_Lab_Proj" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" useMixedMode="false">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to" type="UnityDevicePlayer" factoryName="UnityAttachToDevicePlayer">
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c09c1b3b-d50b-4dab-be34-05c7b8afe57a" name="Changes" comment="" />
+      <created>1782260411653</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1782260411653</updated>
+      <workItem from="1782260412731" duration="6516000" />
+      <workItem from="1782318514138" duration="23131000" />
+      <workItem from="1783077917713" duration="2546000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.Tasks.TaskCanceledException" breakIfHandledByOtherCode="false" displayValue="System.Threading.Tasks.TaskCanceledException" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

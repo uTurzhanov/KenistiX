@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73562c0c9bc3d6c4a9eaf7c2becd569a, type: 3}
+  m_Name: Step_10_ButtonPress
+  m_EditorClassIdentifier: 
+  stepTitle: "\u041D\u0430\u0436\u0430\u0442\u0438\u0435 \u043A\u043D\u043E\u043F\u043A\u0438"
+  stepDescription: "\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u043C \u0437\u043D\u0430\u043D\u0438\u044F
+    \u043D\u0430 \u043F\u0440\u0430\u043A\u0442\u0438\u043A\u0435. \u041D\u0430\u0436\u043C\u0438\u0442\u0435
+    \u0442\u0440\u0438\u0433\u0433\u0435\u0440 \u2014 \u0442\u043E\u0442 \u0441\u0430\u043C\u044B\u0439,
+    \u043F\u043E\u0434 \u0443\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u043C
+    \u043F\u0430\u043B\u044C\u0446\u0435\u043C \u2014 \u043E\u0434\u0438\u043D \u0440\u0430\u0437."
+  videoClip: {fileID: 32900000, guid: be56a4b35317aac45bae594d94b055cc, type: 3}
+  loopVideo: 1
+  videoMaterial: {fileID: 0}
+  stepSceneObject: {fileID: 0}
+  narrationClip: {fileID: 8300000, guid: 53b4f15cefb90c146be3ca178ad88664, type: 3}
+  completionType: 4
+  headCheckYaw: 0
+  headCheckPitch: 0
+  thumbstickCheckMove: 0
+  thumbstickCheckTurn: 0
+  showNextButton: 1
+  delayBeforeNextButton: 12
+  detachPanelFromCamera: 0
+  requireReinforcementRepeat: 1
+  customButtonLabel: 

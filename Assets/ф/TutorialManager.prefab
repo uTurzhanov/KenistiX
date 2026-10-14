@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5444193151691084668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4597370755970221078}
+  - component: {fileID: 2031748772629129975}
+  m_Layer: 0
+  m_Name: TutorialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4597370755970221078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444193151691084668}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.12238188, y: -0.24914558, z: 2.358577}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2031748772629129975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444193151691084668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 700ed754cce6cd842bef316f559b6212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialCanvas: {fileID: 0}
+  steps:
+  - {fileID: 11400000, guid: df25476f0ae560d4783750d14aeb32f8, type: 2}
+  - {fileID: 11400000, guid: f3f5d0d6af565544192ef00760412a64, type: 2}
+  - {fileID: 11400000, guid: 953493a207d2b394980bc89d6b82ff37, type: 2}
+  - {fileID: 11400000, guid: 092e039281e759241a65998d44dfece7, type: 2}
+  - {fileID: 11400000, guid: 085c9641ecf59c3488357e5c815ee62a, type: 2}
+  - {fileID: 11400000, guid: f93befe7eb154da46bc9069f2b34d66b, type: 2}
+  - {fileID: 11400000, guid: 52725b9f81646db4aa5f7f3e58253b65, type: 2}
+  - {fileID: 11400000, guid: 581239a48b0edf4448c38aa3a0b392a3, type: 2}
+  - {fileID: 11400000, guid: d8149125241b79f4a8c7d2483693f618, type: 2}
+  - {fileID: 11400000, guid: 94282e8a92e1c1b4b8c610393f9d1979, type: 2}
+  - {fileID: 11400000, guid: 4ad9652a2499c5a4c8d388a793a6ff41, type: 2}
+  stepListItemPrefab: {fileID: 3645296792179679526, guid: af2b9f803a11c474a8db0ec6558128b4, type: 3}
+  stepListContainer: {fileID: 0}
+  stepCounterLabel: {fileID: 0}
+  titleText: {fileID: 0}
+  videoPlayer: {fileID: 0}
+  videoRawImage: {fileID: 0}
+  replayVideoButton: {fileID: 0}
+  narrationAudioSource: {fileID: 0}
+  headRotationChecker: {fileID: 0}
+  controllerRotationChecker: {fileID: 0}
+  thumbstickActivityChecker: {fileID: 0}
+  buttonPressChecker: {fileID: 0}
+  objectGrabChecker: {fileID: 0}
+  nextButton: {fileID: 0}
+  nextButtonLabel: {fileID: 0}
+  nextButtonCanvasGroup: {fileID: 0}
+  defaultButtonLabel: "\u0414\u0430\u043B\u0435\u0435"
+  backButton: {fileID: 0}
+  skipButton: {fileID: 0}
+  skipConfirmPanel: {fileID: 0}
+  skipConfirmYesButton: {fileID: 0}
+  skipConfirmCancelButton: {fileID: 0}
+  backgroundDimmer: {fileID: 0}
+  completionPanel: {fileID: 0}
+  reinforcementNarrationClip: {fileID: 8300000, guid: d47ce86b3d11e9549835b0d10d4e89d3, type: 3}
+  successSfxClip: {fileID: 0}
+  sfxAudioSource: {fileID: 0}
+  completionNarrationClip: {fileID: 8300000, guid: b10682e810c0b5d45b3ce583f5d58f26, type: 3}
+  delayBeforeSceneLoad: 3
+  practiceAreaRoot: {fileID: 0}
+  continueButton: {fileID: 0}
+  nextSceneName: 210Office
+  onTutorialCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  onStepChanged:
+    m_PersistentCalls:
+      m_Calls: []
