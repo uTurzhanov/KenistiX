@@ -4,6 +4,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Добавляем класс для хранения всех данных скриншота
+[System.Serializable]
+public class ScreenshotData
+{
+    public Texture2D screenshot;
+    public string eventTitle;
+    public string values;
+    public List<string> separatedValues;
+    public string sessionTime;
+    public string timestamp;
+}
+
 public class ScreenshotGalleryUI : MonoBehaviour
 {
     [Header("Галерея")]
@@ -12,7 +24,8 @@ public class ScreenshotGalleryUI : MonoBehaviour
     [SerializeField] private TMP_Text emptyScreenshotsText;
     [SerializeField] private ScrollRect scrollRect;
 
-    private readonly List<Texture2D> capturedTextures = new();
+    // Заменяем List<Texture2D> на List<ScreenshotData>
+    public List<ScreenshotData> capturedData { get; private set; } = new();
 
     private void Awake()
     {
@@ -20,7 +33,6 @@ public class ScreenshotGalleryUI : MonoBehaviour
         emptyScreenshotsText.gameObject.SetActive(true);
     }
 
-    // Добавлен новый параметр: List<string> separatedValues
     public void AddScreenshot(
         Texture2D screenshot,
         string eventTitle,
@@ -31,60 +43,43 @@ public class ScreenshotGalleryUI : MonoBehaviour
     {
         if (screenshot == null)
         {
-            Debug.LogError(
-                "ScreenshotGalleryUI: получена пустая текстура."
-            );
-
+            Debug.LogError("ScreenshotGalleryUI: получена пустая текстура.");
             return;
         }
 
-        capturedTextures.Add(screenshot);
+        // Сохраняем все данные для парсера
+        capturedData.Add(new ScreenshotData
+        {
+            screenshot = screenshot,
+            eventTitle = eventTitle,
+            values = values,
+            separatedValues = separatedValues,
+            sessionTime = sessionTime,
+            timestamp = timestamp
+        });
 
-        ScreenshotCardUI newCard = Instantiate(
-            cardTemplate,
-            content,
-            false
-        );
-
+        ScreenshotCardUI newCard = Instantiate(cardTemplate, content, false);
         newCard.gameObject.SetActive(true);
 
-        // Передаем список отдельных значений в карточку
-        newCard.Setup(
-            screenshot,
-            eventTitle,
-            values,
-            separatedValues,
-            sessionTime,
-            timestamp
-        );
+        newCard.Setup(screenshot, eventTitle, values, separatedValues, sessionTime, timestamp);
 
         emptyScreenshotsText.gameObject.SetActive(false);
-
         StartCoroutine(ScrollToLastScreenshot());
     }
 
     private IEnumerator ScrollToLastScreenshot()
     {
         yield return null;
-
         Canvas.ForceUpdateCanvases();
-
-        if (scrollRect != null)
-        {
-            scrollRect.verticalNormalizedPosition = 0f;
-        }
+        if (scrollRect != null) scrollRect.verticalNormalizedPosition = 0f;
     }
 
     private void OnDestroy()
     {
-        foreach (Texture2D texture in capturedTextures)
+        foreach (var data in capturedData)
         {
-            if (texture != null)
-            {
-                Destroy(texture);
-            }
+            if (data.screenshot != null) Destroy(data.screenshot);
         }
-
-        capturedTextures.Clear();
+        capturedData.Clear();
     }
 }
