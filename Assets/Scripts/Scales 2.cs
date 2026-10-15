@@ -28,7 +28,7 @@ public class Scales2 : MonoBehaviour
         if(other.gameObject.GetComponent<MockWeight>() != null)
         {
             totalWeight += other.gameObject.GetComponent<MockWeight>().weight;
-            display.text = (totalWeight + AddError(addedError)).ToString() + " g";
+            display.text = (totalWeight + AddError(addedError)).ToString("F3") + " g";
 
         }
 

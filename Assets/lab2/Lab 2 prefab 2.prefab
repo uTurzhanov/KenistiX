@@ -15990,7 +15990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398e353b4de05fd4aba11b0e830ab20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scales2
-  addedError: 0
+  addedError: 1
   display: {fileID: 983504608830973590}
 --- !u!1001 &6489546264230233306
 PrefabInstance:
