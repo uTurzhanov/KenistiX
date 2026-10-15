@@ -70,3 +70,116 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/DeviceSimulator.asmdef
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/DeviceSimulator.asmdef.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Fist Expression Capture.asset
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Fist Expression Capture.asset.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Grab Expression Capture.asset
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Grab Expression Capture.asset.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Open Expression Capture.asset
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Open Expression Capture.asset.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Pinch Expression Capture.asset
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Pinch Expression Capture.asset.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Poke Expression Capture.asset
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Poke Expression Capture.asset.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Resting Expression Capture.asset
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Resting Expression Capture.asset.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Thumb Expression Capture.asset
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Hand Expression Captures/Thumb Expression Capture.asset.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Scripts.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Scripts/XRDeviceSimulatorControllerUI.cs
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Scripts/XRDeviceSimulatorControllerUI.cs.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Scripts/XRDeviceSimulatorHandsUI.cs
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Scripts/XRDeviceSimulatorHandsUI.cs.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Scripts/XRDeviceSimulatorUI.cs
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/Scripts/XRDeviceSimulatorUI.cs.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Controller.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Controller/ControllerLeft.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Controller/ControllerLeft.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Controller/ControllerOverlayLinesLeft.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Controller/ControllerOverlayLinesLeft.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Controller/ControllerOverlayLinesRight.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Controller/ControllerOverlayLinesRight.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Controller/ControllerRight.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Controller/ControllerRight.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Controller/xr_ctlr.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Controller/xr_ctlr.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/btn_bgbottom.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/btn_bgbottom.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/CloseWindow.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/CloseWindow.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/CycleXRDevices.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/CycleXRDevices.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/DeviceSimUI_bg.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/DeviceSimUI_bg.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/Gripper.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/Gripper.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/KeyboardIcon.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/KeyboardIcon.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/Locked.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/Locked.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/Look.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/Look.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/OpenWindow.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/OpenWindow.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/Unlocked.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/General/Unlocked.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/hand.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/hand.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Default.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Default.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Fist.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Fist.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Grab.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Grab.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Open.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Open.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Pinch.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Pinch.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Poke.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Poke.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Thumb.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Hands/Hand_Thumb.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/HMD.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/HMD.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/HMD_d.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/HMD_d.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/HMDOverlay.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/HMDOverlay.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/Movement.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/Movement.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/MoveRotateTool.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/MoveRotateTool.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/XR.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/XR.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/xr_hmd.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Head/xr_hmd.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Mouse.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Mouse/Cursor.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Mouse/Cursor.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Mouse/Mouse.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Mouse/Mouse.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Mouse/MouseMoveAround.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Mouse/MouseMoveAround.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Mouse/MouseR.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Mouse/MouseR.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Mouse/MouseR_d.png
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/Mouse/MouseR_d.png.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/XR Device Simulator UI.prefab
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/UI/XR Device Simulator UI.prefab.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/XR Device Controller Controls.inputactions
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/XR Device Controller Controls.inputactions.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/XR Device Hand Controls.inputactions
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/XR Device Hand Controls.inputactions.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/XR Device Simulator Controls.inputactions
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/XR Device Simulator Controls.inputactions.meta
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/XR Device Simulator.prefab
+Assets/Samples/XR Interaction Toolkit/3.4.1/XR Device Simulator/XR Device Simulator.prefab.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+Assets/Scenes/210Office/LightingData.asset
