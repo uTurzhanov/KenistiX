@@ -157,7 +157,7 @@ namespace GogoGaga.OptimizedRopesAndCables
                 for (int j = 0; j <= segmentsPerWire; j++)
                 {
                     float angle = j * Mathf.PI * 2f / segmentsPerWire;
-                    Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
+                    Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * 0.005f;
                     vertices.Add(transform.InverseTransformPoint(points[i] + rotation * offset));
 
                     float u = (float)j / segmentsPerWire;
@@ -199,7 +199,7 @@ namespace GogoGaga.OptimizedRopesAndCables
             for (int j = 0; j <= segmentsPerWire; j++)
             {
                 float angle = j * Mathf.PI * 2f / segmentsPerWire;
-                Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
+                Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * 0.005f;
                 vertices.Add(transform.InverseTransformPoint(points[0] + startRotation * offset));
 
                 if (j < segmentsPerWire)
@@ -220,7 +220,7 @@ namespace GogoGaga.OptimizedRopesAndCables
             for (int j = 0; j <= segmentsPerWire; j++)
             {
                 float angle = j * Mathf.PI * 2f / segmentsPerWire;
-                Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
+                Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * 0.005f;
                 vertices.Add(transform.InverseTransformPoint(points[points.Length - 1] + endRotation * offset));
 
                 if (j < segmentsPerWire)

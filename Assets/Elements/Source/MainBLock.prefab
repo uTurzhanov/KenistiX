@@ -2609,6 +2609,7 @@ GameObject:
   - component: {fileID: 8263094703203133139}
   - component: {fileID: 4613477005106491206}
   - component: {fileID: 8383532619175052399}
+  - component: {fileID: 765657683837457757}
   m_Layer: 0
   m_Name: MainBLock
   m_TagString: Untagged
@@ -2692,6 +2693,27 @@ MonoBehaviour:
   ShortCircuitEmissionIntensity: 5
   PulseShortCircuitHighlight: 1
   ShortCircuitPulseSpeed: 2
+--- !u!65 &765657683837457757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3622444534192837386}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.7690449, y: 1.7237282, z: 4.461308}
+  m_Center: {x: 0.22026539, y: 0.07866621, z: 1.730654}
 --- !u!1 &3787910757563581840
 GameObject:
   m_ObjectHideFlags: 0
