@@ -128,6 +128,7 @@ public class DocxExportManager : MonoBehaviour
                 Debug.Log("Документ успешно создан сервером! Ответ: " + www.downloadHandler.text);
                 UpdateStatus("Успех! Документ создан на сервере.");
                 // Кнопку можно не разблокировать, если работа окончена
+                exportButton.interactable = true;
             }
         }
     }
