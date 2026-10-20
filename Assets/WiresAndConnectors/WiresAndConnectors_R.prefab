@@ -1069,7 +1069,7 @@ GameObject:
   - component: {fileID: 4485804397014498594}
   - component: {fileID: 6772461809947362505}
   - component: {fileID: 3105049785875217350}
-  - component: {fileID: 2563556620403366889}
+  - component: {fileID: 3283809672411101185}
   m_Layer: 0
   m_Name: WiresAndConnectors_R
   m_TagString: Untagged
@@ -1341,8 +1341,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPrefsEnable
   LabNum: 4
---- !u!64 &2563556620403366889
-MeshCollider:
+--- !u!65 &3283809672411101185
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1359,10 +1359,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 0.18014574, y: 0.05608681, z: 0.041726768}
+  m_Center: {x: 0.0027965307, y: 0.17845, z: 0.19737041}
 --- !u!1 &8839296125122851503
 GameObject:
   m_ObjectHideFlags: 0
