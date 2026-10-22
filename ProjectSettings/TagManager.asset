@@ -36,6 +36,7 @@ TagManager:
   - QDSUIToggleThumbnail
   - BIG
   - SMALL
+  - Ruler
   layers:
   - Default
   - TransparentFX

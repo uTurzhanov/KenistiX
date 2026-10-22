@@ -75,7 +75,8 @@ public class TagFilteredSocket : XRSocketInteractor
         
         // Получаем тег именно того коллайдера/объекта, который подошел по фильтру
         connectedTag = GetMatchedTag(args.interactableObject);
-        SC.updCfg();
+        if(SC != null)
+            SC.updCfg();
     }
 
     // Вызывается, когда объект достают из сокета
@@ -83,7 +84,8 @@ public class TagFilteredSocket : XRSocketInteractor
     {
         isOccupied = false;
         connectedTag = "";
-        SC.updCfg();
+        if (SC != null)
+            SC.updCfg();
     }
 
     // Вспомогательный метод для поиска точного тега (если на объекте их несколько в иерархии)
