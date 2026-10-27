@@ -1,12 +1,17 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using System;
 
 public class LabDataManager : MonoBehaviour
 {
     [Header("Связь с UI (Локальные объекты этого канваса)")]
     [SerializeField] private TMP_Text labTitleTMP;
     [SerializeField] private TMP_Text studentNameInput; // или TMP_Text, если используешь его
+
+    [Header("UI Времени")]
+    [SerializeField] private TMP_Text sessionTimeTMP; // TMP для отображения времени сессии (00:00:00)
+    [SerializeField] private TMP_Text timestampTMP;   // TMP для отображения глобального времени (28.08.2026 · 14:22)
 
     public string FinalLabTitle { get; private set; } = "";
 
@@ -32,9 +37,32 @@ public class LabDataManager : MonoBehaviour
         { "7", "№7. Дифракция, коллимация" }
     };
 
-    private void Start() // Изменено с Awake на Start для безопасной инициализации
+    private float sessionTimer = 0f; // Таймер сессии в секундами
+
+    private void Start()
     {
         InitializeLabData();
+
+        // Сбрасываем таймер сессии при запуске сцены
+        sessionTimer = 0f;
+
+        // Сразу обновляем UI актуального времени
+        UpdateTimestampUI();
+    }
+
+    private void Update()
+    {
+        // Увеличиваем таймер
+        sessionTimer += Time.deltaTime;
+
+        // Обновляем UI сессии
+        if (sessionTimeTMP != null)
+        {
+            sessionTimeTMP.text = GetFormattedSessionTime();
+        }
+
+        // Обновляем актуальное время (можно не каждый кадр, но для простоты здесь)
+        UpdateTimestampUI();
     }
 
     private void InitializeLabData()
@@ -54,5 +82,26 @@ public class LabDataManager : MonoBehaviour
         {
             labTitleTMP.text = FinalLabTitle;
         }
+    }
+
+    private void UpdateTimestampUI()
+    {
+        if (timestampTMP != null)
+        {
+            timestampTMP.text = GetFormattedTimestamp();
+        }
+    }
+
+    // Возвращает отформатированное время сессии (ЧЧ:ММ:СС)
+    public string GetFormattedSessionTime()
+    {
+        TimeSpan t = TimeSpan.FromSeconds(sessionTimer);
+        return string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours, t.Minutes, t.Seconds);
+    }
+
+    // Возвращает отформатированное глобальное время (ДД.ММ.ГГГГ · ЧЧ:ММ)
+    public string GetFormattedTimestamp()
+    {
+        return DateTime.Now.ToString("dd.MM.yyyy · HH:mm");
     }
 }

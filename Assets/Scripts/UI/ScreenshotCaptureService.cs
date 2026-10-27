@@ -32,7 +32,6 @@ public class CapturePointConfig
 public class ScreenshotCaptureService : MonoBehaviour
 {
     [Header("Точки съемки и настройки")]
-    [Tooltip("Список точек. Порядок должен совпадать с опциями Dropdown.")]
     [SerializeField] private List<CapturePointConfig> capturePoints = new List<CapturePointConfig>();
     [SerializeField] private Camera captureCamera;
 
@@ -52,6 +51,11 @@ public class ScreenshotCaptureService : MonoBehaviour
     [SerializeField] private string sessionId = "TEST_SESSION";
     [SerializeField] private string testEventTitle = "Снятие контрольного показания";
 
+    // === НОВОЕ ПОЛЕ ДЛЯ ПРИПИСКИ ===
+    [Header("Динамическая приписка (Суффикс)")]
+    [Tooltip("Текст, который будет добавляться к названию прибора. Можно менять через UI кнопки.")]
+    [SerializeField] private string currentTitleSuffix = "";
+
     private float sessionStartTime;
     private int screenshotNumber;
     private bool isCapturing;
@@ -60,6 +64,19 @@ public class ScreenshotCaptureService : MonoBehaviour
     {
         sessionStartTime = Time.time;
         if (captureCamera != null) captureCamera.enabled = false;
+    }
+
+    // === НОВЫЙ МЕТОД ДЛЯ КНОПОК UI ===
+    // Вызывайте его в OnClick() кнопки и передавайте нужную приписку
+    public void SetEventTitleSuffix(string suffix)
+    {
+        currentTitleSuffix = suffix;
+    }
+
+    // Если нужно сбросить приписку (например, при смене прибора)
+    public void ClearEventTitleSuffix()
+    {
+        currentTitleSuffix = "";
     }
 
     public void TakeScreenshot()
@@ -86,10 +103,15 @@ public class ScreenshotCaptureService : MonoBehaviour
             activeConfig = capturePoints[0];
         }
 
-        // ИЗМЕНЕНИЕ: Убрана блокировка. Если точки нет, просто предупреждаем в консоли и делаем снимок с текущего места.
         if (activeConfig == null || activeConfig.point == null)
         {
             Debug.Log("ScreenshotCaptureService: Точка съемки не задана. Камера останется на текущей позиции.");
+        }
+
+        // === ПРИМЕНЯЕМ ПРИПИСКУ ПЕРЕД СОЗДАНИЕМ СКРИНШОТА ===
+        if (!string.IsNullOrEmpty(currentTitleSuffix))
+        {
+            currentTitle += currentTitleSuffix; // Например, "Штангенциркуль" + " height" = "Штангенциркуль height"
         }
 
         CaptureScreenshot(currentTitle, activeConfig, "");
@@ -135,9 +157,16 @@ public class ScreenshotCaptureService : MonoBehaviour
         string timestamp = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
         SaveScreenshotToFile(screenshot, screenshotNumber);
 
+        // === Считывание deviceID (из нашего предыдущего шага) ===
+        string currentDeviceID = "0";
+        if (objectSelectionDropdown != null)
+        {
+            currentDeviceID = objectSelectionDropdown.value.ToString();
+        }
+
         if (galleryUI != null)
         {
-            galleryUI.AddScreenshot(screenshot, eventTitle, finalValues, separatedValues, sessionTime, timestamp);
+            galleryUI.AddScreenshot(screenshot, eventTitle, finalValues, separatedValues, sessionTime, timestamp, currentDeviceID);
         }
 
         if (latestScreenshotCardUI != null)
@@ -165,12 +194,11 @@ public class ScreenshotCaptureService : MonoBehaviour
             }
         }
 
-        // ИЗМЕНЕНИЕ: Добавлена проверка activeConfig на null
         if (activeConfig != null && activeConfig.dataMappings != null)
         {
             foreach (var mapping in activeConfig.dataMappings)
             {
-                if (separatedList.Count >= 10) break; 
+                if (separatedList.Count >= 10) break;
 
                 if (mapping.sourceTMP != null && !string.IsNullOrEmpty(mapping.sourceTMP.text))
                 {
@@ -198,7 +226,6 @@ public class ScreenshotCaptureService : MonoBehaviour
 
     private void SynchronizeCaptureCamera(CapturePointConfig config)
     {
-        // ИЗМЕНЕНИЕ: Если конфига или точки нет, просто подгоняем aspect ratio, не трогая Transform и FOV
         if (config == null || config.point == null)
         {
             captureCamera.aspect = (float)screenshotWidth / screenshotHeight;

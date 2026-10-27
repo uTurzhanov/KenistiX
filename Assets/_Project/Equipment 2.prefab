@@ -2121,6 +2121,38 @@ PrefabInstance:
       propertyPath: m_Navigation.m_Mode
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 268015215668807523, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 268015215668807523, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 268015215668807523, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5883193275148576850}
+    - target: {fileID: 268015215668807523, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 268015215668807523, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetEventTitleSuffix
+      objectReference: {fileID: 0}
+    - target: {fileID: 268015215668807523, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ScreenshotCaptureService, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 268015215668807523, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: "\u0414\u043B\u0438\u043D\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 268015215668807523, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 634211919198060525, guid: b4a001318ac76cf47b7795e605355344, type: 3}
       propertyPath: m_LocalPosition.z
       value: -4
@@ -2200,6 +2232,70 @@ PrefabInstance:
     - target: {fileID: 7491281917204463815, guid: b4a001318ac76cf47b7795e605355344, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 61
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808947963410794833, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808947963410794833, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808947963410794833, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5883193275148576850}
+    - target: {fileID: 7808947963410794833, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808947963410794833, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetEventTitleSuffix
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808947963410794833, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ScreenshotCaptureService, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808947963410794833, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: "\u0412\u044B\u0441\u043E\u0442\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808947963410794833, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949207436955569707, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949207436955569707, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949207436955569707, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5883193275148576850}
+    - target: {fileID: 7949207436955569707, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949207436955569707, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetEventTitleSuffix
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949207436955569707, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ScreenshotCaptureService, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949207436955569707, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: "\u0428\u0438\u0440\u0438\u043D\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949207436955569707, guid: b4a001318ac76cf47b7795e605355344, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 9068144934642045075, guid: b4a001318ac76cf47b7795e605355344, type: 3}
       propertyPath: m_LocalPosition.z

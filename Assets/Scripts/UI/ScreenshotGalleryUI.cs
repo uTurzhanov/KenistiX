@@ -14,6 +14,7 @@ public class ScreenshotData
     public List<string> separatedValues;
     public string sessionTime;
     public string timestamp;
+    public string deviceID;
 }
 
 public class ScreenshotGalleryUI : MonoBehaviour
@@ -39,7 +40,8 @@ public class ScreenshotGalleryUI : MonoBehaviour
         string values,
         List<string> separatedValues,
         string sessionTime,
-        string timestamp)
+        string timestamp,
+        string deviceID)
     {
         if (screenshot == null)
         {
@@ -47,7 +49,7 @@ public class ScreenshotGalleryUI : MonoBehaviour
             return;
         }
 
-        // Сохраняем все данные для парсера
+        // Сохраняем все данные, включая новый deviceID
         capturedData.Add(new ScreenshotData
         {
             screenshot = screenshot,
@@ -55,7 +57,8 @@ public class ScreenshotGalleryUI : MonoBehaviour
             values = values,
             separatedValues = separatedValues,
             sessionTime = sessionTime,
-            timestamp = timestamp
+            timestamp = timestamp,
+            deviceID = deviceID // Присваиваем переданное значение
         });
 
         ScreenshotCardUI newCard = Instantiate(cardTemplate, content, false);

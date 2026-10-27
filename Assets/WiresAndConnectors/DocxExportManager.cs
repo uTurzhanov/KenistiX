@@ -84,16 +84,22 @@ public class DocxExportManager : MonoBehaviour
     private IEnumerator SendReportToServer()
     {
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-        // 1. Берем название лабы и имя из локального менеджера этого канваса
+        // 1. Берем название лабы, имя, время сессии и глобальное время из локального менеджера
         if (localDataManager != null)
         {
             formData.Add(new MultipartFormDataSection("lab_title", localDataManager.FinalLabTitle));
             formData.Add(new MultipartFormDataSection("student_name", localDataManager.FinalStudentName));
+
+            // ДОБАВЛЯЕМ ВРЕМЯ
+            formData.Add(new MultipartFormDataSection("session_time", localDataManager.GetFormattedSessionTime()));
+            formData.Add(new MultipartFormDataSection("timestamp", localDataManager.GetFormattedTimestamp()));
         }
         else
         {
             formData.Add(new MultipartFormDataSection("lab_title", "Без названия"));
             formData.Add(new MultipartFormDataSection("student_name", "Неизвестный студент"));
+            formData.Add(new MultipartFormDataSection("session_time", "00:00:00"));
+            formData.Add(new MultipartFormDataSection("timestamp", System.DateTime.Now.ToString("dd.MM.yyyy · HH:mm")));
             Debug.LogWarning("Local Data Manager не назначен в инспекторе!");
         }
 
