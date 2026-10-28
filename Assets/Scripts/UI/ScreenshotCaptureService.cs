@@ -92,6 +92,7 @@ public class ScreenshotCaptureService : MonoBehaviour
             if (selectedIndex < capturePoints.Count)
             {
                 activeConfig = capturePoints[selectedIndex];
+                ClearEventTitleSuffix(); // Сбрасываем приписку при смене прибора
             }
             else
             {
