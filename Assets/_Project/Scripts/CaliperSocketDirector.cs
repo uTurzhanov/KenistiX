@@ -179,6 +179,18 @@ public class CaliperSocketDirector : MonoBehaviour
         var s = args.interactorObject as XRSocketInteractor;
         if (s == null) return;
         _lockedSocket = s;
+
+        // 1. Игнорируем столкновения между этим бруском и штангенциркулем
+        SetCollisionBetween(args.interactableObject, true);
+
+        // 2. Снимаем кинематику с бруска, чтобы PhysX не считал его якорем в воздухе
+        var rb = args.interactableObject.transform.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = false;
+        }
+
         RefreshSockets();
     }
 
@@ -187,7 +199,37 @@ public class CaliperSocketDirector : MonoBehaviour
         var s = args.interactorObject as XRSocketInteractor;
         if (s == null) return;
         if (_lockedSocket == s) _lockedSocket = null;
+
+        // 1. Возвращаем столкновения
+        SetCollisionBetween(args.interactableObject, false);
+
+        // 2. Возвращаем гравитацию бруску при извлечении из сокета
+        var rb = args.interactableObject.transform.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.useGravity = true;
+        }
+
         RefreshSockets();
+    }
+
+    private void SetCollisionBetween(IXRInteractable interactable, bool ignore)
+    {
+        if (interactable == null) return;
+
+        var blockColliders = interactable.transform.GetComponentsInChildren<Collider>();
+        var caliperColliders = GetComponentsInChildren<Collider>();
+
+        foreach (var bc in blockColliders)
+        {
+            foreach (var cc in caliperColliders)
+            {
+                if (!bc.isTrigger && !cc.isTrigger)
+                {
+                    Physics.IgnoreCollision(bc, cc, ignore);
+                }
+            }
+        }
     }
 
     private void OnCaliperGrabbed(SelectEnterEventArgs args)
@@ -308,10 +350,15 @@ public class CaliperSocketDirector : MonoBehaviour
     private void SetSocket(XRSocketInteractor s, bool on)
     {
         if (s == null) return;
-        // Страховка: никогда не гасим сокет, в котором прямо сейчас лежит брусок
-        if (!on && s.hasSelection) return;
+
+        // Не гасим сокет, если объект уже закреплен (hasSelection) 
+        // ИЛИ если объект прямо сейчас притягивается (hasHover / interactablesHovered)
+        bool isBusy = s.hasSelection || s.hasHover;
+
+        // Примечание: Для старых версий XRIT используйте (s.interactablesHovered.Count > 0) вместо hasHover
+        if (!on && isBusy) return;
+
         s.socketActive = on;
-        // enabled=false чтобы чужой размер вообще не мог заховетиться
         s.enabled = on;
     }
 

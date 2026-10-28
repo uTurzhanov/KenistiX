@@ -72,12 +72,12 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_Handedness: 0
   m_AttachTransform: {fileID: 2404339609374335942}
-  m_KeepSelectedTargetValid: 1
+  m_KeepSelectedTargetValid: 0
   m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
   m_AutoFindParentInteractableInHierarchy: 0
-  m_ParentInteractableObject: {fileID: 0}
+  m_ParentInteractableObject: {fileID: 5317375030467591107}
   m_HoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -175,12 +175,12 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_Handedness: 0
   m_AttachTransform: {fileID: 1327195257837923933}
-  m_KeepSelectedTargetValid: 1
+  m_KeepSelectedTargetValid: 0
   m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
   m_AutoFindParentInteractableInHierarchy: 0
-  m_ParentInteractableObject: {fileID: 0}
+  m_ParentInteractableObject: {fileID: 5317375030467591107}
   m_HoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -278,12 +278,12 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_Handedness: 0
   m_AttachTransform: {fileID: 5625346258381651574}
-  m_KeepSelectedTargetValid: 1
+  m_KeepSelectedTargetValid: 0
   m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
   m_AutoFindParentInteractableInHierarchy: 0
-  m_ParentInteractableObject: {fileID: 0}
+  m_ParentInteractableObject: {fileID: 5317375030467591107}
   m_HoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -591,12 +591,12 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_Handedness: 0
   m_AttachTransform: {fileID: 8936454015922450600}
-  m_KeepSelectedTargetValid: 1
+  m_KeepSelectedTargetValid: 0
   m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
   m_AutoFindParentInteractableInHierarchy: 0
-  m_ParentInteractableObject: {fileID: 0}
+  m_ParentInteractableObject: {fileID: 5317375030467591107}
   m_HoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -1477,12 +1477,12 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_Handedness: 0
   m_AttachTransform: {fileID: 5639623138173990406}
-  m_KeepSelectedTargetValid: 1
+  m_KeepSelectedTargetValid: 0
   m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
   m_AutoFindParentInteractableInHierarchy: 0
-  m_ParentInteractableObject: {fileID: 0}
+  m_ParentInteractableObject: {fileID: 5317375030467591107}
   m_HoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -1792,7 +1792,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_Handedness: 0
   m_AttachTransform: {fileID: 8978557149512441345}
-  m_KeepSelectedTargetValid: 1
+  m_KeepSelectedTargetValid: 0
   m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
