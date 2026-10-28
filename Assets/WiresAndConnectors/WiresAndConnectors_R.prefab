@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4916107286159827318}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6944249537838703855}
   - component: {fileID: 3436312291650598272}
   - component: {fileID: 1507198398249239946}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pin2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 1715493488044893872}
   - component: {fileID: 7194324039927723679}
   - component: {fileID: 4331374586844844009}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pin1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 7159333026898697748}
   - component: {fileID: 5535978250779313716}
   - component: {fileID: 8946372782408490069}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Socket Interactor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +620,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2575121526515506491}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,7 +651,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6465204294864593871}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -682,7 +682,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7208240026299135567}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 7200060259068543538}
   - component: {fileID: 2114972179104316591}
   - component: {fileID: 8650229802036197005}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PinFull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -806,7 +806,7 @@ GameObject:
   - component: {fileID: 6656261106236217608}
   - component: {fileID: 7978627260812909781}
   - component: {fileID: 4516023018464116934}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Socket Interactor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -920,7 +920,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3809494611656006223}
   - component: {fileID: 2743159715401545325}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -974,7 +974,7 @@ GameObject:
   - component: {fileID: 8661235421544513957}
   - component: {fileID: 5736803276183965184}
   - component: {fileID: 7528276291891428042}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PinFull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1070,7 +1070,7 @@ GameObject:
   - component: {fileID: 6772461809947362505}
   - component: {fileID: 3105049785875217350}
   - component: {fileID: 3283809672411101185}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WiresAndConnectors_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1372,7 +1372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7905093515972910441}
   - component: {fileID: 6242785002940230099}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

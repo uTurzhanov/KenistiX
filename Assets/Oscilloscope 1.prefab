@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1482847767827540590}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: "\u041A\u043D\u043E\u043F\u043A\u0438"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 1702953304640754836}
   - component: {fileID: 8742302497235506704}
   - component: {fileID: 8450698274060261190}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_X (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -716,7 +716,7 @@ GameObject:
   - component: {fileID: 5037808498474142044}
   - component: {fileID: 2805246736363719427}
   - component: {fileID: 3894127503245390817}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_Y (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1250,7 +1250,7 @@ GameObject:
   - component: {fileID: 3488301263854612084}
   - component: {fileID: 4078595723221455936}
   - component: {fileID: 461901718004426141}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_X (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1324,7 +1324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2688668694187009537}
   - component: {fileID: 1530547795340497707}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CH2 Signal Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1370,7 +1370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2403603940381935616}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Screen Render System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1411,7 +1411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8400113001036645501}
   - component: {fileID: 7121276415602232034}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Oscilloscope Values Presentor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1456,7 +1456,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5853036334627989718}
   - component: {fileID: 6681865959152701402}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CH1 Signal Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1504,7 +1504,7 @@ GameObject:
   - component: {fileID: 8874118941191485549}
   - component: {fileID: 161956449853148075}
   - component: {fileID: 3769643891078081042}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_X (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1893,7 +1893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2878303685847162421}
   - component: {fileID: 1745404719319249489}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Oscilloscope Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2567,7 +2567,7 @@ GameObject:
   - component: {fileID: 2843793770986125974}
   - component: {fileID: 8465256855249383904}
   - component: {fileID: 5982938453335111215}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_Y (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2844,7 +2844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8579737899486612069}
   - component: {fileID: 3098006400007355159}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: LineRenderer Cursor 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3077,7 +3077,7 @@ GameObject:
   - component: {fileID: 5706372870511786130}
   - component: {fileID: 8819303927466354952}
   - component: {fileID: 5043816686728073160}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_X (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3677,7 +3677,7 @@ GameObject:
   - component: {fileID: 2923603012288512832}
   - component: {fileID: 5648627391836465246}
   - component: {fileID: 6597875514211432163}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_Y (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3953,7 +3953,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 317275868127941652}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4076,7 +4076,7 @@ GameObject:
   - component: {fileID: 3546529237280958080}
   - component: {fileID: 6563280696268922262}
   - component: {fileID: 8150807753935739890}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_Y (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4149,7 +4149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8655179111635697005}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Oscilloscope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4368,7 +4368,7 @@ GameObject:
   - component: {fileID: 1048328378857285768}
   - component: {fileID: 1144564183073850106}
   - component: {fileID: 2299642898944670165}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Object001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4600,7 +4600,7 @@ GameObject:
   - component: {fileID: 8810265697374173223}
   - component: {fileID: 1178729860798294169}
   - component: {fileID: 8598558137866642204}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Screen Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4816,7 +4816,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2134391579969123728}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Scripts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4940,7 +4940,7 @@ GameObject:
   - component: {fileID: 8191257838468070300}
   - component: {fileID: 20281804512444977}
   - component: {fileID: 137238163537843162}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Output Screen (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5030,7 +5030,7 @@ GameObject:
   - component: {fileID: 9128680508162788829}
   - component: {fileID: 6527877609892601643}
   - component: {fileID: 1749139488452176488}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_Y (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5105,7 +5105,7 @@ GameObject:
   - component: {fileID: 7930572430316738462}
   - component: {fileID: 5662181104375255466}
   - component: {fileID: 1351897249021503299}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Output Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5331,7 +5331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8187116624546406782}
   - component: {fileID: 2313763383221991177}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LEVEL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5972,7 +5972,7 @@ GameObject:
   - component: {fileID: 1286440134398190313}
   - component: {fileID: 543009760004889310}
   - component: {fileID: 3306755716199088370}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_X
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6226,7 +6226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5854403022230455860}
   - component: {fileID: 4803310889622020459}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: LineRenderer Cursor 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6367,7 +6367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9036617048824929863}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Text Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6495,7 +6495,7 @@ GameObject:
   - component: {fileID: 4726252894060915743}
   - component: {fileID: 2093281832244856089}
   - component: {fileID: 2376435386040435248}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_Y (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7015,7 +7015,7 @@ GameObject:
   - component: {fileID: 8094240352670025981}
   - component: {fileID: 9144188706179829085}
   - component: {fileID: 8275790966558173903}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Screen Camera (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7143,7 +7143,7 @@ GameObject:
   - component: {fileID: 6462805443114177240}
   - component: {fileID: 3449836451887526727}
   - component: {fileID: 5576420546710366551}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Oscilloscope Values
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7550,7 +7550,7 @@ GameObject:
   - component: {fileID: 343342041966093517}
   - component: {fileID: 4883879273023710352}
   - component: {fileID: 3494731671261672446}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_X (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7805,7 +7805,7 @@ GameObject:
   - component: {fileID: 8617751878639939922}
   - component: {fileID: 2021424547741893991}
   - component: {fileID: 4105231451563524973}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_Y (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7925,7 +7925,7 @@ GameObject:
   - component: {fileID: 8686297210388952011}
   - component: {fileID: 6323771641206274759}
   - component: {fileID: 3247015519077655656}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Box001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8805,7 +8805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5271520099286684532}
   - component: {fileID: 490996813841274697}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Oscilloscope Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8856,7 +8856,7 @@ GameObject:
   - component: {fileID: 7973894370782963356}
   - component: {fileID: 317370973683844453}
   - component: {fileID: 7034632469223587759}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Oscilloscope 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8930,7 +8930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9011492923094371280}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Global Knobs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9061,7 +9061,7 @@ GameObject:
   - component: {fileID: 7773582985880838815}
   - component: {fileID: 8044960983582436351}
   - component: {fileID: 1966543874581118608}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9178,7 +9178,7 @@ GameObject:
   - component: {fileID: 183111370824631025}
   - component: {fileID: 7913777574766062292}
   - component: {fileID: 2443452321612393974}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_Y (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9591,7 +9591,7 @@ GameObject:
   - component: {fileID: 2123875846702174931}
   - component: {fileID: 8362661601791040614}
   - component: {fileID: 3930413662598008814}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_X (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9756,7 +9756,7 @@ GameObject:
   - component: {fileID: 8402879432124068870}
   - component: {fileID: 5481767912106074481}
   - component: {fileID: 5369577680350597089}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Axis_Y
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9961,6 +9961,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 816092439d327364aafbacca1524ea65, type: 3}
       propertyPath: m_Name
       value: "\u0433\u0435\u043D._\u0441\u0438\u0433\u043D\u0430\u043B\u043E\u0432"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 816092439d327364aafbacca1524ea65, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10718,6 +10722,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScreenshotCaptureService
       objectReference: {fileID: 0}
+    - target: {fileID: 3805245739398207466, guid: b8e8135ccceb9eb4eb1e2a58f64089d4, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8973897127355673723, guid: b8e8135ccceb9eb4eb1e2a58f64089d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10899,6 +10907,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u0433\u0435\u043D._\u0441\u0438\u0433\u043D\u0430\u043B\u043E\u0432
         (1)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 816092439d327364aafbacca1524ea65, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
