@@ -14,7 +14,9 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 // Этот скрипт висит на ТРИГГЕРЕ зоны измерения и включает
 // только 1 нужный сокет: по категории рядом (BIG/SMALL) + режиму UI (L/W/H).
 //
-// ВАЖНО: повесь скрипт на ТОТ ЖЕ объект где триггер-бокс зоны измерения.
+// Коллизии «брусок <-> корпус штангеля» отключаются, как только брусок
+// входит в зону измерения / наводится на сокет, и возвращаются только
+// когда брусок покинул зону и его не держит ни один наш сокет.
 [RequireComponent(typeof(BoxCollider))]
 public class CaliperSocketDirector : MonoBehaviour
 {
@@ -47,14 +49,16 @@ public class CaliperSocketDirector : MonoBehaviour
     [SerializeField] private string bigTag = "BIG";
     [SerializeField] private string smallTag = "SMALL";
 
-    private readonly HashSet<XRBaseInteractable> _hovered = new HashSet<XRBaseInteractable>();
+    // Бруски в зоне измерения (счётчик коллайдеров на каждый интерактабл,
+    // т.к. у бруска может быть несколько коллайдеров).
+    private readonly Dictionary<XRBaseInteractable, int> _zone = new Dictionary<XRBaseInteractable, int>();
+    // Бруски, у которых сейчас отключены коллизии с корпусом штангеля.
+    private readonly HashSet<XRBaseInteractable> _ignored = new HashSet<XRBaseInteractable>();
+    private readonly List<XRBaseInteractable> _tmp = new List<XRBaseInteractable>();
+
     private SizeCat _activeCat = SizeCat.Unknown;
     private bool _isHeld;
 
-    // Залипание занятого сокета: пока сокет держит брусок — директор его не выключает.
-    // Иначе петля: сокет притянул брусок к Attach → брусок вышел из зоны → категория Unknown →
-    // сокет выключился → deselect → брусок упал обратно в зону → всё по кругу
-    // (дёргание + toggling kinematic/gravity от XRGrabInteractable + прыжки родителя Attach<->сцена).
     private XRSocketInteractor _lockedSocket;
 
     private void Awake()
@@ -79,11 +83,6 @@ public class CaliperSocketDirector : MonoBehaviour
         RefreshSockets();
     }
 
-    // Чтобы не назначать каждому сокету коллайдер вручную:
-    // если на сокете нет своего триггера — создаем маленькую сферу на Attach.
-    // Общий родительский триггер для ховера сокетов использовать нельзя:
-    // XRIT смотрит триггеры только на объекте самого сокета.
-    // Один общий триггер остается только здесь, на директоре, для определения BIG/SMALL.
     [Tooltip("Радиус авто-триггера сокета если своего нет")]
     [SerializeField] private float autoSocketRadius = 0.02f;
     private void EnsureSocketTriggers()
@@ -133,17 +132,30 @@ public class CaliperSocketDirector : MonoBehaviour
         if (buttonLength != null) buttonLength.onClick.RemoveListener(SetModeLength);
         if (buttonWidth != null) buttonWidth.onClick.RemoveListener(SetModeWidth);
         if (buttonHeight != null) buttonHeight.onClick.RemoveListener(SetModeHeight);
+        _buttonsBound = false; // иначе после повторного Enable кнопки не подпишутся
+
         UnsubscribeSockets();
         if (caliperGrab != null)
         {
             caliperGrab.selectEntered.RemoveListener(OnCaliperGrabbed);
             caliperGrab.selectExited.RemoveListener(OnCaliperReleased);
         }
+
+        // Вернуть все отключённые коллизии, чтобы ничего не осталось "призрачным"
+        _tmp.Clear();
+        _tmp.AddRange(_ignored);
+        foreach (var it in _tmp)
+            if (it != null) SetCollisionBetween(it, false);
+        _tmp.Clear();
+        _ignored.Clear();
+        _zone.Clear();
+
+        _activeCat = SizeCat.Unknown;
         _isHeld = false;
         _lockedSocket = null;
     }
 
-    private System.Collections.Generic.IEnumerable<XRSocketInteractor> AllSockets()
+    private IEnumerable<XRSocketInteractor> AllSockets()
     {
         yield return socketBigLength;
         yield return socketBigWidth;
@@ -160,6 +172,8 @@ public class CaliperSocketDirector : MonoBehaviour
             if (s == null) continue;
             s.selectEntered.AddListener(OnSocketSelected);
             s.selectExited.AddListener(OnSocketReleased);
+            s.hoverEntered.AddListener(OnSocketHoverEntered);
+            s.hoverExited.AddListener(OnSocketHoverExited);
             if (s.hasSelection) _lockedSocket = s;
         }
     }
@@ -171,7 +185,23 @@ public class CaliperSocketDirector : MonoBehaviour
             if (s == null) continue;
             s.selectEntered.RemoveListener(OnSocketSelected);
             s.selectExited.RemoveListener(OnSocketReleased);
+            s.hoverEntered.RemoveListener(OnSocketHoverEntered);
+            s.hoverExited.RemoveListener(OnSocketHoverExited);
         }
+    }
+
+    private void OnSocketHoverEntered(HoverEnterEventArgs args)
+    {
+        // Брусок притягивается к сокету — корпус уже не должен с ним сталкиваться
+        var it = args.interactableObject as XRBaseInteractable;
+        if (it == null || it == caliperGrab) return;
+        IgnoreBlock(it);
+    }
+
+    private void OnSocketHoverExited(HoverExitEventArgs args)
+    {
+        var it = args.interactableObject as XRBaseInteractable;
+        TryRestoreBlock(it, null);
     }
 
     private void OnSocketSelected(SelectEnterEventArgs args)
@@ -180,16 +210,8 @@ public class CaliperSocketDirector : MonoBehaviour
         if (s == null) return;
         _lockedSocket = s;
 
-        // 1. Игнорируем столкновения между этим бруском и штангенциркулем
-        SetCollisionBetween(args.interactableObject, true);
-
-        // 2. Снимаем кинематику с бруска, чтобы PhysX не считал его якорем в воздухе
-        var rb = args.interactableObject.transform.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = false;
-            rb.useGravity = false;
-        }
+        var it = args.interactableObject as XRBaseInteractable;
+        if (it != null) IgnoreBlock(it);
 
         RefreshSockets();
     }
@@ -200,34 +222,60 @@ public class CaliperSocketDirector : MonoBehaviour
         if (s == null) return;
         if (_lockedSocket == s) _lockedSocket = null;
 
-        // 1. Возвращаем столкновения
-        SetCollisionBetween(args.interactableObject, false);
-
-        // 2. Возвращаем гравитацию бруску при извлечении из сокета
-        var rb = args.interactableObject.transform.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.useGravity = true;
-        }
+        // НЕ возвращаем коллизии сразу: брусок ещё между губками, PhysX вытолкнет его с силой.
+        // Вернём, когда брусок покинет зону измерения (OnTriggerExit),
+        // либо прямо сейчас, если он и так уже вне зоны.
+        var it = args.interactableObject as XRBaseInteractable;
+        TryRestoreBlock(it, s);
 
         RefreshSockets();
     }
 
-    private void SetCollisionBetween(IXRInteractable interactable, bool ignore)
+    private void IgnoreBlock(XRBaseInteractable it)
     {
-        if (interactable == null) return;
+        if (it == null) return;
+        if (_ignored.Add(it))
+            SetCollisionBetween(it, true);
+    }
 
-        var blockColliders = interactable.transform.GetComponentsInChildren<Collider>();
-        var caliperColliders = GetComponentsInChildren<Collider>();
+    private void TryRestoreBlock(XRBaseInteractable it, XRSocketInteractor exceptSocket)
+    {
+        if (it == null || !_ignored.Contains(it)) return;
+
+        // Ещё в зоне измерения — держим коллизии отключёнными
+        if (_zone.ContainsKey(it)) return;
+
+        // Всё ещё удерживается одним из наших сокетов — тоже не трогаем
+        foreach (var s in AllSockets())
+        {
+            if (s == null || s == exceptSocket) continue;
+            if (s.hasSelection && ReferenceEquals(s.firstInteractableSelected, it)) return;
+        }
+
+        _ignored.Remove(it);
+        SetCollisionBetween(it, false);
+    }
+
+    // Отключаем/включаем физику между бруском и ВСЕМ корпусом штангенциркуля (от корня caliperGrab).
+    private void SetCollisionBetween(XRBaseInteractable block, bool ignore)
+    {
+        if (block == null || caliperGrab == null) return;
+
+        var blockColliders = block.transform.GetComponentsInChildren<Collider>(true);
+        var caliperColliders = caliperGrab.transform.GetComponentsInChildren<Collider>(true);
 
         foreach (var bc in blockColliders)
         {
+            // IgnoreCollision требует активных коллайдеров
+            if (bc == null || bc.isTrigger || !bc.enabled || !bc.gameObject.activeInHierarchy) continue;
+
             foreach (var cc in caliperColliders)
             {
-                if (!bc.isTrigger && !cc.isTrigger)
-                {
-                    Physics.IgnoreCollision(bc, cc, ignore);
-                }
+                if (cc == null || cc == bc || cc.isTrigger || !cc.enabled || !cc.gameObject.activeInHierarchy) continue;
+                // Не трогаем коллайдеры самого бруска (если он вдруг лежит под корпусом в иерархии)
+                if (cc.transform.IsChildOf(block.transform)) continue;
+
+                Physics.IgnoreCollision(bc, cc, ignore);
             }
         }
     }
@@ -254,7 +302,6 @@ public class CaliperSocketDirector : MonoBehaviour
         if (buttonHeight != null) buttonHeight.onClick.AddListener(SetModeHeight);
     }
 
-    // ---------- UI: 3 Button TMP (Dropdown удален) ----------
     public void SetMode(int m)
     {
         mode = (MeasureMode)Mathf.Clamp(m, 0, 2);
@@ -266,12 +313,19 @@ public class CaliperSocketDirector : MonoBehaviour
     public MeasureMode CurrentMode => mode;
     public string CurrentModeName => mode.ToString();
 
-    // ---------- Триггер зоны: определяем BIG / SMALL ----------
     private void OnTriggerEnter(Collider other)
     {
         var it = FindInteractable(other);
-        if (it == null) return;
-        _hovered.Add(it);
+        if (it == null || it == caliperGrab) return;
+
+        _zone.TryGetValue(it, out int n);
+        _zone[it] = n + 1;
+
+        // Размерный брусок вошёл в зону — сразу отключаем коллизии с корпусом,
+        // чтобы он не упирался в губки ещё на подлёте к сокету
+        if (CategoryOf(it.gameObject.tag) != SizeCat.Unknown)
+            IgnoreBlock(it);
+
         UpdateCategory();
     }
 
@@ -279,22 +333,42 @@ public class CaliperSocketDirector : MonoBehaviour
     {
         var it = FindInteractable(other);
         if (it == null) return;
-        _hovered.Remove(it);
+        if (!_zone.TryGetValue(it, out int n)) return;
+
+        if (n <= 1)
+        {
+            _zone.Remove(it);
+            TryRestoreBlock(it, null);
+        }
+        else
+        {
+            _zone[it] = n - 1;
+        }
+
         UpdateCategory();
     }
 
     private XRBaseInteractable FindInteractable(Collider other)
     {
-        // XR-интеракт на самом коллайдере или родителе (брусок целиком).
-        // Бруски всегда с XRGrabInteractable, других Rigidbody в зоне не ждём.
         return other.GetComponentInParent<XRBaseInteractable>();
+    }
+
+    private void PruneDestroyed()
+    {
+        _tmp.Clear();
+        foreach (var k in _zone.Keys)
+            if (k == null) _tmp.Add(k);
+        foreach (var k in _tmp) _zone.Remove(k);
+        _tmp.Clear();
+
+        _ignored.RemoveWhere(x => x == null);
     }
 
     private void UpdateCategory()
     {
-        _hovered.RemoveWhere(x => x == null);
+        PruneDestroyed();
         SizeCat cat = SizeCat.Unknown;
-        foreach (var it in _hovered)
+        foreach (var it in _zone.Keys)
         {
             cat = CategoryOf(it.gameObject.tag);
             if (cat != SizeCat.Unknown) break;
@@ -310,13 +384,8 @@ public class CaliperSocketDirector : MonoBehaviour
         return SizeCat.Unknown;
     }
 
-    // ---------- Включаем 1 сокет, остальные глушим ----------
-    // Условие: штангель В РУКЕ + брусок в зоне + совпали размер и ось.
-    // В начале (не держат / пустая зона) все 6 выключены.
     private void RefreshSockets()
     {
-        // Пока сокет держит брусок — горит только он, остальное не трогаем.
-        // Иначе выход бруска из зоны в момент притягивания гасит сокет -> петля select/deselect.
         if (_lockedSocket != null)
         {
             foreach (var s in AllSockets())
@@ -339,7 +408,6 @@ public class CaliperSocketDirector : MonoBehaviour
         UpdateButtonVisuals();
     }
 
-    // Подсветка активной кнопки: активная неинтерактивна
     private void UpdateButtonVisuals()
     {
         if (buttonLength != null) buttonLength.interactable = (mode != MeasureMode.Length);
@@ -351,18 +419,16 @@ public class CaliperSocketDirector : MonoBehaviour
     {
         if (s == null) return;
 
-        // Не гасим сокет, если объект уже закреплен (hasSelection) 
-        // ИЛИ если объект прямо сейчас притягивается (hasHover / interactablesHovered)
+        // Защита от выключения занятого сокета (hasSelection)
+        // И притягивающегося в данный момент объекта (hasHover)
         bool isBusy = s.hasSelection || s.hasHover;
 
-        // Примечание: Для старых версий XRIT используйте (s.interactablesHovered.Count > 0) вместо hasHover
         if (!on && isBusy) return;
 
         s.socketActive = on;
         s.enabled = on;
     }
 
-    // Для отладки/логгера (учитывает залипание: категория могла уже сброситься в Unknown)
     public string ActiveSocketName()
     {
         if (_lockedSocket != null)
@@ -374,7 +440,8 @@ public class CaliperSocketDirector : MonoBehaviour
             if (_lockedSocket == socketSmallWidth) return "SMALL_W";
             if (_lockedSocket == socketSmallHeight) return "SMALL_H";
             return "LOCKED";
-        }        if (_activeCat == SizeCat.BIG && mode == MeasureMode.Length) return "BIG_L";
+        }
+        if (_activeCat == SizeCat.BIG && mode == MeasureMode.Length) return "BIG_L";
         if (_activeCat == SizeCat.BIG && mode == MeasureMode.Width) return "BIG_W";
         if (_activeCat == SizeCat.BIG && mode == MeasureMode.Height) return "BIG_H";
         if (_activeCat == SizeCat.SMALL && mode == MeasureMode.Length) return "SMALL_L";

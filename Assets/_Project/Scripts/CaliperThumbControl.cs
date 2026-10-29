@@ -34,6 +34,14 @@ public class CaliperThumbControl : MonoBehaviour
     [Tooltip("Те же точки что в DigitalCaliper: ZeroPoint на неподвижной губке, SliderPoint на подвижной")]
     [SerializeField] private Transform fixedTip;
     [SerializeField] private Transform movingTip;
+
+    [Header("Внутренние губки (упор при РАЗВЕДЕНИИ)")]
+    [Tooltip("Пустой объект на подвижной части, строго в точке контакта ВНУТРЕННЕЙ губки (кончик/ребро, которым она упирается в стенку отверстия). Пусто — внутренний упор выключен.")]
+    [SerializeField] private Transform innerMovingTip;
+    [Tooltip("Радиус начала торможения у внутренней губки (мировые метры).")]
+    [SerializeField] private float innerSlowRadius = 0.005f;
+    [Tooltip("Радиус жёсткого упора у внутренней губки (мировые метры).")]
+    [SerializeField] private float innerTipRadius = 0.0002f;
     [Tooltip("Слои брусков. Можно оставить Everything — точный отбор ниже делают теги.")]
     [SerializeField] private LayerMask blockLayers = ~0;
     [Tooltip("Теги на брусках. Должны совпадать с CaliperSocketDirector (BIG/SMALL)")]
@@ -186,15 +194,19 @@ public class CaliperThumbControl : MonoBehaviour
             // Градиента ещё нет (первый кадр) — считаем сближением, это консервативно и безопасно.
             bool closingPredicted = !_hasGradient || (inputY * _gapPerTravel < 0f);
 
-            // Внешняя зона: щуп только при предсказанном сближении.
-            // На открытии щуп пропускаем — полная скорость (так сбрасывается замедление при реверсе).
+            // Внешние губки упираются при СБЛИЖЕНИИ, внутренние — при РАЗВЕДЕНИИ
+            // (у реального штангеля внутренние губки расходятся, когда внешние раскрываются).
+            bool openingPredicted = innerMovingTip != null && (!_hasGradient || (inputY * _gapPerTravel > 0f));
+
+            // Зона торможения: щуп только в том направлении, куда реально едем.
+            // В обратную сторону — полная скорость (так сбрасывается замедление при реверсе).
             float worldSpeed = slideSpeed;
             bool inSlow = false;
             if (closingPredicted)
-            {
-                inSlow = ProbeBlocks(slowRadius);
-                if (inSlow) worldSpeed = slowSpeed;
-            }
+                inSlow = ProbeBlocks(movingTip, slowRadius);
+            if (openingPredicted)
+                inSlow |= ProbeBlocks(innerMovingTip, innerSlowRadius);
+            if (inSlow) worldSpeed = slowSpeed;
 
             // Шаг: мировую скорость переводим в локальные единицы травел
             float prevTravel = _currentTravel;
@@ -221,8 +233,21 @@ public class CaliperThumbControl : MonoBehaviour
             bool stop = false;
             if (closingActual)
             {
-                stop = ProbeBlocks(tipRadius);
+                stop = ProbeBlocks(movingTip, tipRadius);
                 if (stop)
+                {
+                    _currentTravel = prevTravel;
+                    movableJaw.localPosition = _startLocalPos + (slideAxis.normalized * _currentTravel);
+                }
+            }
+
+            // Внутренний упор: только при ФАКТИЧЕСКОМ разведении
+            bool openingActual = gapAfter > gapBefore + 0.0000001f;
+            bool stopInner = false;
+            if (openingActual && innerMovingTip != null)
+            {
+                stopInner = ProbeBlocks(innerMovingTip, innerTipRadius);
+                if (stopInner)
                 {
                     _currentTravel = prevTravel;
                     movableJaw.localPosition = _startLocalPos + (slideAxis.normalized * _currentTravel);
@@ -232,7 +257,7 @@ public class CaliperThumbControl : MonoBehaviour
             // Лог КАЖДЫЙ активный кадр (под галкой): по нему видно, какое звено цепи молчит —
             // predicted=false (градиент врёт) / inSlow=false (щуп не видит) / closing=false (Gap сломан) / stop=false (контакта нет)
             if (debugLog)
-                Debug.Log($"[Caliper] gap {gapBefore:F6}->{gapAfter:F6} predClose={closingPredicted} slow={inSlow} actClose={closingActual} stop={stop} v={worldSpeed:F4}", this);
+                Debug.Log($"[Caliper] gap {gapBefore:F6}->{gapAfter:F6} predClose={closingPredicted} slow={inSlow} actClose={closingActual} stop={stop} actOpen={openingActual} stopInner={stopInner} v={worldSpeed:F4}", this);
         }
     }
 
@@ -247,10 +272,10 @@ public class CaliperThumbControl : MonoBehaviour
     // Теги ищем ВВЕРХ от самого коллайдера (а не от Rigidbody): тег может висеть
     // на mesh-child под ригидом — старт со Steiner rigidbody его бы пропустил.
     // Радиус — мировой, масштаб иерархии на него не влияет. Ноль аллокаций (NonAlloc + готовый буфер).
-    private bool ProbeBlocks(float worldRadius)
+    private bool ProbeBlocks(Transform tip, float worldRadius)
     {
-        if (movingTip == null) return false;
-        int n = Physics.OverlapSphereNonAlloc(movingTip.position, worldRadius, _hits, blockLayers, QueryTriggerInteraction.Ignore);
+        if (tip == null) return false;
+        int n = Physics.OverlapSphereNonAlloc(tip.position, worldRadius, _hits, blockLayers, QueryTriggerInteraction.Ignore);
         for (int i = 0; i < n; i++)
         {
             Collider h = _hits[i];
@@ -272,6 +297,8 @@ public class CaliperThumbControl : MonoBehaviour
         if (movableJaw == null) Debug.LogWarning("[Caliper] movableJaw не назначен — губка не поедет.", this);
         if (movableJaw == transform) Debug.LogError("[Caliper] movableJaw указывает на КОРЕНЬ штангеля — ездить будет ВЕСЬ штангенциркуль. Нужна подвижная часть (#TOL0002_Movable).", this);
         if (fixedTip == null || movingTip == null) Debug.LogWarning("[Caliper] FixedTip/MovingTip не назначены — Gap()=inf, упор и доводка НЕ РАБОТАЮТ.", this);
+        if (innerMovingTip == null) Debug.Log("[Caliper] innerMovingTip не назначен — упор внутренних губок выключен.", this);
+        if (innerSlowRadius <= innerTipRadius) Debug.LogWarning("[Caliper] innerSlowRadius должен быть заметно больше innerTipRadius.", this);
         if (slowRadius <= tipRadius) Debug.LogWarning("[Caliper] slowRadius должен быть заметно больше tipRadius (минимум +1 полный шаг), иначе торможение не успеет.", this);
     }
 
@@ -279,6 +306,13 @@ public class CaliperThumbControl : MonoBehaviour
     // Смотреть в Scene view при ВЫБРАННОМ штангеле. Если красная сфера не на контактной грани губки — вот и «stop=False при касании».
     private void OnDrawGizmosSelected()
     {
+        if (innerMovingTip != null)
+        {
+            Gizmos.color = new Color(1f, 0.5f, 0f);
+            Gizmos.DrawWireSphere(innerMovingTip.position, innerSlowRadius);
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(innerMovingTip.position, innerTipRadius);
+        }
         if (movingTip == null) return;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(movingTip.position, slowRadius);
