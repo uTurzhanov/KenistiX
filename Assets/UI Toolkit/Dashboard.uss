@@ -1,0 +1,541 @@
+/* ==========================================
+   ПЕРЕМЕННЫЕ ЦВЕТОВ (Light / Dark Theme)
+   ========================================== */
+.root-container {
+    --bg-main: #F4F6F9;
+    --bg-sidebar: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-card-secondary: #F0F3F7;
+    --text-primary: #1A1D20;
+    --text-secondary: #7A869A;
+    --border-color: #E2E8F0;
+    --blue-accent: #0084FF;
+    --blue-hover: #0072DC;
+    --green-bg: #DDF6E8;
+    --green-text: #10B981;
+    --danger-color: #FF3B30;
+    
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    flex-direction: row;
+    background-color: var(--bg-main);
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+/* Переключение на Темную тему */
+.root-container.theme-dark {
+    --bg-main: #0B0E14;
+    --bg-sidebar: #111622;
+    --bg-card: #161C2A;
+    --bg-card-secondary: #1F2738;
+    --text-primary: #FFFFFF;
+    --text-secondary: #8B98A9;
+    --border-color: #242D40;
+    --green-bg: #0E3321;
+    --green-text: #22C55E;
+}
+
+/* ==========================================
+   SIDEBAR
+   ========================================== */
+.sidebar {
+    width: 240px;
+    background-color: var(--bg-sidebar);
+    padding: 32px 20px;
+    border-right-width: 1px;
+    border-right-color: var(--border-color);
+}
+
+.sidebar-title {
+    font-size: 18px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.sidebar-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin-bottom: 24px;
+}
+
+.sidebar-menu {
+    flex-direction: column;
+}
+
+.sidebar-btn {
+    height: 48px;
+    border-radius: 12px;
+    background-color: transparent;
+    border-width: 0;
+    color: var(--text-secondary);
+    -unity-font-style: bold;
+    -unity-text-align: middle-left;
+    padding-left: 20px;
+    margin-bottom: 8px;
+}
+
+/* 1. Сначала задаем hover для всех кнопок */
+.sidebar-btn:hover {
+    background-color: var(--bg-card-secondary);
+}
+
+/* 2. За тем задаем active — он перекроет hover по приоритету */
+.sidebar-btn.active {
+    background-color: var(--blue-accent);
+    color: #FFFFFF;
+}
+
+.sidebar-btn.active:hover {
+    background-color: var(--blue-accent);
+}
+
+/* ==========================================
+   MAIN CONTENT & TOP BAR
+   ========================================== */
+.main-content {
+    flex-grow: 1;
+    padding: 32px;
+    position: relative;
+}
+
+.top-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.main-title {
+    font-size: 22px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+}
+
+.top-controls {
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Переключатель темы */
+.theme-switch {
+    width: 64px;
+    height: 32px;
+    margin: 0 16px 0 0;
+    padding: 0;
+}
+
+.theme-switch .unity-toggle__input {
+    background-color: #E6E8EE;
+    border-radius: 16px;
+    border-width: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.root-container.theme-dark .theme-switch .unity-toggle__input {
+    background-color: #1D2333;
+}
+
+.theme-switch .unity-toggle__checkmark {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    border-width: 0;
+    background-image: none; /* Убираем дефолтную галочку */
+    background-color: #FFFFFF; /* Белый кружок в светлой теме */
+    transition-property: translate, background-color;
+    transition-duration: 0.25s;
+}
+
+.root-container.theme-dark .theme-switch .unity-toggle__checkmark {
+    translate: 32px 0;
+    background-color: #2D374E; /* Темный кружок */
+}
+.icon-sun {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    translate: 0 -50%;
+    width: 16px;
+    height: 16px;
+    /* Если у вас есть SVG/PNG иконка солнца: */
+    background-image: url("project://database/Assets/Prefabs/NewUIFromDimash/Component%201%20(2).png");
+    -unity-background-image-tint-color: #1A1D20;
+}
+.icon-moon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    translate: 0 -50%;
+    width: 16px;
+    height: 16px;
+    /* Если у вас есть SVG/PNG иконка луны: */
+    background-image: url("project://database/Assets/Prefabs/NewUIFromDimash/Vector%20(2).png");
+    -unity-background-image-tint-color: #4A5568;
+}
+.root-container.theme-dark .icon-sun {
+
+     background-image: url("project://database/Assets/Prefabs/NewUIFromDimash/Group%204291.png");
+     -unity-background-image-tint-color: #FFFFFF;
+}
+.root-container.theme-dark .icon-moon {
+    
+     background-image: url("project://database/Assets/Prefabs/NewUIFromDimash/Vector%20(3).png");
+     -unity-background-image-tint-color: #FFFFFF;
+}
+/* Кнопка сессии */
+.session-btn {
+    flex-direction: row;
+    align-items: center;
+    height: 38px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 19px;
+    background-color: var(--green-bg);
+    border-width: 0;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: var(--green-text);
+    margin-right: 8px;
+}
+
+.session-text {
+    color: var(--green-text);
+    -unity-font-style: bold;
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+.dropdown-arrow {
+    color: var(--green-text);
+    font-size: 10px;
+}
+
+/* ==========================================
+   CARDS & TABLE
+   ========================================== */
+.cards-row {
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.info-card {
+    flex-grow: 1;
+    height: 70px;
+    background-color: var(--bg-card-secondary);
+    border-radius: 16px;
+    padding: 12px 16px;
+    margin-right: 16px;
+}
+
+.info-card:last-child {
+    margin-right: 0;
+}
+
+.card-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.table-card {
+    flex-grow: 1;
+    background-color: var(--bg-card);
+    border-radius: 20px;
+    border-width: 1px;
+    border-color: var(--border-color);
+    padding: 16px;
+}
+
+.table-toolbar {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+/* Контейнер поля выбора прибора */
+.search-field {
+    width: 240px;
+    height: 36px;
+    background-color: var(--bg-card-secondary);
+    border-radius: 18px;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 14px;
+    padding-right: 8px;
+}
+
+.search-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: var(--blue-accent);
+    margin-right: 4px;
+}
+
+/* Настройка встроенного DropdownField */
+.device-dropdown {
+    flex-grow: 1;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: transparent;
+    border-width: 0;
+}
+
+.device-dropdown .unity-base-field__input {
+    background-color: transparent;
+    border-width: 0;
+    padding: 0 4px;
+    height: 100%;
+    align-items: center;
+}
+
+.device-dropdown .unity-text-element {
+    color: var(--text-primary);
+    font-size: 12px;
+    -unity-font-style: bold;
+}
+
+.device-dropdown .unity-base-popup-field__arrow {
+    -unity-background-image-tint-color: var(--text-secondary);
+}
+.action-btn {
+    height: 36px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: var(--blue-accent);
+    color: #FFFFFF;
+    border-radius: 18px;
+    border-width: 0;
+    -unity-font-style: bold;
+    font-size: 12px;
+}
+
+.table-header {
+    flex-direction: row;
+    padding-bottom: 12px;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--border-color);
+}
+
+.col {
+    color: var(--text-secondary);
+    font-size: 11px;
+    -unity-font-style: bold;
+}
+.col-xs { width: 40px; }
+.col-md { flex-grow: 1; }
+.col-lg { flex-grow: 1.5; }
+
+/* ==========================================
+   DROPDOWN OVERLAY
+   ========================================== */
+.dropdown-overlay {
+    position: absolute;
+    top: 75px;
+    right: 32px;
+    width: 320px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    padding: 12px 0;
+    border-width: 1px;
+    border-color: #E2E8F0;
+}
+
+.dropdown-overlay.hidden {
+    display: none;
+}
+
+.dropdown-item {
+    flex-direction: row;
+    align-items: center;
+    height: 48px;
+    padding: 0 20px;
+    background-color: transparent;
+    border-width: 0;
+}
+
+.dropdown-item:hover {
+    background-color: #F8FAFC;
+}
+
+.item-icon {
+    font-size: 14px;
+    margin-right: 14px;
+    color: #1A1D20;
+}
+
+.item-text {
+    font-size: 15px;
+    -unity-font-style: bold;
+    color: #1A1D20;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: #F1F5F9;
+    margin: 4px 0;
+}
+
+.danger-icon, .danger-text {
+    color: var(--danger-color);
+}
+/* ==========================================
+   SCROLLVIEW И ГАЛЕРЕЯ СКРИНШОТОВ
+   ========================================== */
+#fixations-scroll .unity-scroll-view__content-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.screenshot-card {
+    width: 48.5%;
+    background-color: var(--bg-card-secondary);
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 16px;
+    flex-direction: column;
+}
+
+.screenshot-preview {
+    width: 100%;
+    height: 170px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    background-size: cover;
+}
+
+.measurement-card {
+    background-color: var(--bg-card-secondary);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    flex-direction: column;
+    width: 100%;
+}
+
+.measurement-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.measurement-title {
+    font-size: 14px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+}
+
+.measurement-time {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.measurement-values {
+    font-size: 13px;
+    -unity-font-style: bold;
+    color: var(--blue-accent);
+}
+.gallery-scroll {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+/* Полное скрытие неактивной вкладки */
+.gallery-scroll.hidden {
+    display: none;
+}
+/* ==========================================
+   МИНИМАЛИСТИЧНЫЙ И УЗКИЙ SCROLLBAR
+   ========================================== */
+
+/* 1. Сжатие внешнего контейнера скроллера */
+/* ==========================================
+   УЗКИЙ SCROLLBAR С БОКОВЫМИ ОТСТУПАМИ
+   ========================================== */
+
+/* 1. Добавляем внешние отступы слева и справа по 5px */
+.unity-scroller--vertical {
+    width: 8px;
+    min-width: 8px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    background-color: transparent;
+    border-width: 0;
+}
+
+/* 2. Слайдер и контейнер */
+.unity-scroller #unity-slider {
+    width: 8px;
+    min-width: 8px;
+    margin: 0;
+    padding: 0;
+}
+
+/* 3. Скрываем стрелки */
+.unity-scroller #unity-low-button,
+.unity-scroller #unity-high-button {
+    display: none;
+}
+
+/* 4. Задний трек (дорожка 6px) */
+.unity-scroller #unity-tracker {
+    width: 6px;
+    min-width: 6px;
+    background-color: #EEF1F6;
+    border-radius: 3px;
+    border-width: 0;
+    align-self: center;
+}
+
+/* 5. Ползунок (dragger 6px) */
+.unity-scroller #unity-dragger {
+    width: 6px;
+    min-width: 6px;
+    background-color: #C1C7D0;
+    border-radius: 3px;
+    border-width: 0;
+    left: 1px;
+    transition-property: background-color;
+    transition-duration: 0.15s;
+}
+
+.unity-scroller #unity-dragger:hover {
+    background-color: #A3ACB9;
+}
+
+/* ==========================================
+   АДАПТАЦИЯ ПОД ТЁМНУЮ ТЕМУ
+   ========================================== */
+.root-container.theme-dark .unity-scroller #unity-tracker {
+    background-color: #1A2232;
+}
+
+.root-container.theme-dark .unity-scroller #unity-dragger {
+    background-color: #3A475D;
+}
+
+.root-container.theme-dark .unity-scroller #unity-dragger:hover {
+    background-color: #4C5B75;
+}

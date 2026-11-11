@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 [Serializable]
 public class TMPDataMapping
@@ -12,171 +11,206 @@ public class TMPDataMapping
     public string prefix;
     public TMP_Text sourceTMP;
 
-    [Tooltip("Целевой TextMeshPro для ПРЕВЬЮ скриншота (в интерфейсе камеры)")]
+    [Tooltip("Целевой TextMeshPro для ПРЕВЬЮ скриншота (в интерфейсе камеры, если используется)")]
     public TMP_Text targetPreviewTMP;
 }
 
 [Serializable]
 public class CapturePointConfig
 {
+    [Tooltip("Название прибора или замера (например: 'Мультиметр', 'Штангенциркуль')")]
+    public string pointName = "Замер";
+
     [Tooltip("Позиция и поворот камеры")]
     public Transform point;
 
     [Tooltip("Угол обзора (Field of View) для этой точки")]
     [Range(1f, 179f)]
     public float fieldOfView = 60f;
-    [Tooltip("Список показателей, которые нужно собирать именно для этой точки (Макс 10)")]
+
+    [Tooltip("Список показателей, которые нужно собирать для этой точки (Макс 10)")]
     public List<TMPDataMapping> dataMappings = new List<TMPDataMapping>();
 }
 
 public class ScreenshotCaptureService : MonoBehaviour
 {
-    [Header("Точки съемки и настройки")]
-    [SerializeField] private List<CapturePointConfig> capturePoints = new List<CapturePointConfig>();
+    [Header("Настройки съемки")]
     [SerializeField] private Camera captureCamera;
+    [SerializeField] private List<CapturePointConfig> capturePoints = new List<CapturePointConfig>();
 
-    [Header("Интерфейс управления и галереи")]
-    [SerializeField] private ScreenshotGalleryUI galleryUI;
-    [SerializeField] private Button captureButton;
-    [SerializeField] private TMP_Dropdown objectSelectionDropdown;
+    [Header("UI Toolkit Контроллер")]
+    [SerializeField] private UIToolkitGalleryController uiToolkitGallery;
 
-    [Header("Вывод последнего скриншота")]
-    [SerializeField] private ScreenshotCardUI latestScreenshotCardUI;
-
-    [Header("Размер изображения")]
+    [Header("Разрешение скриншота")]
     [SerializeField] private int screenshotWidth = 1280;
     [SerializeField] private int screenshotHeight = 720;
 
-    [Header("Тестовые данные")]
+    [Header("Данные сессии")]
     [SerializeField] private string sessionId = "TEST_SESSION";
-    [SerializeField] private string testEventTitle = "Снятие контрольного показания";
+    [SerializeField] private string defaultEventTitle = "Снятие контрольного показания";
 
-    // === НОВОЕ ПОЛЕ ДЛЯ ПРИПИСКИ ===
-    [Header("Динамическая приписка (Суффикс)")]
-    [Tooltip("Текст, который будет добавляться к названию прибора. Можно менять через UI кнопки.")]
+    [Header("Динамический суффикс")]
+    [Tooltip("Текст, добавляемый к названию замера (например: ' height')")]
     [SerializeField] private string currentTitleSuffix = "";
 
-    private float sessionStartTime;
-    private int screenshotNumber;
-    private bool isCapturing;
+    // C# событие для подписки сторонних контроллеров
+    public event Action<Texture2D, string, string, List<string>, string, string, string> OnScreenshotCaptured;
+
+    private float _sessionStartTime;
+    private int _screenshotNumber;
+    private bool _isCapturing;
+
+    public bool IsCapturing => _isCapturing;
 
     private void Awake()
     {
-        sessionStartTime = Time.time;
-        if (captureCamera != null) captureCamera.enabled = false;
+        _sessionStartTime = Time.time;
+        if (captureCamera != null)
+        {
+            captureCamera.enabled = false;
+        }
     }
 
-    // === НОВЫЙ МЕТОД ДЛЯ КНОПОК UI ===
-    // Вызывайте его в OnClick() кнопки и передавайте нужную приписку
+    #region Публичные методы управления
+
+    /// <summary>
+    /// Установить суффикс для названия замера
+    /// </summary>
     public void SetEventTitleSuffix(string suffix)
     {
         currentTitleSuffix = suffix;
     }
 
-    // Если нужно сбросить приписку (например, при смене прибора)
+    /// <summary>
+    /// Сбросить суффикс
+    /// </summary>
     public void ClearEventTitleSuffix()
     {
         currentTitleSuffix = "";
     }
 
+    /// <summary>
+    /// Снять скриншот с текущей или первой доступной точки
+    /// </summary>
     public void TakeScreenshot()
     {
-        string currentTitle = testEventTitle;
+        TakeScreenshot(0);
+    }
+
+    /// <summary>
+    /// Снять скриншот с конкретной точки по её индексу
+    /// </summary>
+    /// <summary>
+    /// Снять скриншот с конкретной точки по её индексу
+    /// </summary>
+    public void TakeScreenshot(int pointIndex)
+    {
+        if (_isCapturing) return;
+
         CapturePointConfig activeConfig = null;
+        string eventTitle = defaultEventTitle;
+        int safeIndex = 0; // Переменная объявлена снаружи блока if
 
-        if (objectSelectionDropdown != null && objectSelectionDropdown.options.Count > 0)
+        if (capturePoints != null && capturePoints.Count > 0)
         {
-            int selectedIndex = objectSelectionDropdown.value;
-            currentTitle = objectSelectionDropdown.options[selectedIndex].text;
+            safeIndex = Mathf.Clamp(pointIndex, 0, capturePoints.Count - 1);
+            activeConfig = capturePoints[safeIndex];
 
-            if (selectedIndex < capturePoints.Count)
+            if (!string.IsNullOrEmpty(activeConfig.pointName))
             {
-                activeConfig = capturePoints[selectedIndex];
-                ClearEventTitleSuffix(); // Сбрасываем приписку при смене прибора
-            }
-            else
-            {
-                Debug.LogWarning($"ScreenshotCaptureService: Нет настроек съемки для индекса {selectedIndex}.");
+                eventTitle = activeConfig.pointName;
             }
         }
-        else if (capturePoints.Count > 0)
-        {
-            activeConfig = capturePoints[0];
-        }
 
-        if (activeConfig == null || activeConfig.point == null)
-        {
-            Debug.Log("ScreenshotCaptureService: Точка съемки не задана. Камера останется на текущей позиции.");
-        }
-
-        // === ПРИМЕНЯЕМ ПРИПИСКУ ПЕРЕД СОЗДАНИЕМ СКРИНШОТА ===
         if (!string.IsNullOrEmpty(currentTitleSuffix))
         {
-            currentTitle += currentTitleSuffix; // Например, "Штангенциркуль" + " height" = "Штангенциркуль height"
+            eventTitle += currentTitleSuffix;
         }
 
-        CaptureScreenshot(currentTitle, activeConfig, "");
+        StartCoroutine(CaptureRoutine(eventTitle, activeConfig, safeIndex.ToString()));
     }
 
-    public void CaptureScreenshot(string eventTitle, CapturePointConfig activeConfig, string fallbackValues = "")
-    {
-        if (isCapturing) return;
-        StartCoroutine(CaptureRoutine(eventTitle, activeConfig, fallbackValues));
-    }
+    #endregion
 
-    private IEnumerator CaptureRoutine(string eventTitle, CapturePointConfig activeConfig, string fallbackValues)
-    {
-        isCapturing = true;
-        if (captureButton != null) captureButton.interactable = false;
+    #region Основная логика захвата
 
+    private IEnumerator CaptureRoutine(string eventTitle, CapturePointConfig activeConfig, string deviceID)
+    {
+        _isCapturing = true;
+
+        // 1. Собираем текстовые данные с 3D-дисплеев
         var (combinedValues, separatedValues) = ProcessDynamicTMPData(activeConfig);
-        string finalValues = !string.IsNullOrEmpty(combinedValues) ? combinedValues : fallbackValues;
 
+        // 2. Настраиваем камеру
         SynchronizeCaptureCamera(activeConfig);
 
-        RenderTexture renderTexture = new RenderTexture(screenshotWidth, screenshotHeight, 24, RenderTextureFormat.ARGB32);
+        // 3. Создаем RenderTexture для кадра
+        RenderTexture renderTexture = RenderTexture.GetTemporary(screenshotWidth, screenshotHeight, 24, RenderTextureFormat.ARGB32);
         captureCamera.targetTexture = renderTexture;
         captureCamera.enabled = true;
 
+        // Ждем завершения рендеринга текущего кадра
         yield return new WaitForEndOfFrame();
 
         captureCamera.enabled = false;
 
-        RenderTexture previousTexture = RenderTexture.active;
+        // 4. Считываем пиксели из RenderTexture в Texture2D
+        RenderTexture previousActive = RenderTexture.active;
         RenderTexture.active = renderTexture;
+
         Texture2D screenshot = new Texture2D(screenshotWidth, screenshotHeight, TextureFormat.RGB24, false);
         screenshot.ReadPixels(new Rect(0, 0, screenshotWidth, screenshotHeight), 0, 0);
         screenshot.Apply();
 
-        RenderTexture.active = previousTexture;
+        // 5. Освобождаем ресурсы рендеринга
+        RenderTexture.active = previousActive;
         captureCamera.targetTexture = null;
-        renderTexture.Release();
-        Destroy(renderTexture);
+        RenderTexture.ReleaseTemporary(renderTexture);
 
-        screenshotNumber++;
+        // 6. Формируем метаданные
+        _screenshotNumber++;
         string sessionTime = GetSessionTime();
         string timestamp = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
-        SaveScreenshotToFile(screenshot, screenshotNumber);
 
-        // === Считывание deviceID (из нашего предыдущего шага) ===
-        string currentDeviceID = "0";
-        if (objectSelectionDropdown != null)
+        // 7. Сохраняем PNG на диск
+        SaveScreenshotToFile(screenshot, _screenshotNumber);
+
+        // 8. Передаем данные в UI Toolkit Галерею
+        if (uiToolkitGallery != null)
         {
-            currentDeviceID = objectSelectionDropdown.value.ToString();
+            uiToolkitGallery.AddScreenshotEntry(
+                screenshot,
+                eventTitle,
+                combinedValues,
+                separatedValues,
+                sessionTime,
+                timestamp
+            );
         }
 
-        if (galleryUI != null)
-        {
-            galleryUI.AddScreenshot(screenshot, eventTitle, finalValues, separatedValues, sessionTime, timestamp, currentDeviceID);
-        }
+        // 9. Оповещаем внешних подписчиков
+        OnScreenshotCaptured?.Invoke(screenshot, eventTitle, combinedValues, separatedValues, sessionTime, timestamp, deviceID);
 
-        if (latestScreenshotCardUI != null)
-        {
-            latestScreenshotCardUI.Setup(screenshot, eventTitle, finalValues, separatedValues, sessionTime, timestamp);
-        }
+        _isCapturing = false;
+    }
 
-        if (captureButton != null) captureButton.interactable = true;
-        isCapturing = false;
+    /// <summary>
+    /// Возвращает список названий приборов, настроенных в Инспекторе Unity
+    /// </summary>
+    public List<string> GetCapturePointNames()
+    {
+        List<string> names = new List<string>();
+        if (capturePoints != null)
+        {
+            foreach (var pointConfig in capturePoints)
+            {
+                if (!string.IsNullOrEmpty(pointConfig.pointName))
+                    names.Add(pointConfig.pointName);
+                else
+                    names.Add($"Точка {names.Count + 1}");
+            }
+        }
+        return names;
     }
 
     private (string combined, List<string> separated) ProcessDynamicTMPData(CapturePointConfig activeConfig)
@@ -184,8 +218,10 @@ public class ScreenshotCaptureService : MonoBehaviour
         string combinedValues = "";
         List<string> separatedList = new List<string>();
 
+        // Скрываем все превью на сцене перед сбором
         foreach (var config in capturePoints)
         {
+            if (config?.dataMappings == null) continue;
             foreach (var mapping in config.dataMappings)
             {
                 if (mapping.targetPreviewTMP != null)
@@ -195,7 +231,8 @@ public class ScreenshotCaptureService : MonoBehaviour
             }
         }
 
-        if (activeConfig != null && activeConfig.dataMappings != null)
+        // Собираем актуальные показания с активного прибора
+        if (activeConfig?.dataMappings != null)
         {
             foreach (var mapping in activeConfig.dataMappings)
             {
@@ -227,28 +264,37 @@ public class ScreenshotCaptureService : MonoBehaviour
 
     private void SynchronizeCaptureCamera(CapturePointConfig config)
     {
-        if (config == null || config.point == null)
+        if (captureCamera == null) return;
+
+        if (config != null && config.point != null)
         {
-            captureCamera.aspect = (float)screenshotWidth / screenshotHeight;
-            return;
+            captureCamera.transform.SetPositionAndRotation(config.point.position, config.point.rotation);
+            captureCamera.fieldOfView = config.fieldOfView;
         }
 
-        captureCamera.transform.SetPositionAndRotation(config.point.position, config.point.rotation);
-        captureCamera.fieldOfView = config.fieldOfView;
         captureCamera.aspect = (float)screenshotWidth / screenshotHeight;
     }
 
     private void SaveScreenshotToFile(Texture2D screenshot, int number)
     {
-        string dir = Path.Combine(Application.persistentDataPath, "LabJournal", sessionId, "Screenshots");
-        Directory.CreateDirectory(dir);
-        string file = Path.Combine(dir, $"shot_{number:000}_{DateTime.UtcNow:yyyyMMdd_HHmmss_fff}.png");
-        File.WriteAllBytes(file, screenshot.EncodeToPNG());
+        try
+        {
+            string dir = Path.Combine(Application.persistentDataPath, "LabJournal", sessionId, "Screenshots");
+            Directory.CreateDirectory(dir);
+            string filePath = Path.Combine(dir, $"shot_{number:000}_{DateTime.Now:yyyyMMdd_HHmmss}.png");
+            File.WriteAllBytes(filePath, screenshot.EncodeToPNG());
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"[ScreenshotCaptureService] Ошибка сохранения снимка: {ex.Message}");
+        }
     }
 
     private string GetSessionTime()
     {
-        TimeSpan elapsed = TimeSpan.FromSeconds(Time.time - sessionStartTime);
+        TimeSpan elapsed = TimeSpan.FromSeconds(Time.time - _sessionStartTime);
         return $"{(int)elapsed.TotalMinutes:00}:{elapsed.Seconds:00}";
     }
+
+    #endregion
 }

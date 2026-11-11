@@ -1,0 +1,94 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd">
+    <ui:Style src="Dashboard.uss" />
+
+    <ui:VisualElement name="root" class="root-container">
+        
+        <!-- ЛЕВАЯ ПАНЕЛЬ (SIDEBAR) -->
+        <ui:VisualElement class="sidebar">
+            <ui:Label text="ЖУРНАЛ" class="sidebar-title" />
+            <ui:VisualElement class="sidebar-divider" />
+            
+            <ui:VisualElement class="sidebar-menu">
+                <ui:Button name="btn-tab-zamery" text="ЗАМЕРЫ" class="sidebar-btn active" />
+                <ui:Button name="btn-tab-fiksaciya" text="ФИКСАЦИЯ" class="sidebar-btn" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ОСНОВНАЯ ОБЛАСТЬ -->
+        <ui:VisualElement class="main-content">
+            
+            <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+            <ui:VisualElement class="top-bar">
+                <ui:Label name="view-title" text="РЕЗУЛЬТАТЫ ИЗМЕРЕНИЙ" class="main-title" />
+                
+                <ui:VisualElement class="top-controls">
+                    <!-- Слайдер темы с вложенными иконками -->
+                    <ui:Toggle name="theme-toggle" class="theme-switch" tooltip="Смена темы">
+                        <ui:VisualElement class="icon-sun" />
+                        <ui:VisualElement class="icon-moon" />
+                    </ui:Toggle>
+                    
+                    <!-- 1. ИСПРАВЛЕНО ИМЯ КНОПКИ: session-btn -->
+                    <ui:Button name="session-btn" class="session-btn">
+                        <ui:VisualElement class="status-dot" />
+                        <ui:Label text="СЕССИЯ АКТИВНА" class="session-text" />
+                        <ui:Label text="▼" class="dropdown-arrow" />
+                    </ui:Button>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- КАРТОЧКИ ИНФОРМАЦИИ -->
+            <ui:VisualElement class="cards-row">
+                <ui:VisualElement class="info-card">
+                    <ui:Label text="Студент" class="card-label" />
+                </ui:VisualElement>
+                <ui:VisualElement class="info-card">
+                    <ui:Label text="Эксперимент" class="card-label" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- ОСНОВНОЙ КОНТЕЙНЕР (ГАЛЕРЕЯ / ТАБЛИЦА) -->
+            <ui:VisualElement class="table-card">
+                <ui:VisualElement class="table-toolbar">
+                    <ui:VisualElement class="search-field">
+                         <ui:VisualElement class="search-dot" />
+                         <ui:DropdownField name="device-dropdown" class="device-dropdown" />
+                    </ui:VisualElement>
+                    <!-- Кнопка снимка -->
+                    <ui:Button name="btn-capture" text="+ ЗАФИКСИРОВАТЬ ЗАМЕР" class="action-btn" />
+                </ui:VisualElement>
+
+                <!-- 1. ВКЛАДКА "ЗАМЕРЫ" (Текстовый ScrollView) -->
+                <ui:ScrollView name="measurements-scroll" class="gallery-scroll">
+                    <!-- Сюда программно добавляются текстовые карточки замеров -->
+                </ui:ScrollView>
+
+                <!-- 2. ВКЛАДКА "ФИКСАЦИЯ" (ScrollView со скриншотами) -->
+                <ui:ScrollView name="fixations-scroll" class="gallery-scroll hidden">
+                    <!-- Сюда программно добавляются карточки со скриншотами -->
+                </ui:ScrollView>
+            </ui:VisualElement>
+
+            <!-- 2. ВОССТАНОВЛЕН ВЫПАДАЮЩИЙ СПИСОК: session-dropdown -->
+            <ui:VisualElement name="session-dropdown" class="dropdown-overlay hidden">
+                <ui:Button name="menu-start" class="dropdown-item">
+                    <ui:Label text="▶" class="item-icon" />
+                    <ui:Label text="Начать сессию" class="item-text" />
+                </ui:Button>
+                <ui:VisualElement class="dropdown-divider" />
+                
+                <ui:Button name="menu-restart" class="dropdown-item">
+                    <ui:Label text="↺" class="item-icon" />
+                    <ui:Label text="Перезапустить" class="item-text" />
+                </ui:Button>
+                <ui:VisualElement class="dropdown-divider" />
+                
+                <ui:Button name="menu-stop" class="dropdown-item danger">
+                    <ui:Label text="■" class="item-icon danger-icon" />
+                    <ui:Label text="Закончить и выгрузить результаты" class="item-text danger-text" />
+                </ui:Button>
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
