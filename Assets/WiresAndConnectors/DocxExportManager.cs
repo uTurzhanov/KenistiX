@@ -1,37 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.UI;
-using TMPro;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UIElements;
+using TMPro;
 
 public class DocxExportManager : MonoBehaviour
 {
     [Header("Связь с данными")]
-    [SerializeField] private LabDataManager localDataManager; // Перетащи сюда LabDataManager с этого же канваса
-    [Header("Связь с UI")]
-    [SerializeField] private ScreenshotGalleryUI galleryUI;   // Ваша галерея со скриншотами
-    [SerializeField] private Button exportButton;             // Кнопка "Отправить/Создать отчет"
-    [SerializeField] private TMP_Text statusText;             // Текст для показа статуса пользователю (опционально)
+    [SerializeField] private LabDataManager localDataManager;
+
+    [Header("Связь с UI Toolkit")]
+    [SerializeField] private UIDocument uiDocument;
+    [SerializeField] private UIToolkitGalleryController galleryController;
+
+    [Header("Связь с uGUI (Опционально)")]
+    [SerializeField] private TMP_Text statusText;
 
     [Header("Сетевые настройки")]
     [SerializeField] private int udpDiscoveryPort = 8888;
     [SerializeField] private string discoveryMessage = "QUEST3_SEARCHING_DOCX_SERVER";
 
     private string foundServerUrl = "";
+    private Button _btnCreateReport;
+    private Label _lblServerStatus;
+
+    private void Awake()
+    {
+        InitUIToolkit();
+    }
+
+    private void InitUIToolkit()
+    {
+        if (uiDocument == null) uiDocument = GetComponent<UIDocument>();
+        if (uiDocument != null && uiDocument.rootVisualElement != null)
+        {
+            VisualElement root = uiDocument.rootVisualElement;
+            _btnCreateReport = root.Q<Button>("btn-create-report");
+            _lblServerStatus = root.Q<Label>("lbl-server-status");
+
+            if (_btnCreateReport != null)
+            {
+                _btnCreateReport.clicked += OnExportButtonClicked;
+            }
+        }
+    }
 
     private void Start()
     {
-        if (exportButton != null)
-            exportButton.onClick.AddListener(OnExportButtonClicked);
-
-        UpdateStatus("Поиск сервера в локальной сети...");
-
-        // Запускаем асинхронный поиск Go-сервера при старте сцены
+        UpdateStatus("Поиск сервера...");
         _ = SearchForServerAsync();
     }
 
@@ -45,10 +66,8 @@ public class DocxExportManager : MonoBehaviour
                 byte[] requestData = Encoding.UTF8.GetBytes(discoveryMessage);
                 IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, udpDiscoveryPort);
 
-                // Отправляем бродкаст-запрос
                 await udpClient.SendAsync(requestData, requestData.Length, endPoint);
 
-                // Ждем ответ от сервера (можно добавить таймаут, но для упрощения ждем бесконечно)
                 UdpReceiveResult result = await udpClient.ReceiveAsync();
                 string response = Encoding.UTF8.GetString(result.Buffer);
 
@@ -56,7 +75,7 @@ public class DocxExportManager : MonoBehaviour
                 {
                     string ip = response.Split(':')[1];
                     foundServerUrl = $"http://{ip}:8080/generate";
-                    UpdateStatus($"Сервер найден ({ip}). Готов к отправке.");
+                    UpdateStatus($"Сервер найден ({ip})");
                     Debug.Log("Сервер найден: " + foundServerUrl);
                 }
             }
@@ -64,7 +83,7 @@ public class DocxExportManager : MonoBehaviour
         catch (System.Exception e)
         {
             Debug.LogError("Ошибка UDP поиска: " + e.Message);
-            UpdateStatus("Ошибка поиска сервера.");
+            UpdateStatus("Ошибка поиска сервера");
         }
     }
 
@@ -72,25 +91,24 @@ public class DocxExportManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(foundServerUrl))
         {
-            UpdateStatus("Ошибка: Сервер не найден! Убедитесь, что Go-сервер запущен.");
+            UpdateStatus("Ошибка: Сервер не найден!");
             return;
         }
 
-        exportButton.interactable = false; // Блокируем кнопку от двойных нажатий
-        UpdateStatus("Сбор данных и отправка...");
+        if (_btnCreateReport != null) _btnCreateReport.SetEnabled(false);
+        UpdateStatus("Отправка отчета...");
         StartCoroutine(SendReportToServer());
     }
 
     private IEnumerator SendReportToServer()
     {
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-        // 1. Берем название лабы, имя, время сессии и глобальное время из локального менеджера
+
+        // 1. Метаданные лабораторной
         if (localDataManager != null)
         {
             formData.Add(new MultipartFormDataSection("lab_title", localDataManager.FinalLabTitle));
             formData.Add(new MultipartFormDataSection("student_name", localDataManager.FinalStudentName));
-
-            // ДОБАВЛЯЕМ ВРЕМЯ
             formData.Add(new MultipartFormDataSection("session_time", localDataManager.GetFormattedSessionTime()));
             formData.Add(new MultipartFormDataSection("timestamp", localDataManager.GetFormattedTimestamp()));
         }
@@ -100,25 +118,24 @@ public class DocxExportManager : MonoBehaviour
             formData.Add(new MultipartFormDataSection("student_name", "Неизвестный студент"));
             formData.Add(new MultipartFormDataSection("session_time", "00:00:00"));
             formData.Add(new MultipartFormDataSection("timestamp", System.DateTime.Now.ToString("dd.MM.yyyy · HH:mm")));
-            Debug.LogWarning("Local Data Manager не назначен в инспекторе!");
         }
 
-        // 2. Метаданные скриншотов (переводим в JSON)
-        List<ScreenshotData> items = galleryUI.capturedData;
+        // 2. Метаданные снимков из UIToolkitGalleryController
+        List<ScreenshotData> items = galleryController != null ? galleryController.CapturedData : new List<ScreenshotData>();
         string jsonMetadata = JsonUtility.ToJson(new GalleryMetadataWrapper { array = items.ToArray() });
         formData.Add(new MultipartFormDataSection("gallery_metadata", jsonMetadata));
 
-        // 3. Сами картинки скриншотов
+        // 3. Бинарные данные PNG карт
         for (int i = 0; i < items.Count; i++)
         {
-            if (items[i].screenshot != null)
+            if (items[i] != null && items[i].screenshot != null)
             {
                 byte[] imgData = items[i].screenshot.EncodeToPNG();
                 formData.Add(new MultipartFormFileSection($"image_{i}", imgData, $"screenshot_{i}.png", "image/png"));
             }
         }
 
-        // 4. Отправляем POST-запрос
+        // 4. Отправка POST запроса
         using (UnityWebRequest www = UnityWebRequest.Post(foundServerUrl, formData))
         {
             yield return www.SendWebRequest();
@@ -126,26 +143,31 @@ public class DocxExportManager : MonoBehaviour
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError("Ошибка сервера: " + www.error);
-                UpdateStatus("Ошибка отправки: " + www.error);
-                exportButton.interactable = true;
+                UpdateStatus("Ошибка отправки!");
+                if (_btnCreateReport != null) _btnCreateReport.SetEnabled(true);
             }
             else
             {
-                Debug.Log("Документ успешно создан сервером! Ответ: " + www.downloadHandler.text);
-                UpdateStatus("Успех! Документ создан на сервере.");
-                // Кнопку можно не разблокировать, если работа окончена
-                exportButton.interactable = true;
+                Debug.Log("Документ создан! Ответ: " + www.downloadHandler.text);
+                UpdateStatus("Отчет создан!");
+                if (_btnCreateReport != null) _btnCreateReport.SetEnabled(true);
             }
         }
     }
 
     private void UpdateStatus(string message)
     {
+        if (_lblServerStatus != null)
+        {
+            _lblServerStatus.text = $"Состояние сервера: {message}";
+        }
+
         if (statusText != null)
+        {
             statusText.text = message;
+        }
     }
 
-    // Класс-обертка для правильной сериализации массива в JSON встроенным JsonUtility
     [System.Serializable]
     private class GalleryMetadataWrapper
     {

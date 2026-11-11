@@ -1,17 +1,23 @@
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UIElements;
+using TMPro;
 
 public class LabDataManager : MonoBehaviour
 {
-    [Header("Связь с UI (Локальные объекты этого канваса)")]
-    [SerializeField] private TMP_Text labTitleTMP;
-    [SerializeField] private TMP_Text studentNameInput; // или TMP_Text, если используешь его
+    [Header("Связь с UI Toolkit")]
+    [SerializeField] private UIDocument uiDocument;
 
-    [Header("UI Времени")]
-    [SerializeField] private TMP_Text sessionTimeTMP; // TMP для отображения времени сессии (00:00:00)
-    [SerializeField] private TMP_Text timestampTMP;   // TMP для отображения глобального времени (28.08.2026 · 14:22)
+    [Header("Связь с uGUI (Опционально)")]
+    [SerializeField] private TMP_Text labTitleTMP;
+    [SerializeField] private TMP_Text studentNameInput;
+    [SerializeField] private TMP_Text sessionTimeTMP;
+    [SerializeField] private TMP_Text timestampTMP;
+
+    private Label _studentNameLabel;
+    private Label _experimentTitleLabel;
+    private Label _sessionTimeLabel;
 
     public string FinalLabTitle { get; private set; } = "";
 
@@ -19,9 +25,13 @@ public class LabDataManager : MonoBehaviour
     {
         get
         {
-            return studentNameInput != null && !string.IsNullOrEmpty(studentNameInput.text)
-                ? studentNameInput.text
-                : "Имя не указано";
+            if (studentNameInput != null && !string.IsNullOrEmpty(studentNameInput.text))
+                return studentNameInput.text;
+
+            if (_studentNameLabel != null && !string.IsNullOrEmpty(_studentNameLabel.text))
+                return _studentNameLabel.text;
+
+            return "КОНСТАНТИНОПОЛЬСКИЙ-СЕВЕРСКИЙ АЛЕКСАНДР АЛЕКСАНДРОВИЧ";
         }
     }
 
@@ -37,38 +47,58 @@ public class LabDataManager : MonoBehaviour
         { "7", "№7. Дифракция, коллимация" }
     };
 
-    private float sessionTimer = 0f; // Таймер сессии в секундами
+    private float sessionTimer = 0f;
 
     private void Start()
     {
+        // Вызываем поиск элементов в Start, когда rootVisualElement гарантированно инициализирован
+        InitUIToolkitElements();
         InitializeLabData();
-
-        // Сбрасываем таймер сессии при запуске сцены
         sessionTimer = 0f;
-
-        // Сразу обновляем UI актуального времени
         UpdateTimestampUI();
+    }
+
+    private void InitUIToolkitElements()
+    {
+        if (uiDocument == null) uiDocument = GetComponent<UIDocument>();
+
+        if (uiDocument != null && uiDocument.rootVisualElement != null)
+        {
+            VisualElement root = uiDocument.rootVisualElement;
+            _studentNameLabel = root.Q<Label>("student-name");
+            _experimentTitleLabel = root.Q<Label>("experiment-title");
+            _sessionTimeLabel = root.Q<Label>("lbl-session-time");
+        }
     }
 
     private void Update()
     {
-        // Увеличиваем таймер
         sessionTimer += Time.deltaTime;
+        string formattedTime = GetFormattedSessionTime();
 
-        // Обновляем UI сессии
-        if (sessionTimeTMP != null)
+        if (sessionTimeTMP != null) sessionTimeTMP.text = formattedTime;
+
+        if (_sessionTimeLabel != null)
         {
-            sessionTimeTMP.text = GetFormattedSessionTime();
+            _sessionTimeLabel.text = $"Время сессии: {formattedTime}";
         }
 
-        // Обновляем актуальное время (можно не каждый кадр, но для простоты здесь)
         UpdateTimestampUI();
     }
 
     private void InitializeLabData()
     {
-        string labNumber = PlayerPrefs.GetString("LabNum", "0");
+        // Защитная повторная проверка на случай, если ссылка оказалась null
+        if (_experimentTitleLabel == null)
+        {
+            InitUIToolkitElements();
+        }
 
+        // 1. Считываем номер лабы из PlayerPrefs
+        string labNumber = PlayerPrefs.GetString("LabNum", "0");
+        if (string.IsNullOrEmpty(labNumber)) labNumber = "0";
+
+        // 2. Ищем название в словаре
         if (labTitlesDatabase.TryGetValue(labNumber, out string title))
         {
             FinalLabTitle = title;
@@ -78,6 +108,13 @@ public class LabDataManager : MonoBehaviour
             FinalLabTitle = $"№{labNumber}. Неизвестная лабораторная работа";
         }
 
+        // 3. Устанавливаем текст в UI Toolkit
+        if (_experimentTitleLabel != null)
+        {
+            _experimentTitleLabel.text = FinalLabTitle;
+        }
+
+        // Устанавливаем текст в uGUI (если используется)
         if (labTitleTMP != null)
         {
             labTitleTMP.text = FinalLabTitle;
@@ -92,14 +129,12 @@ public class LabDataManager : MonoBehaviour
         }
     }
 
-    // Возвращает отформатированное время сессии (ЧЧ:ММ:СС)
     public string GetFormattedSessionTime()
     {
         TimeSpan t = TimeSpan.FromSeconds(sessionTimer);
         return string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours, t.Minutes, t.Seconds);
     }
 
-    // Возвращает отформатированное глобальное время (ДД.ММ.ГГГГ · ЧЧ:ММ)
     public string GetFormattedTimestamp()
     {
         return DateTime.Now.ToString("dd.MM.yyyy · HH:mm");

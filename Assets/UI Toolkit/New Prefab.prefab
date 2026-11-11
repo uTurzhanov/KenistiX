@@ -112,6 +112,8 @@ GameObject:
   - component: {fileID: 197623949695777362}
   - component: {fileID: 390537069064781902}
   - component: {fileID: 7999722550396598419}
+  - component: {fileID: 3859897485255596596}
+  - component: {fileID: 1762539150233253453}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -181,3 +183,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16792198a9a19f489f5571ffc91e4e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  captureService: {fileID: 0}
+  inspectorDeviceOptions: []
+--- !u!114 &3859897485255596596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375812296845995620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb9760dcc5e24484690626fa01ad1648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LabDataManager
+  uiDocument: {fileID: 197623949695777362}
+  labTitleTMP: {fileID: 0}
+  studentNameInput: {fileID: 0}
+  sessionTimeTMP: {fileID: 0}
+  timestampTMP: {fileID: 0}
+--- !u!114 &1762539150233253453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375812296845995620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 302ff70366091574cb0c3cb1d1ec8e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DocxExportManager
+  localDataManager: {fileID: 3859897485255596596}
+  uiDocument: {fileID: 197623949695777362}
+  galleryController: {fileID: 7999722550396598419}
+  statusText: {fileID: 0}
+  udpDiscoveryPort: 8888
+  discoveryMessage: QUEST3_SEARCHING_DOCX_SERVER

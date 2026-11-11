@@ -10,6 +10,9 @@ public class UIToolkitGalleryController : MonoBehaviour
     [Header("Ручные варианты приборов (Опционально)")]
     [SerializeField] private List<string> inspectorDeviceOptions = new List<string>();
 
+    // Список сохраненных данных для генератора DOCX-отчетов
+    public List<ScreenshotData> CapturedData { get; private set; } = new List<ScreenshotData>();
+
     private VisualElement _root;
     private Button _btnZamery;
     private Button _btnFiksaciya;
@@ -28,7 +31,6 @@ public class UIToolkitGalleryController : MonoBehaviour
 
         _root = uiDoc.rootVisualElement;
 
-        // Поиск элементов UI
         _btnZamery = _root.Q<Button>("btn-tab-zamery");
         _btnFiksaciya = _root.Q<Button>("btn-tab-fiksaciya");
         _btnCapture = _root.Q<Button>("btn-capture");
@@ -37,45 +39,34 @@ public class UIToolkitGalleryController : MonoBehaviour
         _fixationsScroll = _root.Q<ScrollView>("fixations-scroll");
         _deviceDropdown = _root.Q<DropdownField>("device-dropdown");
 
-        // Подписка на вкладки
         if (_btnZamery != null) _btnZamery.clicked += () => SwitchTab(true);
         if (_btnFiksaciya != null) _btnFiksaciya.clicked += () => SwitchTab(false);
 
-        // Инициализация выпадающего списка
         SetupDeviceDropdown();
 
-        // Подписка на кнопку фиксации замера
         if (_btnCapture != null && captureService != null)
         {
             _btnCapture.clicked += () => captureService.TakeScreenshot(_selectedDeviceIndex);
         }
 
-        // По умолчанию открываем вкладку "ЗАМЕРЫ"
         SwitchTab(true);
     }
 
-    /// <summary>
-    /// Переключение режимов отображения: ЗАМЕРЫ (только текст) / ФИКСАЦИЯ (только скриншоты)
-    /// </summary>
     private void SwitchTab(bool isZamery)
     {
         if (isZamery)
         {
-            // Активируем кнопку ЗАМЕРЫ
             _btnZamery?.AddToClassList("active");
             _btnFiksaciya?.RemoveFromClassList("active");
 
-            // Показываем ЗАМЕРЫ, скрываем ФИКСАЦИЮ
             if (_measurementsScroll != null) _measurementsScroll.style.display = DisplayStyle.Flex;
             if (_fixationsScroll != null) _fixationsScroll.style.display = DisplayStyle.None;
         }
         else
         {
-            // Активируем кнопку ФИКСАЦИЯ
             _btnFiksaciya?.AddToClassList("active");
             _btnZamery?.RemoveFromClassList("active");
 
-            // Показываем ФИКСАЦИЮ, скрываем ЗАМЕРЫ
             if (_fixationsScroll != null) _fixationsScroll.style.display = DisplayStyle.Flex;
             if (_measurementsScroll != null) _measurementsScroll.style.display = DisplayStyle.None;
         }
@@ -117,7 +108,19 @@ public class UIToolkitGalleryController : MonoBehaviour
         string sessionTime,
         string timestamp)
     {
-        // 1. Добавляем карточку со скриншотом во вкладку "ФИКСАЦИЯ"
+        // 1. Сохраняем метаданные в список для экспорта
+        CapturedData.Add(new ScreenshotData
+        {
+            screenshot = screenshot,
+            eventTitle = eventTitle,
+            values = values,
+            separatedValues = separatedValues,
+            sessionTime = sessionTime,
+            timestamp = timestamp,
+            deviceID = _selectedDeviceIndex.ToString()
+        });
+
+        // 2. Отображаем во вкладке "ФИКСАЦИЯ"
         if (_fixationsScroll != null)
         {
             VisualElement fixationCard = CreateFixationCard(screenshot, eventTitle, values, sessionTime, timestamp);
@@ -125,7 +128,7 @@ public class UIToolkitGalleryController : MonoBehaviour
             _fixationsScroll.ScrollTo(fixationCard);
         }
 
-        // 2. Добавляем текстовую строку во вкладку "ЗАМЕРЫ"
+        // 3. Отображаем во вкладке "ЗАМЕРЫ"
         if (_measurementsScroll != null)
         {
             VisualElement measurementCard = CreateMeasurementCard(eventTitle, values, timestamp);
@@ -134,7 +137,6 @@ public class UIToolkitGalleryController : MonoBehaviour
         }
     }
 
-    // Создание карточки скриншота (Режим ФИКСАЦИЯ)
     private VisualElement CreateFixationCard(Texture2D texture, string title, string values, string sessionTime, string timestamp)
     {
         VisualElement card = new VisualElement();
@@ -156,13 +158,11 @@ public class UIToolkitGalleryController : MonoBehaviour
         return card;
     }
 
-    // Создание текстовой строки замера (Режим ЗАМЕРЫ: Заголовок слева, дата справа, цифры снизу)
     private VisualElement CreateMeasurementCard(string title, string values, string timestamp)
     {
         VisualElement card = new VisualElement();
         card.AddToClassList("measurement-card");
 
-        // Верхняя строка (Заголовок + Время)
         VisualElement header = new VisualElement();
         header.AddToClassList("measurement-header");
 
@@ -176,7 +176,6 @@ public class UIToolkitGalleryController : MonoBehaviour
 
         card.Add(header);
 
-        // Нижняя строка (Синие показатели)
         Label lblValues = new Label(string.IsNullOrEmpty(values) ? "—" : values);
         lblValues.AddToClassList("measurement-values");
         card.Add(lblValues);
