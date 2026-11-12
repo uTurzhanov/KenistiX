@@ -1,0 +1,282 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1794439051087920371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5919751672066318333}
+  - component: {fileID: 3875669546320481797}
+  - component: {fileID: 7351758744397737169}
+  - component: {fileID: 5275406384056405367}
+  - component: {fileID: 645147980668892675}
+  m_Layer: 0
+  m_Name: UIDocument
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5919751672066318333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794439051087920371}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2421518134032449903}
+  m_Father: {fileID: 7337059823428318185}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!114 &3875669546320481797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794439051087920371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 14dba3d7504fb444e9e9b2e3e6cd6b26, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: e9d0535a954709942a6e83ab83036921, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &7351758744397737169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794439051087920371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.UI.TrackedDeviceGraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_CheckFor2DOcclusion: 0
+  m_CheckFor3DOcclusion: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RaycastTriggerInteraction: 1
+--- !u!114 &5275406384056405367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794439051087920371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a0ff9e6fffe374cbf49b3f3584a4ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LabDashboardController
+  studentName: "\u041A\u041E\u041D\u0421\u0422\u0410\u041D\u0422\u0418\u041D\u041E\u041F\u041E\u041B\u042C\u0421\u041A\u0418\u0419-\u0421\u0415\u0412\u0415\u0420\u0421\u041A\u0418\u0419
+    \u0410\u041B\u0415\u041A\u0421\u0410\u041D\u0414\u0420 \u0410\u041B\u0415\u041A\u0421\u0410\u041D\u0414\u0420\u041E\u0412\u0418\u0427"
+  experimentTitle: "\u0418\u0421\u0421\u041B\u0415\u0414\u041E\u0412\u0410\u041D\u0418\u0415
+    \u0417\u0410\u041A\u041E\u041D\u041E\u0412 \u041F\u041E\u0421\u041B\u0415\u0414\u041E\u0412\u0410\u0422\u0415\u041B\u042C\u041D\u041E\u0413\u041E
+    \u0418 \u041F\u0410\u0420\u0410\u041B\u041B\u0415\u041B\u042C\u041D\u041E\u0413\u041E
+    \u0421\u041E\u0415\u0414\u0418\u041D\u0415\u041D\u0418\u042F \u042D\u041B\u0415\u041A\u0422\u0420\u0418\u0427\u0415\u0421\u041A\u0418\u0425
+    \u0426\u0415\u041F\u0415\u0419"
+  videoTitle: "DEMO: \u042D\u041A\u0421\u041F\u0415\u0420\u0418\u041C\u0415\u041D\u0422\u0410\u041B\u042C\u041D\u0410\u042F
+    \u0423\u0421\u0422\u0410\u041D\u041E\u0412\u041A\u0410"
+  labVideoClip: {fileID: 32900000, guid: 597e3ae2e01aed1488c14e4b05610134, type: 3}
+  instructionSteps:
+  - title: "1. \u0421\u043E\u0431\u0435\u0440\u0438\u0442\u0435 \u0446\u0435\u043F\u0438
+      \u043A\u0430\u043A \u043D\u0430 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0435"
+    description: "\u0431\u0438\u043C\u0431\u0438\u043C \u0431\u0430\u043C \u0431\u0430\u043C"
+    image: {fileID: 2800000, guid: 0606d6f1304587f43b916ba6d006d3d1, type: 3}
+  - title: "2. \u0421\u043E\u0431\u0435\u0440\u0438\u0442\u0435 \u0446\u0435\u043F\u0438
+      \u043A\u0430\u043A \u043D\u0430 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0435"
+    description: "\u043F\u0430\u0432\u0430\u043F\u0435\u043F\u0430 \u0433\u0435\u043C\u0430\u0431\u043E\u0434\u0438"
+    image: {fileID: 2800000, guid: 08340edf12133fa47bb58cba2207ef9d, type: 3}
+  - title: "3. \u0421\u043E\u0431\u0435\u0440\u0438\u0442\u0435 \u0446\u0435\u043F\u0438
+      \u043A\u0430\u043A \u043D\u0430 \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0435"
+    description: "\u043F\u0430\u0432\u0430\u043F\u0435\u043F\u0430 \u0433\u0435\u043C\u0430\u0431\u043E\u0434\u0438"
+    image: {fileID: 2800000, guid: 3a2bbcc2f10978f44b07da8170a906ab, type: 3}
+--- !u!328 &645147980668892675
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794439051087920371}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 597e3ae2e01aed1488c14e4b05610134, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 3bdb2060b92e3e64284d2dfdccc820ff, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 1
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
+--- !u!1 &4668057686278518225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7337059823428318185}
+  - component: {fileID: 7374301960066829805}
+  m_Layer: 0
+  m_Name: MaterialScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7337059823428318185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668057686278518225}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.04624, y: -0, z: -1.5638}
+  m_LocalScale: {x: 0.10198, y: 0.10198, z: 0.10198}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5919751672066318333}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &7374301960066829805
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668057686278518225}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.008087158, y: 0.013584375}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 19.305916, y: 10.7652855}
+  m_EdgeRadius: 0
+--- !u!1 &5644847320450388384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2421518134032449903}
+  - component: {fileID: 4481904091221026225}
+  m_Layer: 0
+  m_Name: Panel input config
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2421518134032449903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5644847320450388384}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5919751672066318333}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4481904091221026225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5644847320450388384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19106, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.PanelInputConfiguration
+  m_Settings:
+    m_ProcessWorldSpaceInput: 1
+    m_InteractionLayers:
+      serializedVersion: 2
+      m_Bits: 2147487739
+    m_MaxInteractionDistance: Infinity
+    m_DefaultEventCameraIsMainCamera: 1
+    m_EventCameras: []
+    m_PanelInputRedirection: 0
+    m_AutoCreatePanelComponents: 1

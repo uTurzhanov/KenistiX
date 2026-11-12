@@ -1,0 +1,84 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="LabDashboard.uss" />
+    
+    <ui:VisualElement name="app-root" class="theme-dark">
+        <!-- Боковая панель -->
+        <ui:VisualElement name="sidebar">
+            <ui:Label text="МАТЕРИАЛЫ" name="sidebar-title" />
+            <ui:Button text="▶ ВИДЕО" name="tab-video" class="nav-button active" />
+            <ui:Button text="≡ ИНСТРУКЦИЯ" name="tab-instructions" class="nav-button" />
+        </ui:VisualElement>
+
+        <!-- Основная рабочая область -->
+        <ui:VisualElement name="main-content">
+            
+            <!-- Шапка -->
+            <ui:VisualElement name="header">
+                <ui:Label text="УЧЕБНЫЕ МАТЕРИАЛЫ" name="header-title" />
+                <ui:VisualElement name="header-controls">
+                    <ui:Toggle name="theme-toggle" label="☀ / ☾" />
+                    <ui:VisualElement name="session-badge">
+                        <ui:VisualElement name="session-dot" />
+                        <ui:Label text="СЕССИЯ АКТИВНА" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- Информационные карточки -->
+            <ui:VisualElement name="info-panels">
+                <ui:VisualElement class="info-card">
+                    <ui:Label text="Студент" class="card-subtitle" />
+                    <ui:Label text="ИМЯ СТУДЕНТА" name="label-student-name" class="card-title" />
+                </ui:VisualElement>
+                <ui:VisualElement class="info-card">
+                    <ui:Label text="Эксперимент" class="card-subtitle" />
+                    <ui:Label text="НАЗВАНИЕ ЭКСПЕРИМЕНТА" name="label-experiment-name" class="card-title" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- Контейнер для меняющегося контента -->
+            <ui:VisualElement name="content-container">
+                
+                <!-- Секция 1: Видео -->
+                <ui:VisualElement name="section-video">
+                    <ui:Label text="ОЗНАКОМИТЕЛЬНЫЙ ВИДЕОМАТЕРИАЛ" class="content-title" />
+                    <ui:VisualElement name="video-placeholder">
+                        <ui:Label text="DEMO: ЭКСПЕРИМЕНТАЛЬНАЯ УСТАНОВКА" name="label-video-title" class="video-demo-text" />
+                        <ui:VisualElement name="video-controls">
+                            <ui:Button name="btn-rewind" text="⏪ 5с" class="video-btn" />
+                            <ui:Button name="btn-play-pause" text="⏸" class="video-btn" />
+                            <ui:Button name="btn-forward" text="⏩ 5с" class="video-btn" />
+                                <ui:Label name="label-video-time" text="00:00 / 00:00" class="video-time-text" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <!-- Секция 2: Инструкции (скрыта по умолчанию) -->
+                <ui:VisualElement name="section-instructions" style="display: none;">
+                    <ui:Label text="ПОШАГОВОЕ РУКОВОДСТВО К ВЫПОЛНЕНИЮ" class="content-title" />
+                    <!-- Сюда скрипт будет добавлять шаги из Инспектора -->
+                    <ui:ScrollView name="instructions-scroll-view" style="flex-grow: 1;" />
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Модальное окно (скрыто по умолчанию) -->
+        <ui:VisualElement name="modal-overlay" style="display: none;">
+            <ui:VisualElement name="modal-window">
+                <ui:VisualElement style="flex-direction: row; justify-content: space-between; margin-bottom: 15px;">
+                    <ui:Label text="Название шага" name="modal-title" style="font-weight: bold; font-size: 16px;" />
+                    <ui:Button text="✕" name="btn-close-modal" class="modal-close-btn" />
+                </ui:VisualElement>
+                
+                <!-- Контейнер для полноразмерной картинки -->
+                <ui:VisualElement name="modal-image-full" style="-unity-background-scale-mode: scale-to-fit;">
+                    <ui:Label text="📷 НЕТ ФОТОГРАФИИ" name="modal-no-image-text" style="color: #666; -unity-text-align: middle-center; flex-grow: 1;" />
+                </ui:VisualElement>
+                
+                <ui:Label text="Нажмите ✕ или в любую область вне окна, чтобы вернуться к инструкции" class="modal-hint-text" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+</ui:UXML>
