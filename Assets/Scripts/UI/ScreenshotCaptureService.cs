@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Locomotion.Comfort;
 
 [Serializable]
 public class TMPDataMapping
@@ -34,6 +35,9 @@ public class CapturePointConfig
 
 public class ScreenshotCaptureService : MonoBehaviour
 {
+    [Header("Эффект затвора (Виньетка)")]
+    [SerializeField] private TunnelingVignetteControllerCamera vignetteController;
+
     [Header("Настройки съемки")]
     [SerializeField] private Camera captureCamera;
     [SerializeField] private List<CapturePointConfig> capturePoints = new List<CapturePointConfig>();
@@ -137,6 +141,12 @@ public class ScreenshotCaptureService : MonoBehaviour
     private IEnumerator CaptureRoutine(string eventTitle, CapturePointConfig activeConfig, string deviceID)
     {
         _isCapturing = true;
+
+        if (vignetteController != null)
+        {
+            vignetteController.TriggerVignettePulse();
+        }
+
 
         // 1. Собираем текстовые данные с 3D-дисплеев
         var (combinedValues, separatedValues) = ProcessDynamicTMPData(activeConfig);

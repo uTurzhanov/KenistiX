@@ -237,10 +237,31 @@ namespace UnityEngine.XR.Interaction.Toolkit.Locomotion.Comfort
         /// </summary>
         public void TriggerVignettePulse()
         {
-            // Принудительно включаем блокировку полного закрытия перед открытием, чтобы вспышка/затвор отработали целиком
+            UnityEngine.Debug.Log("[Vignette] TriggerVignettePulse вызван!");
+
             m_DefaultParameters.easeInTimeLock = true;
-            BeginTunnelingVignette(this);
-            EndTunnelingVignette(this);
+
+            ProviderRecord targetRecord = null;
+            foreach (var record in m_ProviderRecords)
+            {
+                if (record.provider == this)
+                {
+                    targetRecord = record;
+                    break;
+                }
+            }
+
+            if (targetRecord == null)
+            {
+                targetRecord = new ProviderRecord(this);
+                m_ProviderRecords.Add(targetRecord);
+            }
+
+            // Полный сброс состояния перед стартом импульса
+            targetRecord.dynamicApertureSize = VignetteParameters.Defaults.apertureSizeMax;
+            targetRecord.easeInLockEnded = false;
+            targetRecord.dynamicEaseOutDelayTime = 0f;
+            targetRecord.easeState = EaseState.EasingInHoldBeforeEasingOut;
         }
 
         public void BeginTunnelingVignette(ITunnelingVignetteProvider provider)
