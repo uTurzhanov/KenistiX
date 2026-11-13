@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using UnityEngine.XR.Interaction.Toolkit.Locomotion.Comfort;
 public class UIToolkitGalleryController : MonoBehaviour
 {
     [Header("Ссылка на Capture Service")]
@@ -9,6 +9,9 @@ public class UIToolkitGalleryController : MonoBehaviour
 
     [Header("Ручные варианты приборов (Опционально)")]
     [SerializeField] private List<string> inspectorDeviceOptions = new List<string>();
+    [Header("Эффект затвора (Виньетка)")]
+    [SerializeField] private TunnelingVignetteControllerCamera vignetteController;
+    
 
     // Список сохраненных данных для генератора DOCX-отчетов
     public List<ScreenshotData> CapturedData { get; private set; } = new List<ScreenshotData>();
@@ -24,6 +27,8 @@ public class UIToolkitGalleryController : MonoBehaviour
 
     private int _selectedDeviceIndex = 0;
 
+    
+    
     private void OnEnable()
     {
         UIDocument uiDoc = GetComponent<UIDocument>();
@@ -46,7 +51,18 @@ public class UIToolkitGalleryController : MonoBehaviour
 
         if (_btnCapture != null && captureService != null)
         {
-            _btnCapture.clicked += () => captureService.TakeScreenshot(_selectedDeviceIndex);
+            _btnCapture.clicked += () =>
+            {
+                if (!captureService.IsCapturing)
+                {
+                    captureService.TakeScreenshot(_selectedDeviceIndex);
+            
+                    if (vignetteController != null)
+                    {
+                        vignetteController.TriggerVignettePulse();
+                    }
+                }
+            };
         }
 
         SwitchTab(true);
