@@ -1,91 +1,66 @@
-        <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd">
-        <ui:Style src="Dashboard.uss" />
-
-        <ui:VisualElement name="root" class="root-container">
-        
-            <!-- ЛЕВАЯ ПАНЕЛЬ (SIDEBAR) -->
-            <ui:VisualElement class="sidebar">
-                <ui:Label text="ЖУРНАЛ" class="sidebar-title" />
-                <ui:VisualElement class="sidebar-divider" />
-            
-                <ui:VisualElement class="sidebar-menu">
-                    <ui:Button name="btn-tab-zamery" text="ЗАМЕРЫ" class="sidebar-btn active" />
-                    <ui:Button name="btn-tab-fiksaciya" text="ФИКСАЦИЯ" class="sidebar-btn" />
-                </ui:VisualElement>
-            </ui:VisualElement>
-
-            <!-- ОСНОВНАЯ ОБЛАСТЬ -->
-            <ui:VisualElement class="main-content">
-            
-                <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
-                <ui:VisualElement class="top-bar">
-                    <ui:Label name="view-title" text="РЕЗУЛЬТАТЫ ИЗМЕРЕНИЙ" class="main-title" />
-                
-                    <ui:VisualElement class="top-controls">
-                        <ui:Toggle name="theme-toggle" class="theme-switch" tooltip="Смена темы">
-                            <ui:VisualElement class="icon-sun" />
-                            <ui:VisualElement class="icon-moon" />
-                        </ui:Toggle>
-                    
-                        <ui:Button name="session-btn" class="session-btn">
-                            <ui:VisualElement class="status-dot" />
-                            <ui:Label text="СЕССИЯ АКТИВНА" class="session-text" />
-                            <ui:Label text="▼" class="dropdown-arrow" />
-                        </ui:Button>
-                    </ui:VisualElement>
-                </ui:VisualElement>
-
-                <!-- КАРТОЧКИ СТУДЕНТА И ЭКСПЕРИМЕНТА -->
-                <ui:VisualElement class="cards-row">
-                    <ui:VisualElement class="info-card">
-                        <ui:Label text="Студент" class="card-label" />
-                        <ui:Label name="student-name" text="КОНСТАНТИНОПОЛЬСКИЙ-СЕВЕРСКИЙ АЛЕКСАНДР АЛЕКСАНДРОВИЧ" class="card-value-text student-name" />
-                    </ui:VisualElement>
-    
-                    <ui:VisualElement class="info-card">
-                        <ui:Label text="Эксперимент" class="card-label" />
-                        <ui:Label name="experiment-title" text="" class="card-value-text experiment-title" />
-                    </ui:VisualElement>
-                </ui:VisualElement>
-
-                <!-- ОСНОВНОЙ КОНТЕЙНЕР (ТАБЛИЦА / ГАЛЕРЕЯ) -->
-                <ui:VisualElement class="table-card">
-                    <ui:VisualElement class="table-toolbar">
-                        <ui:VisualElement class="search-field">
-                            <ui:VisualElement class="search-dot" />
-                            <ui:DropdownField name="device-dropdown" class="device-dropdown" />
-                        </ui:VisualElement>
-                    
-                        <ui:Button name="btn-capture" text="+ ЗАФИКСИРОВАТЬ ЗАМЕР" class="action-btn" />
-                    </ui:VisualElement>
-
-                    <ui:ScrollView name="measurements-scroll" class="gallery-scroll" />
-                    <ui:ScrollView name="fixations-scroll" class="gallery-scroll hidden" />
-                </ui:VisualElement>
-
-                <!-- ВЫПАДАЮЩЕЕ МЕНЮ СЕССИИ -->
-                <ui:VisualElement name="session-dropdown" class="dropdown-overlay hidden">
-                    <!-- 1. Время с начала сессии -->
-                    <ui:VisualElement class="dropdown-item static-item">
-                        <ui:Label text="⏱" class="item-icon" />
-                        <ui:Label name="lbl-session-time" text="Время сессии: 00:00:00" class="item-text" />
-                    </ui:VisualElement>
-                    <ui:VisualElement class="dropdown-divider" />
-                
-                    <!-- 2. Состояние сервера -->
-                    <ui:VisualElement class="dropdown-item static-item">
-                        <ui:Label text="🌐" class="item-icon" />
-                        <ui:Label name="lbl-server-status" text="Состояние сервера: Поиск..." class="item-text" />
-                    </ui:VisualElement>
-                    <ui:VisualElement class="dropdown-divider" />
-                
-                    <!-- 3. Создать отчет! -->
-                    <ui:Button name="btn-create-report" class="dropdown-item action-item">
-                        <ui:Label text="📄" class="item-icon action-icon" />
-                        <ui:Label text="Создать отчет!" class="item-text action-text" />
-                    </ui:Button>
-                </ui:VisualElement>
-
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Dashboard.uss?fileID=7433441132597879392&amp;guid=79cf4b668c8a5be44862229bfef0ff65&amp;type=3#Dashboard" />
+    <ui:VisualElement name="root" class="root-container">
+        <ui:VisualElement class="sidebar">
+            <ui:Label text="ЖУРНАЛ" class="sidebar-title" />
+            <ui:VisualElement class="sidebar-divider" />
+            <ui:VisualElement class="sidebar-menu">
+                <ui:Button name="btn-tab-zamery" text="ЗАМЕРЫ" class="sidebar-btn active" />
+                <ui:Button name="btn-tab-fiksaciya" text="ФИКСАЦИЯ" class="sidebar-btn" />
             </ui:VisualElement>
         </ui:VisualElement>
-        </ui:UXML>
+        <ui:VisualElement class="main-content">
+            <ui:VisualElement class="top-bar">
+                <ui:Label name="view-title" text="РЕЗУЛЬТАТЫ ИЗМЕРЕНИЙ" class="main-title" />
+                <ui:VisualElement class="top-controls">
+                    <ui:Toggle name="theme-toggle" tooltip="Смена темы" class="theme-switch">
+                        <ui:VisualElement class="icon-sun" />
+                        <ui:VisualElement class="icon-moon" />
+                    </ui:Toggle>
+                    <ui:Button name="session-btn" class="session-btn">
+                        <ui:VisualElement class="status-dot" />
+                        <ui:Label text="СЕССИЯ АКТИВНА" class="session-text" />
+                        <ui:Label text="▼" class="dropdown-arrow" />
+                    </ui:Button>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="cards-row">
+                <ui:VisualElement class="info-card">
+                    <ui:Label text="Студент" class="card-label" />
+                    <ui:Label name="student-name" text="КОНСТАНТИНОПОЛЬСКИЙ-СЕВЕРСКИЙ АЛЕКСАНДР АЛЕКСАНДРОВИЧ" class="card-value-text student-name" />
+                </ui:VisualElement>
+                <ui:VisualElement class="info-card">
+                    <ui:Label text="Эксперимент" class="card-label" />
+                    <ui:Label name="experiment-title" class="card-value-text experiment-title" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="table-card">
+                <ui:VisualElement class="table-toolbar">
+                    <ui:VisualElement class="search-field">
+                        <ui:VisualElement class="search-dot" />
+                        <ui:DropdownField name="device-dropdown" class="device-dropdown" />
+                    </ui:VisualElement>
+                    <ui:Button name="btn-capture" text="+ ЗАФИКСИРОВАТЬ ЗАМЕР" class="action-btn" />
+                </ui:VisualElement>
+                <ui:ScrollView name="measurements-scroll" class="gallery-scroll" />
+                <ui:ScrollView name="fixations-scroll" class="gallery-scroll hidden" />
+            </ui:VisualElement>
+            <ui:VisualElement name="session-dropdown" class="dropdown-overlay hidden">
+                <ui:VisualElement class="dropdown-item static-item">
+                    <ui:Label text="⏱" class="item-icon" />
+                    <ui:Label name="lbl-session-time" text="Время сессии: 00:00:00" class="item-text" />
+                </ui:VisualElement>
+                <ui:VisualElement class="dropdown-divider" />
+                <ui:VisualElement class="dropdown-item static-item">
+                    <ui:Label text="🌐" class="item-icon" />
+                    <ui:Label name="lbl-server-status" text="Состояние сервера: Поиск..." class="item-text" />
+                </ui:VisualElement>
+                <ui:VisualElement class="dropdown-divider" />
+                <ui:Button name="btn-create-report" class="dropdown-item action-item">
+                    <ui:Label text="📄" class="item-icon action-icon" />
+                    <ui:Label text="Создать отчет!" class="item-text action-text" />
+                </ui:Button>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
