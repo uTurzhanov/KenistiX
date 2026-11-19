@@ -38,14 +38,14 @@ public class LabDashboardController : MonoBehaviour
     {
         var uiDocument = GetComponent<UIDocument>();
         if (uiDocument == null) return;
-        
+
         root = uiDocument.rootVisualElement;
         appRoot = root.Q<VisualElement>("app-root");
 
         btnVideo = root.Q<Button>("tab-video");
         btnInstructions = root.Q<Button>("tab-instructions");
         themeToggle = root.Q<Toggle>("theme-toggle");
-        
+
         sectionVideo = root.Q<VisualElement>("section-video");
         sectionInstructions = root.Q<VisualElement>("section-instructions");
         instructionsScrollView = root.Q<ScrollView>("instructions-scroll-view");
@@ -58,11 +58,25 @@ public class LabDashboardController : MonoBehaviour
 
         btnVideo.clicked += () => SwitchTab(btnVideo);
         btnInstructions.clicked += () => SwitchTab(btnInstructions);
-        themeToggle.RegisterValueChangedCallback(OnThemeToggled);
+
+        if (themeToggle != null)
+            themeToggle.RegisterValueChangedCallback(OnThemeToggled);
+
+        UIThemeManager.OnThemeChanged += ApplyTheme;
+        ApplyTheme(UIThemeManager.IsDarkTheme);
+
         btnCloseModal?.RegisterCallback<ClickEvent>(evt => CloseModal());
         modalOverlay?.RegisterCallback<ClickEvent>(evt => { if (evt.target == modalOverlay) CloseModal(); });
 
         PopulateDashboardData();
+    }
+
+    void OnDisable()
+    {
+        UIThemeManager.OnThemeChanged -= ApplyTheme;
+
+        if (themeToggle != null)
+            themeToggle.UnregisterValueChangedCallback(OnThemeToggled);
     }
 
     private void PopulateDashboardData()
@@ -74,11 +88,11 @@ public class LabDashboardController : MonoBehaviour
         // --- ИНТЕГРАЦИЯ ВИДЕО ---
         var videoPlaceholder = root.Q<VisualElement>("video-placeholder");
         var player = GetComponent<VideoPlayer>();
-        
+
         if (player != null && player.targetTexture != null)
         {
             if (labVideoClip != null) player.clip = labVideoClip;
-            
+
             videoPlaceholder.style.backgroundImage = new StyleBackground(Background.FromRenderTexture(player.targetTexture));
             videoPlaceholder.style.backgroundColor = new StyleColor(Color.white);
             videoPlaceholder.style.unityBackgroundImageTintColor = new StyleColor(Color.white);
@@ -90,24 +104,24 @@ public class LabDashboardController : MonoBehaviour
             var timeLabel = root.Q<Label>("label-video-time");
 
             // Логика кнопок
-            btnPlayPause?.RegisterCallback<ClickEvent>(evt => 
+            btnPlayPause?.RegisterCallback<ClickEvent>(evt =>
             {
                 if (player.isPlaying) player.Pause();
                 else player.Play();
             });
 
-            btnRewind?.RegisterCallback<ClickEvent>(evt => 
+            btnRewind?.RegisterCallback<ClickEvent>(evt =>
             {
                 player.time = Mathf.Max(0, (float)player.time - 5f);
             });
 
-            btnForward?.RegisterCallback<ClickEvent>(evt => 
+            btnForward?.RegisterCallback<ClickEvent>(evt =>
             {
                 player.time = Mathf.Min((float)player.length, (float)player.time + 5f);
             });
 
             // Цикл обновления (вызывается ~60 раз в секунду)
-            videoPlaceholder.schedule.Execute(() => 
+            videoPlaceholder.schedule.Execute(() =>
             {
                 videoPlaceholder.MarkDirtyRepaint(); // Отрисовка кадров видео
 
@@ -151,7 +165,7 @@ public class LabDashboardController : MonoBehaviour
 
             var imgPlaceholder = new VisualElement();
             imgPlaceholder.AddToClassList("step-image-placeholder");
-            
+
             if (stepData.image != null)
             {
                 imgPlaceholder.style.backgroundImage = new StyleBackground(stepData.image);
@@ -161,10 +175,10 @@ public class LabDashboardController : MonoBehaviour
             var btnEnlarge = new Button();
             btnEnlarge.text = "↗ Увеличить";
             btnEnlarge.AddToClassList("step-image-btn");
-            
+
             Texture2D imgToPass = stepData.image;
             btnEnlarge.clicked += () => OpenModal(imgToPass, stepNumberTitle);
-            
+
             imgPlaceholder.Add(btnEnlarge);
             stepElement.Add(imgPlaceholder);
 
@@ -192,16 +206,26 @@ public class LabDashboardController : MonoBehaviour
 
     private void OnThemeToggled(ChangeEvent<bool> evt)
     {
-        if (evt.newValue)
-        {
-            appRoot.RemoveFromClassList("theme-dark");
-            appRoot.AddToClassList("theme-light");
-        }
-        else
+        UIThemeManager.SetTheme(evt.newValue);
+    }
+
+    private void ApplyTheme(bool isDark)
+    {
+        if (appRoot == null) return;
+
+        if (isDark)
         {
             appRoot.RemoveFromClassList("theme-light");
             appRoot.AddToClassList("theme-dark");
         }
+        else
+        {
+            appRoot.RemoveFromClassList("theme-dark");
+            appRoot.AddToClassList("theme-light");
+        }
+
+        if (themeToggle != null)
+            themeToggle.SetValueWithoutNotify(isDark);
     }
 
     private void OpenModal(Texture2D image, string stepTitle)
@@ -229,7 +253,7 @@ public class LabDashboardController : MonoBehaviour
         if (modalOverlay != null)
         {
             modalOverlay.style.display = DisplayStyle.None;
-            modalImageFull.style.backgroundImage = null; 
+            modalImageFull.style.backgroundImage = null;
         }
     }
 }

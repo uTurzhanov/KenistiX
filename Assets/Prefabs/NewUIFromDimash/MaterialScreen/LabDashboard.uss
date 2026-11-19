@@ -1,204 +1,333 @@
-/* --- ПЕРЕМЕННЫЕ ТЕМ --- */
-.theme-dark {
-    --bg-main: #13161C;
-    --bg-sidebar: #1C2029;
-    --bg-card: #222732;
-    --bg-step: #1C2029;
-    --bg-video: #0A0C10;
-    --bg-modal-overlay: rgba(0, 0, 0, 0.7);
-    --text-primary: #FFFFFF;
-    --text-secondary: #8B94A5;
-    --accent-blue: #1880FF;
-    --accent-green: #1E8E3E;
-    --border-color: rgba(255, 255, 255, 0.1);
-}
-
-.theme-light {
-    --bg-main: #F9FAFB;
-    --bg-sidebar: #F3F4F6;
-    --bg-card: #FFFFFF;
-    --bg-step: #F9FAFB;
-    --bg-video: #0A0C10;
-    --bg-modal-overlay: rgba(0, 0, 0, 0.4);
-    --text-primary: #111827;
-    --text-secondary: #6B7280;
-    --accent-blue: #1880FF;
-    --accent-green: #1E8E3E;
-    --border-color: rgba(0, 0, 0, 0.1);
-}
-
-/* --- БАЗОВАЯ СТРУКТУРА --- */
-#app-root {
-    flex-direction: row;
+/* ==========================================
+   ПЕРЕМЕННЫЕ ЦВЕТОВ (Light / Dark Theme)
+   ========================================== */
+.root-container {
+    --bg-main: #DCDCDC;
+    --bg-sidebar: #BCBCBC;
+    --bg-card: #C2C2C2;
+    --bg-card-secondary: #F0F3F7;
+    --bg-video: #0B0E14;
+    --bg-modal-overlay: rgba(11, 14, 20, 0.65);
+    --text-primary: #1A1D20;
+    --text-secondary: #5A6472;
+    --border-color: #E2E8F0;
+    --blue-accent: #0084FF;
+    --blue-hover: #0072DC;
+    --green-bg: #DDF6E8;
+    --green-text: #10B981;
+    --danger-color: #FF3B30;
+    
     width: 100%;
     height: 100%;
+    flex-grow: 1;
+    flex-direction: row;
     background-color: var(--bg-main);
+    font-size: 14px;
     color: var(--text-primary);
-    font-family: sans-serif;
 }
 
-/* --- БОКОВАЯ ПАНЕЛЬ --- */
-#sidebar {
-    width: 300px;
+/* Переключение на Темную тему */
+.root-container.theme-dark {
+    --bg-main: #0B0E14;
+    --bg-sidebar: #111622;
+    --bg-card: #161C2A;
+    --bg-card-secondary: #1F2738;
+    --bg-video: #080A0F;
+    --bg-modal-overlay: rgba(0, 0, 0, 0.75);
+    --text-primary: #FFFFFF;
+    --text-secondary: #8B98A9;
+    --border-color: #242D40;
+    --green-bg: #0E3321;
+    --green-text: #22C55E;
+}
+
+/* ==========================================
+   SIDEBAR
+   ========================================== */
+.sidebar {
+    width: 240px;
     background-color: var(--bg-sidebar);
+    padding: 32px 20px;
     border-right-width: 1px;
-    border-color: var(--border-color);
-    padding: 28px;
+    border-right-color: var(--border-color);
 }
 
-#sidebar-title {
-    font-size: 26px;
-    font-weight: bold;
-    margin-bottom: 32px;
+.sidebar-title {
+    font-size: 18px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+    margin-bottom: 12px;
 }
 
-.nav-button {
+.sidebar-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin-bottom: 24px;
+}
+
+.sidebar-menu {
+    flex-direction: column;
+}
+
+.sidebar-btn {
+    height: 48px;
+    border-radius: 12px;
     background-color: transparent;
     border-width: 0;
+    color: #1b1e1f;
+    -unity-font-style: bold;
+    -unity-text-align: middle-left;
+    padding-left: 20px;
+    margin-bottom: 8px;
+}
+
+.root-container.theme-dark .sidebar-btn {
+     color: #FFFFFF;
+
+}
+
+
+.sidebar-btn:hover {
+    background-color: var(--bg-card-secondary);
     color: var(--text-primary);
-    font-size: 20px;
-    font-weight: bold;
-    padding: 18px 20px;
-    border-radius: 10px;
-    text-align: left;
-    margin-bottom: 12px;
-    transition: background-color 0.2s;
 }
 
-.nav-button:hover {
-    background-color: rgba(24, 128, 255, 0.2);
-}
-
-.nav-button.active {
-    background-color: var(--accent-blue);
+.sidebar-btn.active {
+    background-color: var(--blue-accent);
     color: #FFFFFF;
 }
 
-/* --- ОСНОВНАЯ ОБЛАСТЬ --- */
-#main-content {
-    flex-grow: 1;
-    padding: 32px;
+.sidebar-btn.active:hover {
+    background-color: var(--blue-accent);
+    color: #FFFFFF;
 }
 
-#header {
+/* ==========================================
+   MAIN CONTENT & TOP BAR
+   ========================================== */
+.main-content {
+    flex-grow: 1;
+    padding: 32px;
+    position: relative;
+}
+
+.top-bar {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
 }
 
-#header-title {
-    font-size: 34px;
-    font-weight: bold;
+.main-title {
+    font-size: 22px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
 }
 
-#header-controls {
+.top-controls {
     flex-direction: row;
     align-items: center;
 }
 
-#theme-toggle Label {
-    font-size: 20px;
-    color: var(--text-primary);
+/* Переключатель темы */
+.theme-switch {
+    width: 64px;
+    height: 32px;
+    margin: 0 16px 0 0;
+    padding: 0;
+}
+
+.theme-switch .unity-toggle__input {
+    background-color: #E6E8EE;
+    border-radius: 16px;
+    border-width: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.root-container.theme-dark .theme-switch .unity-toggle__input {
+    background-color: #1D2333;
+}
+
+.theme-switch .unity-toggle__checkmark {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    border-width: 0;
+    background-image: none;
+    background-color: #FFFFFF;
+    transition-property: translate, background-color;
+    transition-duration: 0.25s;
+}
+
+.root-container.theme-dark .theme-switch .unity-toggle__checkmark {
+    translate: 32px 0;
+    background-color: #2D374E;
+}
+
+.icon-sun {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    translate: 0 -50%;
+    width: 16px;
+    height: 16px;
+    background-image: url("project://database/Assets/Prefabs/NewUIFromDimash/Component%201%20(2).png");
+    -unity-background-image-tint-color: #1A1D20;
+}
+
+.icon-moon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    translate: 0 -50%;
+    width: 16px;
+    height: 16px;
+    background-image: url("project://database/Assets/Prefabs/NewUIFromDimash/Vector%20(2).png");
+    -unity-background-image-tint-color: #4A5568;
+}
+
+.root-container.theme-dark .icon-sun {
+    background-image: url("project://database/Assets/Prefabs/NewUIFromDimash/Group%204291.png");
+    -unity-background-image-tint-color: #FFFFFF;
+}
+
+.root-container.theme-dark .icon-moon {
+    background-image: url("project://database/Assets/Prefabs/NewUIFromDimash/Vector%20(3).png");
+    -unity-background-image-tint-color: #FFFFFF;
+}
+
+/* Плашка сессии */
+.session-btn {
+    flex-direction: row;
+    align-items: center;
+    height: 38px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 19px;
+    background-color: var(--green-bg);
+    border-width: 0;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: var(--green-text);
     margin-right: 8px;
 }
 
-#session-badge {
+.session-text {
+    color: var(--green-text);
+    -unity-font-style: bold;
+    font-size: 12px;
+}
+
+/* ==========================================
+   КАРТОЧКИ С ТЕКСТОМ (Студент / Эксперимент)
+   ========================================== */
+.cards-row {
     flex-direction: row;
-    background-color: rgba(30, 142, 62, 0.15);
-    padding: 10px 20px;
-    border-radius: 24px;
-    align-items: center;
-    margin-left: 24px;
-    border-width: 1px;
-    border-color: rgba(30, 142, 62, 0.3);
-}
-
-#session-badge Label {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-#session-dot {
-    width: 10px;
-    height: 10px;
-    background-color: var(--accent-green);
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-/* --- КАРТОЧКИ --- */
-#info-panels {
-    flex-direction: row;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .info-card {
     flex-grow: 1;
-    background-color: var(--bg-card);
-    border-radius: 14px;
-    padding: 18px 24px;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-height: 70px;
+    height: auto;
+    background-color: var(--bg-card-secondary);
+    border-radius: 16px;
+    padding: 12px 16px;
     margin-right: 16px;
-    border-width: 1px;
-    border-color: var(--border-color);
 }
 
-.card-subtitle {
-    font-size: 16px;
+.info-card:last-child {
+    margin-right: 0;
+}
+
+.card-label {
+    font-size: 12px;
     color: var(--text-secondary);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
-.card-title {
-    font-size: 19px;
-    font-weight: bold;
+.card-value-text {
+    font-size: 14px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+    margin-top: 4px;
     white-space: normal;
 }
 
-/* --- КОНТЕЙНЕР КОНТЕНТА --- */
-#content-container {
-    background-color: var(--bg-card);
-    border-radius: 16px;
+.card-value-text.student-name {
+    font-size: 11px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+    white-space: normal;
+}
+
+/* ==========================================
+   ОСНОВНОЙ КОНТЕЙНЕР (Table Card)
+   ========================================== */
+.table-card {
     flex-grow: 1;
-    padding: 28px;
+    background-color: var(--bg-card);
+    border-radius: 20px;
     border-width: 1px;
     border-color: var(--border-color);
+    padding: 16px;
 }
 
-#section-video {
+.table-toolbar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--border-color);
+}
+
+.section-container {
     flex-grow: 1;
 }
 
-#section-instructions {
-    flex-grow: 1;
-}
-
-.content-title {
-    font-size: 22px;
-    font-weight: bold;
+.section-title {
+    font-size: 14px;
+    -unity-font-style: bold;
     color: var(--text-primary);
-    margin-bottom: 18px;
-    text-transform: uppercase;
 }
 
-/* --- ВИДЕО ПЛЕЕР --- */
+/* ==========================================
+   ВИДЕО ПЛЕЕР
+   ========================================== */
 #video-placeholder {
     flex-grow: 1;
     background-color: var(--bg-video);
-    border-radius: 12px;
-    margin-top: 10px;
+    border-radius: 16px;
     position: relative;
-    min-height: 400px;
+    min-height: 320px;
     -unity-background-scale-mode: scale-to-fit;
 }
 
 .video-demo-text {
     position: absolute;
-    top: 22px;
-    left: 24px;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
+    top: 16px;
+    left: 20px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -unity-font-style: bold;
 }
 
 #video-controls {
@@ -206,84 +335,108 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 64px;
-    background-color: rgba(0, 0, 0, 0.85);
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    height: 54px;
+    background-color: rgba(11, 14, 20, 0.85);
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
     flex-direction: row;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 16px;
 }
 
 .video-btn {
+    height: 36px;
+    padding-left: 16px;
+    padding-right: 16px;
     background-color: transparent;
+    color: #FFFFFF;
+    border-radius: 18px;
     border-width: 0;
-    color: white;
-    font-size: 20px;
+    -unity-font-style: bold;
+    font-size: 12px;
     margin-right: 8px;
-    padding: 10px 14px;
-    border-radius: 8px;
+    transition-property: background-color;
+    transition-duration: 0.15s;
 }
 
 .video-btn:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--blue-accent);
 }
 
 .video-time-text {
-    color: #CCCCCC;
-    font-size: 19px;
-    margin-left: 18px;
-    font-weight: bold;
+    color: #8B98A9;
+    font-size: 12px;
+    -unity-font-style: bold;
+    margin-left: 8px;
 }
 
-/* --- ШАГИ ИНСТРУКЦИИ --- */
+/* ==========================================
+   ШАГИ ИНСТРУКЦИИ (в стиле Measurement Card)
+   ========================================== */
+.gallery-scroll {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
 .instruction-step {
-    background-color: var(--bg-step);
+    background-color: var(--bg-card-secondary);
     border-radius: 14px;
-    padding: 24px;
-    margin-bottom: 22px;
-    border-width: 1px;
-    border-color: var(--border-color);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    flex-direction: column;
+    width: 100%;
 }
 
 .step-title {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 12px;
+    font-size: 14px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+    margin-bottom: 6px;
     white-space: normal;
 }
 
 .step-desc {
-    font-size: 28px;
-    white-space: normal;
+    font-size: 13px;
     color: var(--text-secondary);
-    margin-bottom: 18px;
+    margin-bottom: 12px;
+    white-space: normal;
 }
 
 .step-image-placeholder {
-    width: 640px;
-    max-width: 100%;
-    height: 360px;
-    background-color: rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 320px;
+    background-color: var(--bg-card);
     border-radius: 12px;
+    border-width: 1px;
+    border-color: var(--border-color);
     justify-content: flex-end;
     align-items: flex-start;
-    padding: 18px;
+    padding: 14px;
 }
 
+/* Кнопка открытия изображения (в стиле .action-btn из Dashboard.uss) */
 .step-image-btn {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 12px 18px;
-    border-radius: 8px;
-    font-size: 20px;
+    height: 36px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: var(--blue-accent);
+    color: #FFFFFF;
+    border-radius: 18px;
     border-width: 0;
+    -unity-font-style: bold;
+    font-size: 12px;
+    transition-property: background-color;
+    transition-duration: 0.15s;
 }
 
 .step-image-btn:hover {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: var(--blue-hover);
 }
-/* --- МОДАЛЬНОЕ ОКНО --- */
+
+/* ==========================================
+   МОДАЛЬНОЕ ОКНО
+   ========================================== */
 #modal-overlay {
     position: absolute;
     top: 0;
@@ -299,8 +452,8 @@
     background-color: var(--bg-card);
     width: 82%;
     height: 82%;
-    border-radius: 16px;
-    padding: 28px;
+    border-radius: 20px;
+    padding: 20px;
     border-width: 1px;
     border-color: var(--border-color);
 }
@@ -309,16 +462,120 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
+}
+
+.modal-title-text {
+    font-size: 18px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+}
+
+.modal-close-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    background-color: var(--bg-card-secondary);
+    color: var(--text-primary);
+    border-width: 0;
+    font-size: 14px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    padding: 0;
+    transition-property: background-color, color;
+    transition-duration: 0.15s;
+}
+
+.modal-close-btn:hover {
+    background-color: var(--danger-color);
+    color: #FFFFFF;
 }
 
 #modal-image-full {
     flex-grow: 1;
     min-height: 0;
     overflow: hidden;
-    background-color: var(--bg-sidebar);
+    background-color: var(--bg-card-secondary);
     border-radius: 12px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-no-image {
+    font-size: 14px;
+    -unity-font-style: bold;
+    color: var(--text-secondary);
+}
+
+.modal-hint-text {
+    font-size: 12px;
+    color: var(--text-secondary);
+    -unity-text-align: middle-center;
+    margin-top: 12px;
+}
+
+/* ==========================================
+   УЗКИЙ SCROLLBAR (из Dashboard.uss)
+   ========================================== */
+.unity-scroller--vertical {
+    width: 8px;
+    min-width: 8px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    background-color: transparent;
+    border-width: 0;
+}
+
+.unity-scroller #unity-slider {
+    width: 8px;
+    min-width: 8px;
+    margin: 0;
+    padding: 0;
+}
+
+.unity-scroller #unity-low-button,
+.unity-scroller #unity-high-button {
+    display: none;
+}
+
+.unity-scroller #unity-tracker {
+    width: 6px;
+    min-width: 6px;
+    background-color: #EEF1F6;
+    border-radius: 3px;
+    border-width: 0;
+    align-self: center;
+}
+
+.unity-scroller #unity-dragger {
+    width: 6px;
+    min-width: 6px;
+    background-color: #C1C7D0;
+    border-radius: 3px;
+    border-width: 0;
+    left: 1px;
+    transition-property: background-color;
+    transition-duration: 0.15s;
+}
+
+.unity-scroller #unity-dragger:hover {
+    background-color: #A3ACB9;
+}
+
+.root-container.theme-dark .unity-scroller #unity-tracker {
+    background-color: #1A2232;
+}
+
+.root-container.theme-dark .unity-scroller #unity-dragger {
+    background-color: #3A475D;
+}
+
+.root-container.theme-dark .unity-scroller #unity-dragger:hover {
+    background-color: #4C5B75;
 }

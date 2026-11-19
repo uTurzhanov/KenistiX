@@ -1,47 +1,55 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="LabDashboard.uss" />
     
-    <ui:VisualElement name="app-root" class="theme-dark">
-        <!-- Боковая панель -->
-        <ui:VisualElement name="sidebar">
-            <ui:Label text="МАТЕРИАЛЫ" name="sidebar-title" />
-            <ui:Button text="▶ ВИДЕО" name="tab-video" class="nav-button active" />
-            <ui:Button text="≡ ИНСТРУКЦИЯ" name="tab-instructions" class="nav-button" />
+    <ui:VisualElement name="app-root" class="root-container">
+        <!-- Боковая панель (Sidebar) -->
+        <ui:VisualElement name="sidebar" class="sidebar">
+            <ui:Label text="МАТЕРИАЛЫ" name="sidebar-title" class="sidebar-title" />
+            <ui:VisualElement class="sidebar-divider" />
+            <ui:VisualElement class="sidebar-menu">
+                <ui:Button text="▶ ВИДЕО" name="tab-video" class="sidebar-btn active" />
+                <ui:Button text="≡ ИНСТРУКЦИЯ" name="tab-instructions" class="sidebar-btn" />
+            </ui:VisualElement>
         </ui:VisualElement>
 
-        <!-- Основная рабочая область -->
-        <ui:VisualElement name="main-content">
+        <!-- Основная рабочая область (Main Content) -->
+        <ui:VisualElement name="main-content" class="main-content">
             
-            <!-- Шапка -->
-            <ui:VisualElement name="header">
-                <ui:Label text="УЧЕБНЫЕ МАТЕРИАЛЫ" name="header-title" />
-                <ui:VisualElement name="header-controls">
-                    <ui:Toggle name="theme-toggle" label="☀ / ☾" />
-                    <ui:VisualElement name="session-badge">
-                        <ui:VisualElement name="session-dot" />
-                        <ui:Label text="СЕССИЯ АКТИВНА" />
+            <!-- Верхняя панель (Top Bar) -->
+            <ui:VisualElement name="header" class="top-bar">
+                <ui:Label text="УЧЕБНЫЕ МАТЕРИАЛЫ" name="header-title" class="main-title" />
+                <ui:VisualElement name="header-controls" class="top-controls">
+                    <ui:Toggle name="theme-toggle" class="theme-switch">
+                        <ui:VisualElement class="icon-sun" picking-mode="Ignore" />
+                        <ui:VisualElement class="icon-moon" picking-mode="Ignore" />
+                    </ui:Toggle>
+                    <ui:VisualElement name="session-badge" class="session-btn">
+                        <ui:VisualElement name="session-dot" class="status-dot" />
+                        <ui:Label text="СЕССИЯ АКТИВНА" class="session-text" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
 
-            <!-- Информационные карточки -->
-            <ui:VisualElement name="info-panels">
+            <!-- Информационные карточки (Cards Row) -->
+            <ui:VisualElement name="info-panels" class="cards-row">
                 <ui:VisualElement class="info-card">
-                    <ui:Label text="Студент" class="card-subtitle" />
-                    <ui:Label text="ИМЯ СТУДЕНТА" name="label-student-name" class="card-title" />
+                    <ui:Label text="Студент" class="card-label" />
+                    <ui:Label text="ИМЯ СТУДЕНТА" name="label-student-name" class="card-value-text student-name" />
                 </ui:VisualElement>
                 <ui:VisualElement class="info-card">
-                    <ui:Label text="Эксперимент" class="card-subtitle" />
-                    <ui:Label text="НАЗВАНИЕ ЭКСПЕРИМЕНТА" name="label-experiment-name" class="card-title" />
+                    <ui:Label text="Эксперимент" class="card-label" />
+                    <ui:Label text="НАЗВАНИЕ ЭКСПЕРИМЕНТА" name="label-experiment-name" class="card-value-text" />
                 </ui:VisualElement>
             </ui:VisualElement>
 
-            <!-- Контейнер для меняющегося контента -->
-            <ui:VisualElement name="content-container">
+            <!-- Контейнер контента (в стиле Table Card) -->
+            <ui:VisualElement name="content-container" class="table-card">
                 
                 <!-- Секция 1: Видео -->
-                <ui:VisualElement name="section-video">
-                    <ui:Label text="ОЗНАКОМИТЕЛЬНЫЙ ВИДЕОМАТЕРИАЛ" class="content-title" />
+                <ui:VisualElement name="section-video" class="section-container">
+                    <ui:VisualElement class="table-toolbar">
+                        <ui:Label text="ОЗНАКОМИТЕЛЬНЫЙ ВИДЕОМАТЕРИАЛ" class="section-title" />
+                    </ui:VisualElement>
                     <ui:VisualElement name="video-placeholder">
                         <ui:Label text="DEMO: ЭКСПЕРИМЕНТАЛЬНАЯ УСТАНОВКА" name="label-video-title" class="video-demo-text" />
                         <ui:VisualElement name="video-controls">
@@ -54,9 +62,11 @@
                 </ui:VisualElement>
 
                 <!-- Секция 2: Инструкции (скрыта по умолчанию) -->
-                <ui:VisualElement name="section-instructions" style="display: none;">
-                    <ui:Label text="ПОШАГОВОЕ РУКОВОДСТВО К ВЫПОЛНЕНИЮ" class="content-title" />
-                    <ui:ScrollView name="instructions-scroll-view" style="flex-grow: 1;" />
+                <ui:VisualElement name="section-instructions" class="section-container" style="display: none;">
+                    <ui:VisualElement class="table-toolbar">
+                        <ui:Label text="ПОШАГОВОЕ РУКОВОДСТВО К ВЫПОЛНЕНИЮ" class="section-title" />
+                    </ui:VisualElement>
+                    <ui:ScrollView name="instructions-scroll-view" class="gallery-scroll" />
                 </ui:VisualElement>
 
             </ui:VisualElement>

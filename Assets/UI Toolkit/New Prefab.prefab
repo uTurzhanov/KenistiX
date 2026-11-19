@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 7999722550396598419}
   - component: {fileID: 3859897485255596596}
   - component: {fileID: 1762539150233253453}
+  - component: {fileID: 3007663483011416}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -185,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   captureService: {fileID: 0}
   inspectorDeviceOptions: []
+  vignetteController: {fileID: 0}
 --- !u!114 &3859897485255596596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,3 +222,24 @@ MonoBehaviour:
   statusText: {fileID: 0}
   udpDiscoveryPort: 8888
   discoveryMessage: QUEST3_SEARCHING_DOCX_SERVER
+--- !u!65 &3007663483011416
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375812296845995620}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 12.800006, y: 7.2, z: 0.91218513}
+  m_Center: {x: 0.000000019770829, y: 0.0000000015907047, z: -0.09380447}

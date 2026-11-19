@@ -18,11 +18,13 @@ public class DashboardController : MonoBehaviour
         _sessionBtn = _root.Q<Button>("session-btn");
         _sessionDropdown = _root.Q<VisualElement>("session-dropdown");
 
-        // 1. Обработка переключения темы
+        // 1. Обработка переключения темы и синхронизация
         if (_themeToggle != null)
         {
             _themeToggle.RegisterValueChangedCallback(OnThemeToggled);
         }
+        UIThemeManager.OnThemeChanged += ApplyTheme;
+        ApplyTheme(UIThemeManager.IsDarkTheme);
 
         // 2. Отображение / Скрытие Dropdown Меню
         if (_sessionBtn != null && _sessionDropdown != null)
@@ -36,6 +38,8 @@ public class DashboardController : MonoBehaviour
 
     private void OnDisable()
     {
+        UIThemeManager.OnThemeChanged -= ApplyTheme;
+
         if (_themeToggle != null)
             _themeToggle.UnregisterValueChangedCallback(OnThemeToggled);
 
@@ -48,14 +52,20 @@ public class DashboardController : MonoBehaviour
 
     private void OnThemeToggled(ChangeEvent<bool> evt)
     {
-        if (evt.newValue)
-        {
+        UIThemeManager.SetTheme(evt.newValue);
+    }
+
+    private void ApplyTheme(bool isDark)
+    {
+        if (_root == null) return;
+
+        if (isDark)
             _root.AddToClassList("theme-dark");
-        }
         else
-        {
             _root.RemoveFromClassList("theme-dark");
-        }
+
+        if (_themeToggle != null)
+            _themeToggle.SetValueWithoutNotify(isDark);
     }
 
     private void ToggleDropdown()
