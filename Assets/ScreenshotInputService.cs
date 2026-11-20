@@ -49,7 +49,17 @@ public class ScreenshotInputTrigger : MonoBehaviour
 
     private void OnCapturePerformed(InputAction.CallbackContext context)
     {
-
+        if (captureService == null)
+        {
+            string labNumStr = PlayerPrefs.GetString("LabNum");
+            if (!string.IsNullOrEmpty(labNumStr) && int.TryParse(labNumStr, out int labIndex))
+            {
+                if (labIndex >= 0 && labIndex < CaptureServices.Count && CaptureServices[labIndex] != null)
+                {
+                    captureService = CaptureServices[labIndex];
+                }
+            }
+        }
 
         if (captureService != null)
         {
@@ -57,15 +67,7 @@ public class ScreenshotInputTrigger : MonoBehaviour
         }
         else
         {
-            if(PlayerPrefs.GetString("LabNum") != null && CaptureServices[Convert.ToInt16(PlayerPrefs.GetString("LabNum"))] !=null)
-            {
-                captureService = CaptureServices[Convert.ToInt16(PlayerPrefs.GetString("LabNum"))];
-            }
-            else{
-
-
             Debug.LogError("ScreenshotInputTrigger: Ссылка на ScreenshotCaptureService пуста!");
-            }
         }
     }
 }

@@ -108,6 +108,7 @@ public class UIToolkitGalleryController : MonoBehaviour
             _deviceDropdown.choices = choices;
             _deviceDropdown.index = 0;
             _selectedDeviceIndex = 0;
+            captureService?.SetSelectedPointIndex(0);
 
             _deviceDropdown.RegisterValueChangedCallback(evt =>
             {

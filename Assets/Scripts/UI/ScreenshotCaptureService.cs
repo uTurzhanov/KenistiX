@@ -63,6 +63,7 @@ public class ScreenshotCaptureService : MonoBehaviour
     private float _sessionStartTime;
     private int _screenshotNumber;
     private bool _isCapturing;
+    private int _currentPointIndex = 0;
 
     public bool IsCapturing => _isCapturing;
 
@@ -96,9 +97,16 @@ public class ScreenshotCaptureService : MonoBehaviour
     /// <summary>
     /// Снять скриншот с текущей или первой доступной точки
     /// </summary>
+    public void SetSelectedPointIndex(int pointIndex)
+    {
+        if (capturePoints != null && capturePoints.Count > 0)
+            _currentPointIndex = Mathf.Clamp(pointIndex, 0, capturePoints.Count - 1);
+        else
+            _currentPointIndex = 0;
+    }
     public void TakeScreenshot()
     {
-        TakeScreenshot(0);
+        TakeScreenshot(_currentPointIndex);
     }
 
     /// <summary>
