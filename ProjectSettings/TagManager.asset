@@ -37,6 +37,9 @@ TagManager:
   - BIG
   - SMALL
   - Ruler
+  - wire
+  - CH1
+  - CH2
   layers:
   - Default
   - TransparentFX

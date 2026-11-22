@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using System;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ using UnityEngine;
 public class OscilloscopeChannel
 {
     [Header("Железо")]
-    [SerializeField] private DummySignalGenerator source;
+    //[SerializeField] private DummySignalGenerator source;
 
     [Header("Настройки")]
     public CouplingMode coupling = CouplingMode.DC;
@@ -13,13 +14,14 @@ public class OscilloscopeChannel
     // Внутренние значения канала (управляются из Core через дельту)
     public ReactableValue<float> VoltsPerDiv = new(2f);
     public ReactableValue<float> YOffset = new(0f);
+    private ISignalSource _source;
 
-    public bool HasSource => source != null;
+    public bool HasSource => _source != null;
 
     public float GetRawVoltage(float time)
     {
-        if (!HasSource || coupling == CouplingMode.GND) return 0f;
-        return source.GetVoltage(time);
+        if (_source == null) return 0f;
+        return _source.GetVoltage(time);
     }
 
     public float GetScreenYPosition(float rawVoltage, float frameAverageVoltage)
@@ -32,5 +34,15 @@ public class OscilloscopeChannel
         }
 
         return (finalVolts / VoltsPerDiv.CurrentValue) + YOffset.CurrentValue;
+    }
+
+    public void SetSource(ISignalSource source)
+    {
+        _source = source;
+    }
+
+    public void ClearSource()
+    {
+        _source = null;
     }
 }

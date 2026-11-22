@@ -151,9 +151,16 @@ public class OscilloscopeCore : MonoBehaviour
         }
     }
 
+    // ƒобавь эти методы в OscilloscopeCore:
+    public void SetChannel1Source(ISignalSource source) => ch1.SetSource(source);
+    public void ClearChannel1Source() => ch1.ClearSource();
+
+    public void SetChannel2Source(ISignalSource source) => ch2.SetSource(source);
+    public void ClearChannel2Source() => ch2.ClearSource();
+
     void Update()
     {
-        if (!ch1.HasSource) return;
+        if (!ch1.HasSource && !ch2.HasSource) return;
 
         // „увствительность: сколько единиц прибавл€етс€ за 1 градус поворота ручки
         float voltsSens = 0.01f;
@@ -389,4 +396,7 @@ public class OscilloscopeCore : MonoBehaviour
         if(_mathButton != null)
             _mathButton.OnClicked -= ToggleMath;
     }
+
+   
+
 }
