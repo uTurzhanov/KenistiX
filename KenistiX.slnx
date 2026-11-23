@@ -97,6 +97,7 @@
   <Project Path="Unity.XR.ARSubsystems.Editor.csproj" />
   <Project Path="Oculus.Platform.Editor.csproj" />
   <Project Path="Unity.Performance.Profile-Analyzer.Editor.csproj" />
+  <Project Path="Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj" />
   <Project Path="Oculus.Interaction.OVR.Samples.csproj" />
   <Project Path="UnityEditor.UI.csproj" />
   <Project Path="Unity.RenderPipelines.Universal.2D.Editor.Overrides.csproj" />
@@ -164,6 +165,7 @@
   <Project Path="Meta.WitAi.TTS.Editor.csproj" />
   <Project Path="Meta.XR.EnvironmentDepth.Editor.csproj" />
   <Project Path="Oculus.Interaction.Samples.Editor.UISet.csproj" />
+  <Project Path="Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.Editor.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.InteractionSimulator.csproj" />
   <Project Path="Unity.XR.ARFoundation.InternalUtils.csproj" />
   <Project Path="Unity.XR.ARFoundation.Editor.csproj" />

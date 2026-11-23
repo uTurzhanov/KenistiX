@@ -1,0 +1,297 @@
+/* ==========================================
+   ПЕРЕМЕННЫЕ ЦВЕТОВ (Идентично Dashboard USS)
+   ========================================== */
+.root-container {
+    --bg-main: #DCDCDC;
+    --bg-sidebar: #BCBCBC;
+    --bg-card: #C2C2C2;
+    --bg-card-secondary: #F0F3F7;
+    --text-primary: #1A1D20;
+    --text-secondary: #64748B;
+    --border-color: #E2E8F0;
+    --blue-accent: #0084FF;
+    --blue-hover: #0072DC;
+    --green-bg: #DDF6E8;
+    --green-text: #10B981;
+    --danger-color: #FF3B30;
+    --danger-bg: rgba(255, 59, 48, 0.12);
+
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    background-color: var(--bg-main);
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+/* Переключение на Темную тему */
+.root-container.theme-dark {
+    --bg-main: #0B0E14;
+    --bg-sidebar: #111622;
+    --bg-card: #161C2A;
+    --bg-card-secondary: #1F2738;
+    --text-primary: #FFFFFF;
+    --text-secondary: #8B98A9;
+    --border-color: #242D40;
+    --green-bg: #0E3321;
+    --green-text: #22C55E;
+    --danger-bg: rgba(255, 59, 48, 0.18);
+}
+
+/* ==========================================
+   LAYOUT ЭКРАНА ВХОДА
+   ========================================== */
+.login-screen-root {
+    flex-direction: column;
+    padding: 32px;
+}
+
+.login-top-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.brand-badge {
+    flex-direction: row;
+    align-items: center;
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 18px;
+    background-color: var(--bg-card-secondary);
+    border-width: 1px;
+    border-color: var(--border-color);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: var(--blue-accent);
+    margin-right: 8px;
+}
+
+.brand-badge-text {
+    font-size: 12px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+}
+
+.login-center-wrapper {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ==========================================
+   КАРТОЧКА АВТОРИЗАЦИИ
+   ========================================== */
+.login-card {
+    width: 440px;
+    background-color: var(--bg-card-secondary);
+    border-radius: 20px;
+    border-width: 1px;
+    border-color: var(--border-color);
+    padding: 32px;
+    flex-direction: column;
+}
+
+.root-container.theme-dark .login-card {
+    background-color: var(--bg-card);
+}
+
+.login-title {
+    font-size: 22px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.login-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    white-space: normal;
+}
+
+.login-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* ==========================================
+   ПОЛЯ ВВОДА (TextField)
+   ========================================== */
+.input-group {
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.input-label {
+    font-size: 12px;
+    -unity-font-style: bold;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    margin-left: 2px;
+}
+
+.login-text-field {
+    margin: 0;
+    padding: 0;
+    height: 46px;
+}
+
+.login-text-field .unity-text-field__input {
+    background-color: #FFFFFF;
+    border-width: 1px;
+    border-color: var(--border-color);
+    border-radius: 12px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 14px;
+    color: var(--text-primary);
+    -unity-text-align: middle-left;
+    transition-property: border-color, background-color;
+    transition-duration: 0.15s;
+}
+
+.root-container.theme-dark .login-text-field .unity-text-field__input {
+    background-color: var(--bg-card-secondary);
+    color: #FFFFFF;
+}
+
+.login-text-field:hover .unity-text-field__input {
+    border-color: var(--blue-accent);
+}
+
+.login-text-field:focus .unity-text-field__input {
+    border-width: 1.5px;
+    border-color: var(--blue-accent);
+}
+
+/* ==========================================
+   СТАТУС-СТРОКА И КНОПКА ВХОДА
+   ========================================== */
+.status-banner {
+    min-height: 22px;
+    margin-top: 2px;
+    margin-bottom: 14px;
+    justify-content: center;
+}
+
+.status-text {
+    font-size: 12px;
+    -unity-font-style: bold;
+    color: var(--text-secondary);
+    white-space: normal;
+}
+
+.status-text.error {
+    color: var(--danger-color);
+}
+
+.status-text.success {
+    color: var(--green-text);
+}
+
+.login-submit-btn {
+    height: 48px;
+    border-radius: 14px;
+    background-color: var(--blue-accent);
+    color: #FFFFFF;
+    border-width: 0;
+    font-size: 14px;
+    -unity-font-style: bold;
+    margin: 0;
+    transition-property: background-color;
+    transition-duration: 0.15s;
+}
+
+.login-submit-btn:hover {
+    background-color: var(--blue-hover);
+}
+
+.login-submit-btn:disabled {
+    opacity: 0.6;
+}
+
+/* ==========================================
+   ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ (Из вашего Dashboard USS)
+   ========================================== */
+.theme-switch {
+    width: 64px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+}
+
+.theme-switch .unity-toggle__input {
+    background-color: #E6E8EE;
+    border-radius: 16px;
+    border-width: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.root-container.theme-dark .theme-switch .unity-toggle__input {
+    background-color: #1D2333;
+}
+
+.theme-switch .unity-toggle__checkmark {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    border-width: 0;
+    background-image: none;
+    background-color: #FFFFFF;
+    transition-property: translate, background-color;
+    transition-duration: 0.25s;
+}
+
+.root-container.theme-dark .theme-switch .unity-toggle__checkmark {
+    translate: 32px 0;
+    background-color: #2D374E;
+}
+
+.icon-sun {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    translate: 0 -50%;
+    width: 16px;
+    height: 16px;
+    background-image: url("project://database/Assets/Prefabs/NewUIFromDimash/Component%201%20(2).png");
+    -unity-background-image-tint-color: #1A1D20;
+}
+
+.icon-moon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    translate: 0 -50%;
+    width: 16px;
+    height: 16px;
+    background-image: url("project://database/Assets/Prefabs/NewUIFromDimash/Vector%20(2).png");
+    -unity-background-image-tint-color: #4A5568;
+}
+
+.root-container.theme-dark .icon-sun {
+    background-image: url("project://database/Assets/Prefabs/NewUIFromDimash/Group%204291.png");
+    -unity-background-image-tint-color: #FFFFFF;
+}
+
+.root-container.theme-dark .icon-moon {
+    background-image: url("project://database/Assets/Prefabs/NewUIFromDimash/Vector%20(3).png");
+    -unity-background-image-tint-color: #FFFFFF;
+}
