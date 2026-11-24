@@ -201,7 +201,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LabDataManager
   uiDocument: {fileID: 197623949695777362}
   labTitleTMP: {fileID: 0}
-  studentNameInput: {fileID: 0}
   sessionTimeTMP: {fileID: 0}
   timestampTMP: {fileID: 0}
 --- !u!114 &1762539150233253453
@@ -220,8 +219,8 @@ MonoBehaviour:
   uiDocument: {fileID: 197623949695777362}
   galleryController: {fileID: 7999722550396598419}
   statusText: {fileID: 0}
-  udpDiscoveryPort: 8888
-  discoveryMessage: QUEST3_SEARCHING_DOCX_SERVER
+  googleAppsScriptUrl: https://script.google.com/macros/s/AKfycbwORprZt_eOAE8iFIqT-YzKx3BBo9oYUn9AyZbaWqVN6VqUMWsXZ7yanD34lOyJLsp8mw/exec
+  iituLogoTexture: {fileID: 2800000, guid: 18239fcd73ef38e4c910ee8f781b8f0e, type: 3}
 --- !u!65 &3007663483011416
 BoxCollider:
   m_ObjectHideFlags: 0

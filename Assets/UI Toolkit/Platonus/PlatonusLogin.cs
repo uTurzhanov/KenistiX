@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class PlatonusAuth : MonoBehaviour
 {
     public const string StudentNamePrefKey = "StudentFullName";
+    public const string StudentLoginPrefKey = "StudentLogin";
 
     /// <summary>
     /// Живёт в памяти всю игровую сессию (между сценами) и сбрасывается при закрытии приложения.
@@ -185,13 +186,13 @@ public class PlatonusAuth : MonoBehaviour
                 yield break;
             }
 
-            yield return GetFioRoutine(authData.auth_token, authData.sid);
+            yield return GetFioRoutine(authData.auth_token, authData.sid, login);
         }
 
         _submitButton.SetEnabled(true);
     }
 
-    private IEnumerator GetFioRoutine(string authToken, string sid)
+    private IEnumerator GetFioRoutine(string authToken, string sid, string login)
     {
         SetStatus("Загрузка профиля...");
 
@@ -233,15 +234,16 @@ public class PlatonusAuth : MonoBehaviour
                 yield break;
             }
 
-            // 1. Сохраняем ФИО в PlayerPrefs для передачи в LabDataManager и другие сцены
+            // 1. Сохраняем ФИО и логин-почту в PlayerPrefs для LabDataManager и выгрузки на Google Диск
             PlayerPrefs.SetString(StudentNamePrefKey, UserFullName);
+            PlayerPrefs.SetString(StudentLoginPrefKey, login);
             PlayerPrefs.Save();
 
             // 2. Помечаем текущую сессию как авторизованную
             IsAuthenticatedThisSession = true;
 
             SetStatus($"Добро пожаловать, {UserFullName}!", isSuccess: true);
-            Debug.Log($"[PlatonusAuth] Авторизован и сохранено в PlayerPrefs: {UserFullName}");
+            Debug.Log($"[PlatonusAuth] Авторизован и сохранено в PlayerPrefs: {UserFullName} ({login})");
 
             OnAuthSuccess?.Invoke(UserFullName);
 
