@@ -7,11 +7,19 @@ using UnityEngine.UIElements;
 
 public class PlatonusAuth : MonoBehaviour
 {
+    public const string StudentNamePrefKey = "StudentFullName";
+
+    /// <summary>
+    /// Живёт в памяти всю игровую сессию (между сценами) и сбрасывается при закрытии приложения.
+    /// </summary>
+    public static bool IsAuthenticatedThisSession { get; private set; } = false;
+
     [Header("UI Toolkit")]
     [SerializeField] private UIDocument uiDocument;
 
     [Header("Настройки по умолчанию")]
     [SerializeField] private bool startInDarkTheme = false;
+    [SerializeField] private float hideDelaySeconds = 0.6f; // Небольшая пауза, чтобы пользователь увидел "Добро пожаловать!"
 
     private const string LoginUrl = "https://platonus.iitu.edu.kz/rest/api/login";
     private const string FioUrl = "https://platonus.iitu.edu.kz/rest/fio/ru";
@@ -23,24 +31,40 @@ public class PlatonusAuth : MonoBehaviour
     private Button _submitButton;
     private Label _statusLabel;
 
-    /// <summary>
-    /// Полученное ФИО студента после успешной авторизации.
-    /// </summary>
     public string UserFullName { get; private set; }
-
-    /// <summary>
-    /// Событие вызывается при успешном входе и передаёт ФИО пользователя.
-    /// </summary>
     public event Action<string> OnAuthSuccess;
 
-    private void OnEnable()
+    private void Awake()
     {
         if (uiDocument == null)
         {
             uiDocument = GetComponent<UIDocument>();
         }
 
+        // Если в этой сессии уже был успешный вход — сразу скрываем окно при повторном попадании на сцену
+        if (IsAuthenticatedThisSession)
+        {
+            HideAuthUIImmediate();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (IsAuthenticatedThisSession)
+        {
+            HideAuthUIImmediate();
+            return;
+        }
+
+        if (uiDocument == null)
+        {
+            uiDocument = GetComponent<UIDocument>();
+        }
+
         var root = uiDocument.rootVisualElement;
+        if (root == null) return;
+
+        root.style.display = DisplayStyle.Flex;
 
         _rootContainer = root.Q<VisualElement>("root-container");
         _themeToggle = root.Q<Toggle>("theme-toggle");
@@ -49,7 +73,6 @@ public class PlatonusAuth : MonoBehaviour
         _submitButton = root.Q<Button>("login-button");
         _statusLabel = root.Q<Label>("status-label");
 
-        // Инициализация темы
         if (_rootContainer != null)
         {
             _rootContainer.EnableInClassList("theme-dark", startInDarkTheme);
@@ -79,6 +102,18 @@ public class PlatonusAuth : MonoBehaviour
         if (_submitButton != null)
         {
             _submitButton.clicked -= OnLoginClicked;
+        }
+    }
+
+    private void HideAuthUIImmediate()
+    {
+        if (uiDocument != null)
+        {
+            if (uiDocument.rootVisualElement != null)
+            {
+                uiDocument.rootVisualElement.style.display = DisplayStyle.None;
+            }
+            uiDocument.gameObject.SetActive(false);
         }
     }
 
@@ -198,10 +233,25 @@ public class PlatonusAuth : MonoBehaviour
                 yield break;
             }
 
+            // 1. Сохраняем ФИО в PlayerPrefs для передачи в LabDataManager и другие сцены
+            PlayerPrefs.SetString(StudentNamePrefKey, UserFullName);
+            PlayerPrefs.Save();
+
+            // 2. Помечаем текущую сессию как авторизованную
+            IsAuthenticatedThisSession = true;
+
             SetStatus($"Добро пожаловать, {UserFullName}!", isSuccess: true);
-            Debug.Log($"[PlatonusAuth] Авторизован: {UserFullName}");
+            Debug.Log($"[PlatonusAuth] Авторизован и сохранено в PlayerPrefs: {UserFullName}");
 
             OnAuthSuccess?.Invoke(UserFullName);
+
+            // 3. Скрываем UI Document входа
+            if (hideDelaySeconds > 0f)
+            {
+                yield return new WaitForSeconds(hideDelaySeconds);
+            }
+
+            HideAuthUIImmediate();
         }
     }
 

@@ -6,12 +6,13 @@ using TMPro;
 
 public class LabDataManager : MonoBehaviour
 {
+    private const string DefaultStudentName = "КОНСТАНТИНОПОЛЬСКИЙ-СЕВЕРСКИЙ АЛЕКСАНДР АЛЕКСАНДРОВИЧ";
+
     [Header("Связь с UI Toolkit")]
     [SerializeField] private UIDocument uiDocument;
 
     [Header("Связь с uGUI (Опционально)")]
     [SerializeField] private TMP_Text labTitleTMP;
-    [SerializeField] private TMP_Text studentNameInput;
     [SerializeField] private TMP_Text sessionTimeTMP;
     [SerializeField] private TMP_Text timestampTMP;
 
@@ -25,13 +26,14 @@ public class LabDataManager : MonoBehaviour
     {
         get
         {
-            if (studentNameInput != null && !string.IsNullOrEmpty(studentNameInput.text))
-                return studentNameInput.text;
+            string savedName = PlayerPrefs.GetString(PlatonusAuth.StudentNamePrefKey, string.Empty);
+            if (!string.IsNullOrEmpty(savedName))
+                return savedName;
 
             if (_studentNameLabel != null && !string.IsNullOrEmpty(_studentNameLabel.text))
                 return _studentNameLabel.text;
 
-            return "КОНСТАНТИНОПОЛЬСКИЙ-СЕВЕРСКИЙ АЛЕКСАНДР АЛЕКСАНДРОВИЧ";
+            return DefaultStudentName;
         }
     }
 
@@ -48,12 +50,31 @@ public class LabDataManager : MonoBehaviour
     };
 
     private float sessionTimer = 0f;
+    private PlatonusAuth _platonusAuth;
+
+    private void OnEnable()
+    {
+        // Если PlatonusAuth присутствует на этой же сцене, подписываемся на момент завершения входа
+        _platonusAuth = FindFirstObjectByType<PlatonusAuth>();
+        if (_platonusAuth != null)
+        {
+            _platonusAuth.OnAuthSuccess += OnPlatonusAuthSuccess;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_platonusAuth != null)
+        {
+            _platonusAuth.OnAuthSuccess -= OnPlatonusAuthSuccess;
+        }
+    }
 
     private void Start()
     {
-        // Вызываем поиск элементов в Start, когда rootVisualElement гарантированно инициализирован
         InitUIToolkitElements();
         InitializeLabData();
+        RefreshStudentNameFromPrefs();
         sessionTimer = 0f;
         UpdateTimestampUI();
     }
@@ -68,6 +89,33 @@ public class LabDataManager : MonoBehaviour
             _studentNameLabel = root.Q<Label>("student-name");
             _experimentTitleLabel = root.Q<Label>("experiment-title");
             _sessionTimeLabel = root.Q<Label>("lbl-session-time");
+        }
+    }
+
+    private void OnPlatonusAuthSuccess(string _)
+    {
+        RefreshStudentNameFromPrefs();
+    }
+
+    /// <summary>
+    /// Подтягивает ФИО студента из PlayerPrefs и обновляет UI Toolkit.
+    /// </summary>
+    public void RefreshStudentNameFromPrefs()
+    {
+        if (_studentNameLabel == null)
+        {
+            InitUIToolkitElements();
+        }
+
+        string studentName = PlayerPrefs.GetString(PlatonusAuth.StudentNamePrefKey, string.Empty);
+        if (string.IsNullOrEmpty(studentName))
+        {
+            studentName = DefaultStudentName;
+        }
+
+        if (_studentNameLabel != null)
+        {
+            _studentNameLabel.text = studentName;
         }
     }
 
@@ -88,7 +136,6 @@ public class LabDataManager : MonoBehaviour
 
     private void InitializeLabData()
     {
-        // Защитная повторная проверка на случай, если ссылка оказалась null
         if (_experimentTitleLabel == null)
         {
             InitUIToolkitElements();
