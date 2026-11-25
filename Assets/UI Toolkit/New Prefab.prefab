@@ -130,13 +130,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375812296845995620}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.1869628, y: -0, z: -0.00000002235174, w: 0.98236704}
+  m_LocalPosition: {x: -1.25, y: 4.93, z: -2.95}
+  m_LocalScale: {x: 0.64479494, y: 0.6286453, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3721069780665259798}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -21.551, y: 0, z: 0}
 --- !u!114 &197623949695777362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,8 +155,8 @@ MonoBehaviour:
   m_SortingOrder: 0
   m_Position: 0
   m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 3840
-  m_WorldSpaceHeight: 2160
+  m_WorldSpaceWidth: 1280
+  m_WorldSpaceHeight: 720
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
@@ -221,6 +221,8 @@ MonoBehaviour:
   statusText: {fileID: 0}
   googleAppsScriptUrl: https://script.google.com/macros/s/AKfycbwORprZt_eOAE8iFIqT-YzKx3BBo9oYUn9AyZbaWqVN6VqUMWsXZ7yanD34lOyJLsp8mw/exec
   iituLogoTexture: {fileID: 2800000, guid: 18239fcd73ef38e4c910ee8f781b8f0e, type: 3}
+  watermarkFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  watermarkRenderLayer: 30
 --- !u!65 &3007663483011416
 BoxCollider:
   m_ObjectHideFlags: 0
