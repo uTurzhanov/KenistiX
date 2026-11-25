@@ -1,11 +1,17 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class DashboardController : MonoBehaviour
 {
+    [Header("Навигация")]
+    [Tooltip("Название сцены главного меню для выхода")]
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
+
     private VisualElement _root;
     private Toggle _themeToggle;
     private Button _sessionBtn;
+    private Button _exitBtn;
     private VisualElement _sessionDropdown;
 
     private void OnEnable()
@@ -16,6 +22,7 @@ public class DashboardController : MonoBehaviour
         _root = uiDoc.rootVisualElement.Q<VisualElement>("root");
         _themeToggle = _root.Q<Toggle>("theme-toggle");
         _sessionBtn = _root.Q<Button>("session-btn");
+        _exitBtn = _root.Q<Button>("exit-app-btn");
         _sessionDropdown = _root.Q<VisualElement>("session-dropdown");
 
         // 1. Обработка переключения темы и синхронизация
@@ -32,7 +39,13 @@ public class DashboardController : MonoBehaviour
             _sessionBtn.clicked += ToggleDropdown;
         }
 
-        // 3. Закрытие Dropdown при клике вне его области
+        // 3. Кнопка выхода в главное меню
+        if (_exitBtn != null)
+        {
+            _exitBtn.clicked += ExitToMainMenu;
+        }
+
+        // 4. Закрытие Dropdown при клике вне его области
         _root.RegisterCallback<PointerDownEvent>(OnRootClicked, TrickleDown.TrickleDown);
     }
 
@@ -46,8 +59,22 @@ public class DashboardController : MonoBehaviour
         if (_sessionBtn != null)
             _sessionBtn.clicked -= ToggleDropdown;
 
+        if (_exitBtn != null)
+            _exitBtn.clicked -= ExitToMainMenu;
+
         if (_root != null)
             _root.UnregisterCallback<PointerDownEvent>(OnRootClicked);
+    }
+
+    private void ExitToMainMenu()
+    {
+        if (string.IsNullOrWhiteSpace(mainMenuSceneName))
+        {
+            Debug.LogWarning("[DashboardController] Не указано имя сцены главного меню (mainMenuSceneName)!");
+            return;
+        }
+
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     private void OnThemeToggled(ChangeEvent<bool> evt)

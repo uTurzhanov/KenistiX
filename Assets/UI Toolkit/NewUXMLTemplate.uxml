@@ -2,12 +2,19 @@
     <Style src="project://database/Assets/UI%20Toolkit/Dashboard.uss?fileID=7433441132597879392&amp;guid=79cf4b668c8a5be44862229bfef0ff65&amp;type=3#Dashboard" />
     <ui:VisualElement name="root" class="root-container">
         <ui:VisualElement class="sidebar">
-            <ui:Label text="ЖУРНАЛ" class="sidebar-title" />
-            <ui:VisualElement class="sidebar-divider" />
-            <ui:VisualElement class="sidebar-menu">
-                <ui:Button name="btn-tab-zamery" text="ЗАМЕРЫ" class="sidebar-btn active" />
-                <ui:Button name="btn-tab-fiksaciya" text="ФИКСАЦИЯ" class="sidebar-btn" />
+            <ui:VisualElement class="sidebar-top">
+                <ui:Label text="ЖУРНАЛ" class="sidebar-title" />
+                <ui:VisualElement class="sidebar-divider" />
+                <ui:VisualElement class="sidebar-menu">
+                    <ui:Button name="btn-tab-zamery" text="ЗАМЕРЫ" class="sidebar-btn active" />
+                    <ui:Button name="btn-tab-fiksaciya" text="ФИКСАЦИЯ" class="sidebar-btn" />
+                </ui:VisualElement>
             </ui:VisualElement>
+
+            <ui:Button name="exit-app-btn" class="exit-btn">
+                <ui:Label text="↪" class="exit-icon" />
+                <ui:Label text="ВЫЙТИ" class="exit-text" />
+            </ui:Button>
         </ui:VisualElement>
         <ui:VisualElement class="main-content">
             <ui:VisualElement class="top-bar">
