@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 942810691211101373}
   - component: {fileID: 5967689310316253315}
   - component: {fileID: 6693052528577237899}
+  - component: {fileID: 2027045972716126758}
   m_Layer: 0
   m_Name: Left Controller
   m_TagString: Untagged
@@ -183,6 +184,24 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+--- !u!114 &2027045972716126758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202364687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c13ad7e6b55414cbeafc93ca9443a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NearFarUICursor
+  nearFarInteractor: {fileID: 8877177980677234388}
+  pokeInteractor: {fileID: 4343660526480754339}
+  dotRadius: 0.008
+  surfaceOffset: 0.002
+  normalColor: {r: 0.18, g: 0.65, b: 1, a: 1}
+  pressedColor: {r: 0.16, g: 0.85, b: 0.45, a: 1}
 --- !u!1 &1670256624
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +215,7 @@ GameObject:
   - component: {fileID: 6678509202150728127}
   - component: {fileID: 4238984354899526239}
   - component: {fileID: 4602308928622519009}
+  - component: {fileID: 4526514234162786636}
   m_Layer: 0
   m_Name: Right Controller
   m_TagString: Untagged
@@ -366,6 +386,24 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+--- !u!114 &4526514234162786636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670256624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c13ad7e6b55414cbeafc93ca9443a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NearFarUICursor
+  nearFarInteractor: {fileID: 1883230248363655243}
+  pokeInteractor: {fileID: 2141651114331267770}
+  dotRadius: 0.008
+  surfaceOffset: 0.002
+  normalColor: {r: 0.18, g: 0.65, b: 1, a: 1}
+  pressedColor: {r: 0.16, g: 0.85, b: 0.45, a: 1}
 --- !u!1 &1680501586
 GameObject:
   m_ObjectHideFlags: 0

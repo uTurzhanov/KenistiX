@@ -1,0 +1,71 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="PlatonusLoginTemplate" src="project://database/Assets/UI%20Toolkit/Platonus/PlatonusLogin.uxml?fileID=9197481963319205126&amp;guid=eeba5627d5eb6b14e99b0d6d8e86d207&amp;type=3#PlatonusLogin"/>
+    <Style src="project://database/Assets/UI%20Toolkit/Dashboard.uss?fileID=7433441132597879392&amp;guid=79cf4b668c8a5be44862229bfef0ff65&amp;type=3#Dashboard"/>
+    <ui:VisualElement name="app-root" class="root-container theme-dark">
+        <ui:VisualElement class="sidebar">
+            <ui:VisualElement class="sidebar-top">
+                <ui:Label text="ГЛАВНОЕ МЕНЮ" class="sidebar-title"/>
+                <ui:VisualElement class="sidebar-divider"/>
+                <ui:VisualElement class="sidebar-menu">
+                    <ui:Button name="filter-all-btn" text="ВСЕ РАБОТЫ (8)" class="sidebar-btn active"/>
+                    <ui:Button name="filter-available-btn" text="ДОСТУПНЫЕ (5)" class="sidebar-btn"/>
+                    <ui:Button name="filter-completed-btn" text="ЗАВЕРШЁННЫЕ (2)" class="sidebar-btn"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Button name="exit-app-btn" class="exit-btn">
+                <ui:Label text="↪" class="exit-icon"/>
+                <ui:Label text="ВЫЙТИ" class="exit-text"/>
+            </ui:Button>
+        </ui:VisualElement>
+        <ui:VisualElement class="main-content">
+            <ui:VisualElement class="top-bar">
+                <ui:Label text="ВЫБОР ЛАБОРАТОРНОЙ РАБОТЫ" class="main-title"/>
+                <ui:Toggle name="dashboard-theme-toggle" class="theme-switch">
+                    <ui:VisualElement picking-mode="Ignore" class="icon-sun"/>
+                    <ui:VisualElement picking-mode="Ignore" class="icon-moon"/>
+                </ui:Toggle>
+            </ui:VisualElement>
+            <ui:VisualElement class="cards-row">
+                <ui:VisualElement class="info-card student-card">
+                    <ui:Label text="СТУДЕНТ" class="card-label"/>
+                    <ui:Label name="student-fio-label" text="НЕ АВТОРИЗОВАН" class="card-value-text student-name"/>
+                </ui:VisualElement>
+                <ui:VisualElement class="info-card practicum-card">
+                    <ui:Label text="ПРАКТИКУМ" class="card-label"/>
+                    <ui:Label text="ОБЩАЯ ФИЗИКА • ВИРТУАЛЬНАЯ ЛАБОРАТОРИЯ" class="card-value-text"/>
+                    <ui:Label name="available-count-label" text="ДОСТУПНО РАБОТ: 5 ИЗ 8" class="practicum-subtext"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="labs-workspace">
+                <ui:ScrollView name="labs-list-scroll" class="labs-list-column"/>
+                <ui:VisualElement name="lab-preview-card" class="lab-preview-panel">
+                    <ui:VisualElement class="preview-layout">
+                        <ui:VisualElement class="preview-image-box">
+                            <ui:VisualElement name="preview-screenshot" class="preview-screenshot-img"/>
+                            <ui:VisualElement class="stand-badge">
+                                <ui:Label text="СЦЕНА СТЕНДА" class="stand-badge-text"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement class="preview-details-box">
+                            <ui:VisualElement class="lab-number-pill">
+                                <ui:Label name="preview-lab-badge" text="ЛАБОРАТОРНАЯ РАБОТА №1" class="lab-number-pill-text"/>
+                            </ui:VisualElement>
+                            <ui:Label name="preview-lab-title" text="Ускорение свободного падения" class="preview-title"/>
+                            <ui:Label name="preview-lab-desc" text="Описание лабораторной работы..." class="preview-description"/>
+                            <ui:VisualElement class="preview-meta-row">
+                                <ui:VisualElement class="meta-pill">
+                                    <ui:Label name="preview-duration" text="◷ ~25 МИНУТ" class="meta-pill-text"/>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="meta-pill">
+                                    <ui:Label name="preview-devices" text="🔧 3 ПРИБОРА" class="meta-pill-text"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:Button name="start-lab-btn" text="НАЖМИТЕ НА КНОПКУ, ЧТОБЫ НАЧАТЬ →" class="start-lab-link-btn"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Instance template="PlatonusLoginTemplate" name="platonus-login-overlay" class="login-overlay-wrapper" style="display: flex;"/>
+    </ui:VisualElement>
+</ui:UXML>

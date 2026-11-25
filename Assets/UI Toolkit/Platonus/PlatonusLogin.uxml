@@ -1,10 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/Platonus/PlatonusLogin.uss" />
-
-    <!-- Корневой контейнер с поддержкой .theme-dark -->
-    <ui:VisualElement name="root-container" class="root-container login-screen-root">
+    <ui:VisualElement name="login-root-container" class="login-screen-root">
         
-        <!-- Верхняя панель с переключателем темы в стиле Dashboard -->
         <ui:VisualElement class="login-top-bar">
             <ui:VisualElement class="brand-badge">
                 <ui:VisualElement class="status-dot" />
@@ -17,35 +13,28 @@
             </ui:Toggle>
         </ui:VisualElement>
 
-        <!-- Центрированная карточка авторизации -->
         <ui:VisualElement class="login-center-wrapper">
             <ui:VisualElement class="login-card">
-                
                 <ui:Label text="Вход в систему" class="login-title" />
                 <ui:Label text="Введите учетные данные Platonus МУИТ для начала работы" class="login-subtitle" />
 
                 <ui:VisualElement class="login-divider" />
 
-                <!-- Поле логина -->
                 <ui:VisualElement class="input-group">
                     <ui:Label text="Логин или корпоративная почта" class="input-label" />
                     <ui:TextField name="login-input" placeholder-text="37448@iitu.edu.kz" class="login-text-field" />
                 </ui:VisualElement>
 
-                <!-- Поле пароля -->
                 <ui:VisualElement class="input-group">
                     <ui:Label text="Пароль" class="input-label" />
-                    <ui:TextField name="password-input" password="true" mask-character="•" placeholder-text="••••••••" class="login-text-field" />
+                    <ui:TextField name="password-input" mask-character="•" placeholder-text="••••••••" class="login-text-field" />
                 </ui:VisualElement>
 
-                <!-- Статус / ошибки / приветствие с ФИО -->
                 <ui:VisualElement name="status-banner" class="status-banner">
                     <ui:Label name="status-label" text="" class="status-text" />
                 </ui:VisualElement>
 
-                <!-- Кнопка входа -->
                 <ui:Button name="login-button" text="Войти в Platonus" class="login-submit-btn" />
-
             </ui:VisualElement>
         </ui:VisualElement>
 

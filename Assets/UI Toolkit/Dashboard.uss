@@ -622,3 +622,446 @@
      color: #FFFFFF;
 
 }
+/* ==========================================
+   ДОПОЛНЕНИЯ ПОД МАКЕТ ГЛАВНОГО МЕНЮ (FIGMA)
+   ========================================== */
+.sidebar {
+    width: 250px;
+    justify-content: space-between; /* Прижимает кнопку ВЫЙТИ вниз */
+}
+
+.exit-btn {
+    height: 46px;
+    border-radius: 12px;
+    background-color: rgba(255, 59, 48, 0.10);
+    border-width: 1px;
+    border-color: rgba(255, 59, 48, 0.35);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.exit-btn:hover {
+    background-color: rgba(255, 59, 48, 0.20);
+}
+
+.exit-icon, .exit-text {
+    color: var(--danger-color);
+    -unity-font-style: bold;
+    font-size: 13px;
+}
+
+.exit-icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* Карточки Студент и Практикум */
+.student-card {
+    flex-grow: 1.35;
+}
+
+.practicum-card {
+    flex-grow: 1;
+}
+
+.practicum-subtext {
+    font-size: 11px;
+    -unity-font-style: bold;
+    color: var(--green-text);
+    margin-top: 4px;
+}
+
+/* Рабочая область: Список слева + Превью справа */
+.labs-workspace {
+    flex-grow: 1;
+    flex-direction: row;
+    margin-top: 4px;
+}
+
+.labs-list-column {
+    width: 42%;
+    min-width: 340px;
+    margin-right: 24px;
+}
+
+/* Элемент списка лабораторной работы */
+.lab-list-item {
+    height: 64px;
+    background-color: var(--bg-card);
+    border-radius: 14px;
+    border-width: 1px;
+    border-color: var(--border-color);
+    padding: 0 18px;
+    margin-bottom: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    transition-property: border-color, background-color;
+    transition-duration: 0.15s;
+}
+
+.lab-list-item:hover {
+    border-color: var(--blue-accent);
+}
+
+.lab-list-item.selected {
+    border-width: 1.5px;
+    border-color: var(--blue-accent);
+    background-color: var(--bg-card-secondary);
+}
+
+.lab-list-item.locked {
+    opacity: 0.55;
+}
+
+.lab-item-left {
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 1;
+}
+
+.lab-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    margin-right: 14px;
+    background-color: var(--blue-accent);
+}
+
+.lab-status-dot.completed {
+    background-color: var(--green-text);
+}
+
+.lab-status-dot.locked {
+    background-color: var(--text-secondary);
+}
+
+.lab-item-texts {
+    flex-direction: column;
+    flex-shrink: 1;
+}
+
+.lab-item-number {
+    font-size: 13px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+}
+
+.lab-item-subtitle {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.lab-list-item.selected .lab-item-subtitle {
+    color: var(--blue-accent);
+}
+
+.lab-item-arrow {
+    font-size: 16px;
+    -unity-font-style: bold;
+    color: var(--text-secondary);
+}
+
+.lab-list-item.selected .lab-item-arrow {
+    color: var(--blue-accent);
+}
+
+/* Правая панель: Превью выбранной лабораторной работы */
+.lab-preview-panel {
+    flex-grow: 1;
+    flex-basis: 0; /* Не даёт длинному тексту распирать панель */
+    background-color: var(--bg-card);
+    border-radius: 20px;
+    border-width: 1.5px;
+    border-color: rgba(0, 132, 255, 0.55);
+    padding: 24px;
+    align-self: stretch; /* Выравнивает по высоте рабочей зоны или задайте фиксированную высоту */
+    max-height: 440px;
+    overflow: hidden;
+}
+
+.preview-layout {
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+}
+
+.preview-image-box {
+    width: 46%;
+    min-width: 240px;
+    height: 100%;
+    background-color: var(--bg-main);
+    border-radius: 16px;
+    border-width: 1px;
+    border-color: var(--border-color);
+    margin-right: 24px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0; /* Запрещаем сжимать картинку */
+}
+
+.preview-screenshot-img {
+    width: 100%;
+    height: 100%;
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.stand-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: rgba(15, 20, 30, 0.85);
+    border-width: 1px;
+    border-color: var(--border-color);
+    border-radius: 12px;
+    padding: 5px 12px;
+}
+
+.stand-badge-text {
+    font-size: 10px;
+    -unity-font-style: bold;
+    color: var(--text-secondary);
+}
+
+/* Правая колонка внутри карточки превью */
+.preview-details-box {
+    flex-grow: 1;
+    flex-basis: 0;
+    flex-direction: column;
+    justify-content: space-between; /* Равномерно распределяет верх, центр и кнопку снизу */
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.lab-number-pill {
+    align-self: flex-start;
+    background-color: rgba(0, 132, 255, 0.16);
+    border-radius: 12px;
+    padding: 5px 12px;
+    margin-bottom: 10px;
+}
+
+.lab-number-pill-text {
+    font-size: 10px;
+    -unity-font-style: bold;
+    color: var(--blue-accent);
+}
+
+.preview-title {
+    font-size: 18px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+    white-space: normal;
+    margin-bottom: 8px;
+}
+
+.preview-description {
+    font-size: 13px;
+    color: var(--text-secondary);
+    white-space: normal;
+    margin-bottom: 14px;
+    flex-grow: 1;
+}
+
+.preview-meta-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.meta-pill {
+    background-color: var(--bg-card-secondary);
+    border-width: 1px;
+    border-color: var(--border-color);
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-right: 8px;
+    margin-bottom: 4px;
+    flex-shrink: 0;
+}
+
+.meta-pill-text {
+    font-size: 11px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.start-lab-link-btn {
+    height: 44px;
+    width: 100%;
+    border-radius: 12px;
+    background-color: var(--blue-accent);
+    border-width: 0;
+    padding: 0 16px;
+    color: #FFFFFF;
+    font-size: 12px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    transition-property: background-color;
+    transition-duration: 0.15s;
+}
+
+.start-lab-link-btn:hover {
+    background-color: var(--blue-hover);
+}
+
+.start-lab-link-btn:disabled {
+    background-color: var(--bg-card-secondary);
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* ==========================================
+   ОВЕРЛЕЙ АВТОРИЗАЦИИ PLATONUS (ПОВЕРХ МЕНЮ)
+   ========================================== */
+.login-overlay-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.login-screen-root {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    padding: 32px;
+    background-color: var(--bg-main);
+}
+
+.login-top-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.brand-badge {
+    flex-direction: row;
+    align-items: center;
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 18px;
+    background-color: var(--bg-card-secondary);
+    border-width: 1px;
+    border-color: var(--border-color);
+}
+
+.brand-badge-text {
+    font-size: 12px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+}
+
+.login-center-wrapper {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    width: 440px;
+    background-color: var(--bg-card-secondary);
+    border-radius: 20px;
+    border-width: 1px;
+    border-color: var(--border-color);
+    padding: 32px;
+    flex-direction: column;
+}
+
+.root-container.theme-dark .login-card {
+    background-color: var(--bg-card);
+}
+
+.login-title {
+    font-size: 22px;
+    -unity-font-style: bold;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.login-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    white-space: normal;
+}
+
+.login-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.input-label {
+    font-size: 12px;
+    -unity-font-style: bold;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    margin-left: 2px;
+}
+
+.login-text-field {
+    margin: 0;
+    padding: 0;
+    height: 46px;
+}
+
+.login-text-field .unity-text-field__input {
+    background-color: #FFFFFF;
+    border-width: 1px;
+    border-color: var(--border-color);
+    border-radius: 12px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 14px;
+    color: var(--text-primary);
+    -unity-text-align: middle-left;
+}
+
+.root-container.theme-dark .login-text-field .unity-text-field__input {
+    background-color: var(--bg-card-secondary);
+    color: #FFFFFF;
+}
+
+.status-banner {
+    min-height: 22px;
+    margin-top: 2px;
+    margin-bottom: 14px;
+    justify-content: center;
+}
+
+.status-text {
+    font-size: 12px;
+    -unity-font-style: bold;
+    color: var(--text-secondary);
+    white-space: normal;
+}
+
+.status-text.error { color: var(--danger-color); }
+.status-text.success { color: var(--green-text); }
+
+.login-submit-btn {
+    height: 48px;
+    border-radius: 14px;
+    background-color: var(--blue-accent);
+    color: #FFFFFF;
+    border-width: 0;
+    font-size: 14px;
+    -unity-font-style: bold;
+}
+
+.login-submit-btn:hover { background-color: var(--blue-hover); }
+.login-submit-btn:disabled { opacity: 0.6; }
