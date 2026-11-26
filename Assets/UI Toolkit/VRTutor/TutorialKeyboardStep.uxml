@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Dashboard.uss" />
+
+    <ui:VisualElement name="kbd-step-root" class="root-container tutorial-mini-panel theme-dark">
+        <ui:Label text="ВВОД ТЕКСТА (НАПИШИТЕ: Hello)" class="input-label" />
+        <ui:TextField name="tutorial-text-input" placeholder-text="Нажмите сюда для ввода..." class="login-text-field" />
+        <ui:Label name="kbd-hint-label" text="Ожидается слово: Hello" class="status-text" />
+    </ui:VisualElement>
+</ui:UXML>

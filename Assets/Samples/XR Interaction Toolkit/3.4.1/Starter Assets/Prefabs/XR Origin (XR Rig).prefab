@@ -200,6 +200,10 @@ MonoBehaviour:
   pokeInteractor: {fileID: 4343660526480754339}
   dotRadius: 0.008
   surfaceOffset: 0.002
+  maxRayDistance: 10
+  uiRaycastMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   normalColor: {r: 0.18, g: 0.65, b: 1, a: 1}
   pressedColor: {r: 0.16, g: 0.85, b: 0.45, a: 1}
 --- !u!1 &1670256624
@@ -402,6 +406,10 @@ MonoBehaviour:
   pokeInteractor: {fileID: 2141651114331267770}
   dotRadius: 0.008
   surfaceOffset: 0.002
+  maxRayDistance: 10
+  uiRaycastMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   normalColor: {r: 0.18, g: 0.65, b: 1, a: 1}
   pressedColor: {r: 0.16, g: 0.85, b: 0.45, a: 1}
 --- !u!1 &1680501586

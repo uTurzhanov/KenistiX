@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Dashboard.uss" />
+
+    <ui:VisualElement name="btn-step-root" class="root-container tutorial-mini-panel theme-dark">
+        <ui:Label text="ТЕСТОВАЯ ПАНЕЛЬ" class="card-label" />
+        <ui:Button name="btn-test-press" text="НАЖАТЬ" class="tutorial-action-btn" />
+    </ui:VisualElement>
+</ui:UXML>

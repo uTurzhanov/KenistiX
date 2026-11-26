@@ -1,0 +1,53 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Dashboard.uss" />
+
+    <ui:VisualElement name="tutorial-root" class="root-container tutorial-screen-root theme-dark">
+        
+        <!-- Верхняя панель: Бейдж + Переключатель темы в правом верхнем углу -->
+        <ui:VisualElement class="tutorial-top-bar">
+            <ui:VisualElement class="brand-badge">
+                <ui:VisualElement class="status-dot" />
+                <ui:Label text="VR ОБУЧЕНИЕ • ВВОДНЫЙ КУРС" class="brand-badge-text" />
+            </ui:VisualElement>
+
+            <ui:Toggle name="theme-toggle" tooltip="Смена темы" class="theme-switch">
+                <ui:VisualElement class="icon-sun" picking-mode="Ignore" />
+                <ui:VisualElement class="icon-moon" picking-mode="Ignore" />
+            </ui:Toggle>
+        </ui:VisualElement>
+
+        <!-- Основная карточка обучения -->
+        <ui:VisualElement class="tutorial-card">
+            
+            <!-- Верхняя часть: Инструкция текущего шага -->
+            <ui:VisualElement class="tutorial-instruction-box">
+                <ui:VisualElement class="lab-number-pill">
+                    <ui:Label name="step-badge-label" text="ЗАДАНИЕ 1" class="lab-number-pill-text" />
+                </ui:VisualElement>
+
+                <ui:Label name="instruction-title-label" text="Взятие предмета в руки" class="tutorial-step-title" />
+                <ui:Label name="instruction-desc-label" text="Поднесите контроллер к тестовому предмету на столе и зажмите кнопку хвата (Grip)." class="tutorial-step-desc" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="tutorial-divider" />
+
+            <!-- Нижняя часть: Ход обучения (N из 8 шагов), прогресс-бар и кнопка выхода -->
+            <ui:VisualElement class="tutorial-progress-section">
+                <ui:VisualElement class="progress-header-row">
+                    <ui:Label text="ХОД ОБУЧЕНИЯ" class="progress-caption" />
+                    <ui:Label name="progress-counter-label" text="1 из 8 шагов" class="progress-counter-text" />
+                </ui:VisualElement>
+
+                <!-- Прогресс-бар под надписью -->
+                <ui:VisualElement class="tutorial-progress-track">
+                    <ui:VisualElement name="progress-bar-fill" class="tutorial-progress-fill" />
+                </ui:VisualElement>
+
+                <!-- Кнопка перехода в главное меню (появляется на шаге 8 из 8) -->
+                <ui:Button name="btn-to-main-menu" text="ПЕРЕЙТИ В ГЛАВНОЕ МЕНЮ →" class="tutorial-finish-btn hidden" />
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+</ui:UXML>
